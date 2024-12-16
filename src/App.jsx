@@ -1,5 +1,5 @@
 import "./assets/main.css";
-import { RouterProviderComponent as RouterProvider } from "./Router/RouterProvider";
+import { RouterProviderComponent as RouterProvider } from "./router/RouterProvider";
 
 function App() {
   return <RouterProvider />;
