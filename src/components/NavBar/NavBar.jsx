@@ -34,7 +34,7 @@ export default function NavBar() {
                 style={{
                   backgroundColor: `${currentPage === "/events" ? "red" : ""}`,
                 }}
-                to="/events"
+                to="/"
                 onClick={() => setCurrentPage("/events")}
               >
                 Events
@@ -42,7 +42,6 @@ export default function NavBar() {
             </li>
             <li>
               <Link to="/" onClick={() => setCurrentPage("about-us")}>
-                {" "}
                 About Us
               </Link>
             </li>
