@@ -1,5 +1,9 @@
 function App() {
-  return <></>;
+  return (
+    <>
+      <h1>Cultural Hamrony</h1>
+    </>
+  );
 }
 
 export default App;
