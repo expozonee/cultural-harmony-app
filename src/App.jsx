@@ -1,10 +1,8 @@
 import "./assets/main.css";
+import { RouterProviderComponent as RouterProvider } from "./Router/RouterProvider";
+
 function App() {
-  return (
-    <>
-      <h1>Cultural Hamrony</h1>
-    </>
-  );
+  return <RouterProvider />;
 }
 
 export default App;
