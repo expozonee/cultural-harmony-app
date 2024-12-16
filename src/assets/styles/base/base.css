@@ -1,0 +1,42 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-family: lato, sans-serif;
+}
+
+body {
+  margin: 0;
+  color: var(--gray3);
+  font-family: lato, sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0.2em 0 0.5em;
+  font-family: lato, sans-serif;
+}
+
+p {
+  margin: 0 0 1em;
+  font-family: lato, sans-serif;
+}
+
+a {
+  font-family: lato, sans-serif;
+
+  text-decoration: none;
+  color: unset;
+}
+
+embed,
+video,
+object {
+  max-width: 100%;
+}

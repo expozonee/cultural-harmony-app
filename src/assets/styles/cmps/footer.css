@@ -1,0 +1,19 @@
+footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: var(--mainBlue);
+  color: var(--mainWhite);
+  text-align: center;
+  padding: 0.5rem;
+  font-size: 0.8rem;
+  margin: 0 auto !important;
+  z-index: 10;
+  max-height: 120;
+}
+
+.footer-logo-img {
+  width: 80px;
+  object-fit: cover;
+}

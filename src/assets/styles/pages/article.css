@@ -1,0 +1,128 @@
+.article-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 50px auto;
+  width: 100%;
+
+  /* height: 100vh; */
+}
+
+.article-title {
+  font-size: 2rem;
+  max-width: 90rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+  padding-bottom: 15px;
+  border-bottom: 3px solid black;
+  text-align: center;
+}
+
+.article-author {
+  font-style: italic;
+  margin-bottom: 10px;
+  color: var(--mainRed);
+  font-weight: 700;
+  margin-top: 15px;
+}
+
+.article-author span {
+  color: black;
+  font-size: 1.2rem;
+}
+
+.article-description {
+  margin-bottom: 20px;
+  text-align: center;
+  font-size: 1.2rem;
+  line-height: 1.6;
+  width: 60%;
+}
+
+.article-img {
+  width: 100%;
+  max-width: 600px;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  object-fit: cover;
+}
+
+.article-source {
+  font-style: italic;
+  margin-top: 20px;
+  color: var(--mainRed);
+  font-weight: 700;
+}
+
+.article-source span {
+  color: black;
+  font-size: 1.2rem;
+}
+
+/*back to home page -btn*/
+.back-to-news,
+.make-calm-btn {
+  background-color: var(--mainRed);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 10px 10px;
+  width: fit-content;
+}
+
+@media screen and (max-width: 800px) {
+  .article-container {
+    padding: 30px 30px;
+    margin: 0 auto;
+    margin-bottom: 100px;
+  }
+
+  .article-description {
+    width: 100% !important;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .article-container {
+    padding: 30px 30px;
+  }
+
+  .article-description {
+    width: 100% !important;
+  }
+}
+
+.mood-slider {
+  margin: 20px 10px;
+  text-align: center;
+}
+
+.label-mood-slider {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.mood-slider input[type='range'] {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 10px;
+  background: #ddd;
+  outline: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.update-article-btn {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.update-article-btn:hover {
+  background-color: #45a049;
+}
