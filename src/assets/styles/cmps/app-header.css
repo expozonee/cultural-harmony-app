@@ -1,4 +1,7 @@
+@import "./app-header-buttons.css";
+
 /* Header Styling */
+
 .app-header {
   display: flex;
   justify-content: space-between;
@@ -10,9 +13,24 @@
   max-height: 100px;
 }
 
+.logo-and-nav {
+  display: flex;
+  align-items: center;
+}
+
+.logo-and-nav > nav {
+  margin-left: 2rem;
+}
+
 .logo {
   width: 120px;
   padding: 5px;
+}
+
+.app-header__buttons {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
 }
 
 .app-header h1 a {
