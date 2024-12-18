@@ -25,23 +25,6 @@ export default function AboutUs() {
         Group Organizer is a smart app designed to simplify the planning of group events and activities like parties or trips. Our platform lets you create events, assign roles, and send automatic reminders to participants. Easily share event details with your group and make decisions together with voting options. Customize each event for a seamless and personalized experience!
         </p>
       </section>
-      <section className="section3">
-        <h2>Our Services</h2>
-        <section className='services-container'>
-        <div className="services-container">
-       
-        <div className="EventManagement-card">
-          <div className="EventManagement-image">
-            <img src='/images/img2.jpg' alt="Coaching" />
-          </div>
-          <h3>Coaching</h3>
-          <p>Lorem Ipsum</p>
-        </div>
-        </div>
-        </section>
-    
-
-      </section>
-   </>
+  </>
   )
 }
