@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useSearchParams } from "react-router";
 import UsersList from "../../components/Admin/UsersList";
-import EventsList from "../../components/Admin/EventsList";
+import EventsList from "../../components/Events/EventsList";
 import DashboardButton from "../../components/Admin/DashboardButton";
 
 const BUTTONS_TYPES = ["Events", "Users"];
