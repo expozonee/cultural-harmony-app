@@ -1,6 +1,7 @@
 import { HomePage } from "../pages/HomePage";
 import { RootLayout } from "../layout/RootLayout";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import AdminPage from "../pages/AdminPage/AdminPage";
 
 const router = createBrowserRouter([
   {
@@ -10,6 +11,10 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <HomePage />,
+      },
+      {
+        path: "/admin",
+        element: <AdminPage />,
       },
     ],
   },
