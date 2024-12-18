@@ -125,10 +125,17 @@ const EVENTS = [
 
 export default function EventsList() {
   return (
-    <div>
+    <table className="table-event">
+      <thead>
+        <tr>
+          <th>Event Title</th>
+          <th>Location</th>
+          <th>Date</th>
+        </tr>
+      </thead>
       {EVENTS.map((e, index) => {
-        return <EventList key={index} />;
+        return <EventList key={index} data={e} />;
       })}
-    </div>
+    </table>
   );
 }
