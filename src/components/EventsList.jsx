@@ -10,15 +10,13 @@ function EventsList() {
     const fetchEvents = async () => {
       try {
         const queryEventsDB = await getDocs(collection(db, 'events'));
-
         const eventsData = queryEventsDB.docs.map((doc) => ({
           id: doc.id,
           ...doc.data(),
         }));
-
         setEvents(eventsData);
       } catch (error) {
-        console.error('Error fetching data from firestore: ', error);
+        console.error('Error fetching data from Firestore: ', error);
       }
     };
 
@@ -27,14 +25,18 @@ function EventsList() {
 
   return (
     <>
+      <h1 className="event-list-title">Upcoming Events</h1>
       <ul className="events-list">
         {events.map((event) => (
-          <li key={event.id}>
-            <EventPreview event={event} />
+          <li className="event-preview" key={event.id}>
+            <div>
+              <EventPreview event={event} />
+            </div>
           </li>
         ))}
       </ul>
     </>
   );
 }
+
 export default EventsList;

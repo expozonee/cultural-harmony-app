@@ -1,33 +1,30 @@
+import { useNavigate } from 'react-router';
+
 function EventPreview({ event }) {
+  const navigate = useNavigate();
+
+  function handleEventClick(event) {
+    navigate(`/events/${event.id}`, { state: { event } });
+  }
+
   return (
-    <div className="event-card">
-      <h1>{event.event_title}</h1>
-      <p>{event.date}</p>
-      <p>{event.location}</p>
-      <p>{event.host}</p>
-      <p>{event.summary}</p>
-      <p>{event.description}</p>
+    <div className="event-preview-card">
+      <div className="event-image">
+        <img src={event.imgUrl} alt={event.event_title} />
+      </div>
+
+      <div className="event-date">
+        <span className="event-month">{event.date}</span>
+      </div>
+
+      <div className="event-details">
+        <h2 className="event-title">{event.event_title}</h2>
+        <p className="event-description">{event.summary}</p>
+        <button className="join-button" onClick={() => handleEventClick(event)}>
+          Join event
+        </button>
+      </div>
     </div>
   );
 }
 export default EventPreview;
-
-//   return (
-//     <div className="event-preview-card">
-//       <div className="event-image">
-//         <img src={imageUrl} alt="Event" />
-//       </div>
-
-//       <div className="event-date">
-//         <span className="event-month">{month}</span>
-//         <span className="event-day">{day}</span>
-//       </div>
-
-//       <div className="event-details">
-//         <h2 className="event-title">{title}</h2>
-//         <p className="event-description">{description}</p>
-//         <button className="join-button">Join event</button>
-//       </div>
-//     </div>
-//   );
-// };

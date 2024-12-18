@@ -1,11 +1,12 @@
-import { HomePage } from "../pages/HomePage";
-import { RootLayout } from "../layout/RootLayout";
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import EventsList from "../components/EventsList";
+import { HomePage } from '../pages/HomePage';
+import { RootLayout } from '../layout/RootLayout';
+import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import EventsList from '../components/EventsList';
+import EventDescription from '../components/EventDescription';
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: '/',
     element: <RootLayout />,
     children: [
       {
@@ -13,8 +14,12 @@ const router = createBrowserRouter([
         element: <HomePage />,
       },
       {
-        path: "/events",
+        path: '/events',
         element: <EventsList />,
+      },
+      {
+        path: '/events/:eventId',
+        element: <EventDescription />,
       },
     ],
   },
