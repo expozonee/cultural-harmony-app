@@ -5,7 +5,7 @@ const eventsData = [
   {
     id: 0,
     event_title: "Cultural Cuisine Exchange",
-    "img-url":
+    imgUrl:
       "https://plus.unsplash.com/premium_photo-1664474653221-8412b8dfca3e?q=80&w=2069&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     date: "2025-05-12",
     "event-start": "18:00",
@@ -26,7 +26,7 @@ const eventsData = [
   {
     id: 1,
     event_title: "Interfaith Music Festival",
-    "img-url":
+    imgUrl:
       "https://plus.unsplash.com/premium_photo-1664474653221-8412b8dfca3e?q=80&w=2069&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     date: "2025-06-20",
     "event-start": "20:00",
@@ -46,7 +46,7 @@ const eventsData = [
   {
     id: 2,
     event_title: "Shared Heritage Art Exhibit",
-    "img-url":
+    imgUrl:
       "https://plus.unsplash.com/premium_photo-1664474653221-8412b8dfca3e?q=80&w=2069&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     date: "2025-07-15",
     "event-start": "10:00",
@@ -65,7 +65,7 @@ const eventsData = [
   {
     id: 3,
     event_title: "Joint Storytelling Session",
-    "img-url":
+    imgUrl:
       "https://plus.unsplash.com/premium_photo-1664474653221-8412b8dfca3e?q=80&w=2069&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     date: "2025-08-10",
     "event-start": "14:00",
@@ -85,7 +85,7 @@ const eventsData = [
   {
     id: 4,
     event_title: "Youth Sports for Unity",
-    "img-url":
+    imgUrl:
       "https://plus.unsplash.com/premium_photo-1664474653221-8412b8dfca3e?q=80&w=2069&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     date: "2025-09-05",
     "event-start": "16:00",
@@ -105,7 +105,7 @@ const eventsData = [
   {
     id: 5,
     event_title: "Jewish Culinary Traditions",
-    "img-url":
+    imgUrl:
       "https://plus.unsplash.com/premium_photo-1664474653221-8412b8dfca3e?q=80&w=2069&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     date: "2025-10-12",
     "event-start": "17:00",
