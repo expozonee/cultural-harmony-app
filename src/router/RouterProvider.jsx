@@ -1,4 +1,4 @@
-import { HomePage } from "../pages/HomePage";
+import { HomePage } from "../pages/homePage/HomePage";
 import { RootLayout } from "../layout/RootLayout";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
