@@ -1,5 +1,5 @@
 import { collection, addDoc } from "firebase/firestore";
-import { db } from "../../src/firebase.js";
+import { db } from "../../src/firebaseConfig.js";
 
 const eventsData = [
   {

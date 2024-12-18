@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { collection, getDocs, QuerySnapshot } from "firebase/firestore";
-import { db } from "../firebase.js";
+import { db } from "../firebaseConfig.js";
 import EventPreview from "./EventPreview";
 
 function EventsList() {
