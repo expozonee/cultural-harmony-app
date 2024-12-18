@@ -6,10 +6,8 @@ export default function AboutUs() {
    <>
    <div className='section1'>
     
-    <img className='purblebackground'
-    src='/images/img4.jpg'/>
-    <img className='partyimg'
-    src='/images/img1.jpg'/> 
+    <img className='backgroundImg'
+    src='/images/backgroundImg.jpg'/>
     <div className="content-card">
         <h1>
         We Make Event Planning <br />

@@ -1,51 +1,39 @@
 
 .section1 {
-    position: relative;
+    position: relative; 
     width: 100%;
-    height: 90vh;
+    height: 90vh; 
     max-height: 700px;
-    left: 0;
-    top: 0;
-      /* background-color: #d391b0; */
-    background-color: #7b466a;
-    /* background-color: #9f6496;  */
-  } 
-  .purblebackground{
-    width: 100%;
-  max-width: 550px;
-  height :100%;
-  border-radius: 8px;
-    position: relative;
-    top: 0;
-    left: 0;
+    overflow: hidden; 
   }
-.partyimg{
-        width: 70%;
-        max-width: 450px;
-        height: 70%;
-        border-radius: 100% 100% 0 0; /* Top half circle */
-        position: absolute;
-        top: 10%;
-        left: 20%;
-    }
-      
+  
+  .backgroundImg {
+    position: absolute; 
+    top: 0;
+    left: 0;
+    width: 100%; 
+    height: 100%; 
+    object-fit: cover; 
+    border-radius: 8px; 
+  }
+  
 
 .content-card {
     position: absolute;
-    top: 40%;
-    left: 50%;
+    top: 15%;
+    left: 30%;
     
   }
 
   .content-card h1 {
-    font-size: 3rem;
+    font-size: 3.5vw;
     color: #ffffff;
     margin-bottom: 1rem;
   }
   
   .content-card p {
     color: #ffffff;
-    font-size: 1rem;
+    font-size: 1.5vw;
     text-transform: uppercase;
     letter-spacing: 1px;
     margin-bottom: 1.5rem;
@@ -55,7 +43,7 @@
   .section2 {
     position: relative;
     width: 100%;
-    height: 50vh;
+    height: 40vh;
     max-height: 400px;
     background-color: #fafafa;
     padding: 50px 20px;
@@ -63,18 +51,81 @@
   }
   
   .section2 h2 {
-    font-size: 2.5rem;
+    font-size: 2.5vw;
     margin-bottom: 1.2rem;
-    color:  #7b466a;
+    color:  #000000;
   }
   
   .section2 p {
-    font-size: 1.5rem;
+    font-size: 1.5vw;
     line-height: 1.6;
-    margin-bottom: 1rem;
+    margin-bottom: 1vw;
     max-width: 700px;
     margin-left: auto;
     margin-right: auto;
     color: #4a4a4a;
   }
- 
+ /* Media Query for phone screens */
+@media (max-width: 768px) {
+    .section1 {
+      height: 40vh; 
+      max-height: none;
+    }
+
+    .content-card {
+        width: 80%;
+      top: 10%; 
+      left: 45%; 
+      transform: translateX(-50%); 
+      text-align: center; 
+    }
+  
+    .content-card h1 {
+      font-size: 3.5vw; 
+    }
+  
+    .content-card p {
+      font-size: 1.5vw;
+    }
+  
+    /* Section 2 Adjustments */
+    .section2 {
+      height: auto; 
+      padding: 30px 10px; 
+    }
+  
+    .section2 h2 {
+      font-size: 3vw;
+      margin-bottom: 1rem; 
+    }
+  
+    .section2 p {
+      font-size: 2vw; 
+      line-height: 1.4; 
+      margin-bottom: 1rem;
+    }
+  }
+  
+  @media (max-width: 500px) {
+    .section1 {
+        height: 30vh; 
+        max-height: none; 
+      }
+  
+    .content-card h1 {
+      font-size: 3vw;
+    }
+  
+    .content-card p {
+      font-size: 1.5vw; 
+    }
+  
+    .section2 h2 {
+      font-size: 3vw; 
+    }
+  
+    .section2 p {
+      font-size: 1.5vw;
+    }
+  }
+  
