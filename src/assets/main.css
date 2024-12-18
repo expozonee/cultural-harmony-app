@@ -12,6 +12,7 @@
 
 /* Pages */
 @import "./styles/pages/event-description.css";
+@import "./styles/pages/AdminPage.css";
 
 /* Components */
 @import "./styles/cmps/app-header.css";
