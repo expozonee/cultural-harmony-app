@@ -8,6 +8,8 @@
   overflow: hidden;
   width: 43.75rem;
   font-family: Arial, sans-serif;
+  margin-bottom: 20px;
+  list-style-type: none;
 }
 
 .event-image {
@@ -64,8 +66,8 @@
 }
 
 .join-button {
-  background-color: #e0e0e0;
-  color: #777;
+  background-color: #f37878;
+  color: #fafafa;
   border: none;
   padding: 0.625rem 1.25rem;
   font-size: 1rem;
@@ -74,5 +76,7 @@
 }
 
 .join-button:hover {
-  background-color: #d5d5d5;
+  background-color: #1c36c7;
+  color: rgb(255, 255, 255);
+  font-weight: 600;
 }

@@ -1,0 +1,19 @@
+.description-page-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 50px 100px;
+  gap: 20px;
+}
+
+.event-image-description {
+  width: 50rem;
+}
+
+.event-description-info {
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-align: center;
+  width: 50rem;
+  color: red;
+}
