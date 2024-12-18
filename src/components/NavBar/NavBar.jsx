@@ -9,7 +9,7 @@ import logo from "/icons8-people-working-together-100.png";
 import { useState } from "react";
 
 export default function NavBar() {
-  const { pathname } = useLocation();
+  const { pathname } = useLocation(); //test
   const [currentPage, setCurrentPage] = useState(pathname);
 
   return (
