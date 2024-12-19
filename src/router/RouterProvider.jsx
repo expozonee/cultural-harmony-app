@@ -6,6 +6,8 @@ import SignUpPage from "./../pages/SignUp/SignUp";
 import EventsList from "../components/EventsList";
 import EventDescription from "../components/EventDescription";
 import { eventsLoader } from "../../loaders/eventsLoader";
+import AdminPage from "../pages/AdminPage/AdminPage";
+import AdminLayout from "../layout/AdminLayout";
 
 const router = createBrowserRouter([
   {
@@ -32,6 +34,25 @@ const router = createBrowserRouter([
       {
         path: "/events/:eventId",
         element: <EventDescription />,
+      },
+      {
+        path: "/admin",
+        element: <AdminLayout />,
+        children: [
+          {
+            index: true,
+            element: <AdminPage />,
+          },
+          {
+            path: "events",
+            element: <AdminPage dashboard={"events"} />,
+            loader: eventsLoader,
+          },
+          {
+            path: "users",
+            element: <AdminPage dashboard={"users"} />,
+          },
+        ],
       },
     ],
   },
