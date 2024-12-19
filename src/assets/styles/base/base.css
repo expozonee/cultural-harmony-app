@@ -40,3 +40,19 @@ video,
 object {
   max-width: 100%;
 }
+
+table {
+  border: 1px solid #ccc;
+  width: 100%;
+  text-align: left;
+}
+
+th,
+td {
+  padding: 10px;
+  border: 1px solid #ddd;
+}
+
+th {
+  background-color: #f4f4f4;
+}
