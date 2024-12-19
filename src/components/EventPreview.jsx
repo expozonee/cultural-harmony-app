@@ -1,5 +1,5 @@
 import { Link } from "react-router";
-
+// todo: url builder for links
 function EventPreview({ event }) {
   return (
     <div className="event-preview-card">
