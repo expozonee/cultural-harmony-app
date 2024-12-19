@@ -1,4 +1,4 @@
-import { db } from "../src/firebaseConfig";
+import { db } from "../src/firebase/firebaseConfig";
 import { collection, getDocs } from "firebase/firestore";
 
 export async function eventsLoader() {

@@ -1,7 +1,7 @@
-import { doc, getDoc } from 'firebase/firestore';
-import { useEffect, useState } from 'react';
-import { useParams, useLocation } from 'react-router';
-import { db } from '../firebaseConfig';
+import { doc, getDoc } from "firebase/firestore";
+import { useEffect, useState } from "react";
+import { useParams, useLocation } from "react-router";
+import { db } from "../firebase/firebaseConfig";
 
 function EventDescription() {
   const { eventId } = useParams();
@@ -13,16 +13,16 @@ function EventDescription() {
     if (!event) {
       const fetchEvent = async () => {
         try {
-          const docRef = doc(db, 'events', eventId);
+          const docRef = doc(db, "events", eventId);
           const docSnap = await getDoc(docRef);
 
           if (docSnap.exists()) {
             setEvent({ id: docSnap.id, ...docSnap.data() });
           } else {
-            console.error('Event not found');
+            console.error("Event not found");
           }
         } catch (error) {
-          console.error('Error fetching data from Firestore: ', error);
+          console.error("Error fetching data from Firestore: ", error);
         } finally {
           setLoading(false);
         }
