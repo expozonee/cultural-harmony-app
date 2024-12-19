@@ -17,9 +17,7 @@ export function RootLayout() {
       publishableKey={PUBLISHABLE_KEY}
     >
       <NavBar />
-      <section className="flex justify-center">
-        <Outlet />
-      </section>
+      <Outlet />
     </ClerkProvider>
   );
 }
