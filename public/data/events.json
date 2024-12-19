@@ -106,5 +106,23 @@
     ],
     "participants": [],
     "max_participants": 10
+  },
+  {
+    "id": 7,
+    "event_title": "Arabic Culinary Traditions",
+    "imgUrl": "https://plus.unsplash.com/premium_photo-1664474653221-8412b8dfca3e?q=80&w=2069&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "date": "2025-10-12",
+    "event_start_time": "17:00",
+    "location": { "lat": 32.0853, "lng": 34.7818, "city_name": "Ramla" },
+    "event_host_name": "israel litvak",
+    "summary": "A celebration of traditional Arabic contribution_list and their cultural significance.",
+    "description": "Discover the rich history of Arabic cuisine through a hands-on cooking experience. Learn to prepare classic contribution_list and uncover the stories behind them, passed down through generations.",
+    "contribution_list": [
+      { "item_name": "Jibneh Arabiyeh", "user": "undifined" },
+      { "item_name": "Lahmajun", "user": "undifined" },
+      { "item_name": "Fatayer", "user": "undifined" }
+    ],
+    "participants": [],
+    "max_participants": 10
   }
 ]
