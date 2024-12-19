@@ -1,4 +1,4 @@
-export default function DashboardEventsList({
+export default function DashboardEvents({
   event_title,
   date,
   location,
