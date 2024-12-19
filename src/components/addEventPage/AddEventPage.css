@@ -1,0 +1,65 @@
+
+.form1 {
+    position: relative;
+    margin: 0 auto;
+    top: 10vh;
+    background-color: white; /* White background */
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 50vw;
+    height: 70vh;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  
+  .form-group{
+    width: auto;
+    display: flex;
+    flex-direction: row;
+  }
+  
+ 
+  label {
+    width: 8vw;
+    font-size: 1rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    display: block;
+    
+}
+  
+
+  input, textarea {
+    width: 90%;
+    padding: 0.75rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+    resize: none; /* Prevent resizing for textareas */
+  }
+  
+  textarea {
+    height: 7vh; /* Default height for the textarea */
+  }
+  
+  /* Buttons styling */
+  .button1 {
+    background-color: #ff69b4; /* Hot pink color */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 0.75rem;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    text-align: center;
+    transition: background-color 0.3s ease;
+  }
+  
+  .button1:hover {
+    background-color: #ff85c1; /* Slightly lighter pink on hover */
+  }
+  
+  
