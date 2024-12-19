@@ -1,20 +1,10 @@
-import { useState } from "react";
-import { useSearchParams } from "react-router";
 import EventsList from "../../components/Events/EventsList";
 import DashboardButton from "../../components/Admin/DashboardButton";
 import UsersList from "../../components/Users/UsersList";
 
 const BUTTONS_TYPES = ["Events", "Users"];
 
-export default function AdminPage() {
-  // todo: divide it into 2 seperate paths
-  const [params] = useSearchParams();
-  const dashboardParams = params.get("dashboard");
-
-  const [dashboardSection, setDashboardSection] = useState(
-    dashboardParams ?? "events"
-  );
-
+export default function AdminPage({ dashboard }) {
   return (
     <div>
       <h2>Dashboard</h2>
@@ -25,16 +15,13 @@ export default function AdminPage() {
             <DashboardButton
               key={b}
               name={b}
-              onClick={() => {
-                setDashboardSection(b.toLowerCase());
-              }}
-              isActive={b.toLowerCase() === dashboardSection}
+              isActive={b.toLowerCase() === dashboard}
             />
           );
         })}
       </div>
       <section>
-        {dashboardSection === "events" ? <EventsList /> : <UsersList />}
+        {dashboard === "events" ? <EventsList /> : <UsersList />}
       </section>
     </div>
   );
