@@ -1,0 +1,21 @@
+.events-list {
+  display: flex;
+  max-width: 150rem;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.events-list li {
+  list-style-type: none;
+}
+
+.event-list-title {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 5rem;
+  font-weight: bold;
+  color: var(--mainRed);
+  text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
