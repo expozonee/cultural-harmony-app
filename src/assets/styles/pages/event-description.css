@@ -17,3 +17,10 @@
   width: 50rem;
   color: red;
 }
+
+.event-date {
+  color: blue;
+  background-color: antiquewhite;
+  padding: 5px 5px;
+  border: none;
+}
