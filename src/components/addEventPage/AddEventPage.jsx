@@ -34,7 +34,7 @@ export default function AddEventPage() {
     setlocation("");
     setFormsummary({ summary: "", description: "" });
     setFormDate({ date: "", event_start_time: "" });
-    setItems([]);
+    // setItems([]);
 
 
   }
@@ -57,6 +57,7 @@ export default function AddEventPage() {
   const removeItem = (index) => {
     setItems((prev) => prev.filter((_, i) => i !== index));
   };
+
 
  
  
@@ -143,7 +144,19 @@ export default function AddEventPage() {
         {items.map((item, index) => (
           <li key={index} style={{ marginBottom: "10px" }}>
             <strong>{item.title}</strong>: {item.description}
-            <button onClick={() => removeItem(index)}>Remove</button>
+            <button
+              onClick={() => removeItem(index)}
+              style={{
+                marginLeft: "10px",
+                color: "white",
+                backgroundColor: "red",
+                border: "none",
+                padding: "5px",
+                cursor: "pointer",
+              }}
+            >
+              Remove
+            </button>
           </li>
         ))}
       </ul>
