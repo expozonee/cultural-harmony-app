@@ -1,4 +1,4 @@
-import EventsList from "../../components/Events/EventsList";
+import DashboardEventsList from "../../components/Events/DashboardEventsList";
 import DashboardButton from "../../components/Admin/DashboardButton";
 import UsersList from "../../components/Users/UsersList";
 
@@ -21,7 +21,7 @@ export default function AdminPage({ dashboard }) {
         })}
       </div>
       <section>
-        {dashboard === "events" ? <EventsList /> : <UsersList />}
+        {dashboard === "events" ? <DashboardEventsList /> : <UsersList />}
       </section>
     </div>
   );

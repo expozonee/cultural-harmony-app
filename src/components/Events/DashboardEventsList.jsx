@@ -1,4 +1,4 @@
-import EventList from "./EventList";
+import DashboardEvents from "./DashboardEvents";
 import { useLoaderData } from "react-router";
 
 export default function EventsList() {
@@ -15,7 +15,7 @@ export default function EventsList() {
         </tr>
       </thead>
       {events.map((e, index) => {
-        return <EventList key={index} {...e} />;
+        return <DashboardEvents key={index} {...e} />;
       })}
     </table>
   );
