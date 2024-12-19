@@ -1,10 +1,16 @@
-export default function EventList({ data }) {
+export default function EventList({
+  event_title,
+  date,
+  location,
+  event_host_name,
+}) {
   return (
     <tbody>
       <tr>
-        <td>{data.event_title}</td>
-        <td>{data.location}</td>
-        <td>{data.date}</td>
+        <td>{event_title}</td>
+        <td>{location.city_name}</td>
+        <td>{date}</td>
+        <td>{event_host_name}</td>
       </tr>
     </tbody>
   );
