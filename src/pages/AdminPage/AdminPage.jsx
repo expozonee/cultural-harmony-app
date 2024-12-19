@@ -1,4 +1,4 @@
-import DashboardEventsList from "../../components/Events/DashboardEventsList";
+import DashboardEventsList from "../../components/Admin/Events/DashboardEventsList";
 import DashboardButton from "../../components/Admin/DashboardButton";
 import UsersList from "../../components/Users/UsersList";
 
