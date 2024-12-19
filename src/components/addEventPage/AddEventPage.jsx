@@ -15,7 +15,7 @@ export default function AddEventPage() {
     event_start_time: '',
   });
   const [items, setItems] = useState([]);
-  const [newItem, setNewItem] = useState({ title: "", description: "" });
+  const [newItem, setNewItem] = useState("");
 
   function handleSubmit(e){
     e.preventDefault();
@@ -34,10 +34,11 @@ export default function AddEventPage() {
     setlocation("");
     setFormsummary({ summary: "", description: "" });
     setFormDate({ date: "", event_start_time: "" });
-    // setItems([]);
+    //setItems([]);
 
 
   }
+console.log(items);
 
 
   const handleInputChange = (e) => {
@@ -46,11 +47,11 @@ export default function AddEventPage() {
   };
 
   const addItem = () => {
-    if (newItem.title && newItem.description) {
+    if (newItem.title ) {
       setItems((prev) => [...prev, newItem]);
-      setNewItem({ title: "", description: "" });
+      setNewItem({ title: ""});
     } else {
-      alert("Please fill out both fields.");
+      alert("Please fill the field.");
     }
   };
 
@@ -130,20 +131,20 @@ export default function AddEventPage() {
           onChange={handleInputChange}
           style={{ marginRight: "10px" }}
         />
-        <input
+        {/* <input
           type="text"
           name="description"
           placeholder="Item Description"
           value={newItem.description}
           onChange={handleInputChange}
           style={{ marginRight: "10px" }}
-        />
+        /> */}
         <button className="AddButton" onClick={addItem}>Add Checklist Item</button>
       </div>
       <ul>
         {items.map((item, index) => (
           <li key={index} style={{ marginBottom: "10px" }}>
-            <strong>{item.title}</strong>: {item.description}
+            <strong>{item.title}</strong>
             <button
               onClick={() => removeItem(index)}
               style={{
