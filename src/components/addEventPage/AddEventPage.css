@@ -8,7 +8,7 @@
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     width: 50vw;
-    height: 70vh;
+    height: auto;
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
@@ -37,16 +37,16 @@
     border: 1px solid #ccc;
     border-radius: 5px;
     font-size: 1rem;
-    resize: none; /* Prevent resizing for textareas */
+    resize: none; 
   }
   
   textarea {
-    height: 7vh; /* Default height for the textarea */
+    height: 7vh; 
   }
   
-  /* Buttons styling */
+  
   .button1 {
-    background-color: #ff69b4; /* Hot pink color */
+    background-color: #3426ff; 
     color: white;
     border: none;
     border-radius: 5px;
@@ -59,7 +59,20 @@
   }
   
   .button1:hover {
-    background-color: #ff85c1; /* Slightly lighter pink on hover */
+    background-color: #dc6fa6; /* Slightly lighter pink on hover */
   }
-  
-  
+  h1{
+    font-size: large;
+  }
+  .AddButton{
+    background-color: #da7ebe; 
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 0.75rem;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    text-align: center;
+    
+  }
