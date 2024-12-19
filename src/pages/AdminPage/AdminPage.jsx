@@ -7,6 +7,7 @@ import UsersList from "../../components/Users/UsersList";
 const BUTTONS_TYPES = ["Events", "Users"];
 
 export default function AdminPage() {
+  // todo: divide it into 2 seperate paths
   const [params] = useSearchParams();
   const dashboardParams = params.get("dashboard");
 
@@ -19,10 +20,10 @@ export default function AdminPage() {
       <h2>Dashboard</h2>
       <hr />
       <div className="flex dashboard__buttons">
-        {BUTTONS_TYPES.map((b, index) => {
+        {BUTTONS_TYPES.map((b) => {
           return (
             <DashboardButton
-              key={index}
+              key={b}
               name={b}
               onClick={() => {
                 setDashboardSection(b.toLowerCase());
