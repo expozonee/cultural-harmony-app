@@ -50,9 +50,9 @@ export default function NavBar() {
       </div>
       <div className="app-header__buttons">
         <SignedOut>
-          <SignInButton>
+          <Link to={"/sign-in"}>
             <button className="sign-in__button">Sign In</button>
-          </SignInButton>
+          </Link>
         </SignedOut>
         <SignedIn>
           <UserButton />
