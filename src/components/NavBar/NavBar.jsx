@@ -1,12 +1,7 @@
-import {
-  SignedIn,
-  SignedOut,
-  SignInButton,
-  UserButton,
-} from '@clerk/clerk-react';
-import { Link, useLocation } from 'react-router-dom';
-import logo from '/icons8-people-working-together-100.png';
-import { useState } from 'react';
+import { SignedIn, SignedOut, UserButton } from "@clerk/clerk-react";
+import { Link, useLocation } from "react-router-dom";
+import logo from "/icons8-people-working-together-100.png";
+import { useState } from "react";
 
 export default function NavBar() {
   const { pathname } = useLocation();
@@ -21,10 +16,10 @@ export default function NavBar() {
             <li>
               <Link
                 style={{
-                  backgroundColor: `${currentPage === '/' ? 'red' : ''}`,
+                  backgroundColor: `${currentPage === "/" ? "red" : ""}`,
                 }}
                 to="/"
-                onClick={() => setCurrentPage('/')}
+                onClick={() => setCurrentPage("/")}
               >
                 Home
               </Link>
@@ -32,16 +27,16 @@ export default function NavBar() {
             <li>
               <Link
                 style={{
-                  backgroundColor: `${currentPage === '/events' ? 'red' : ''}`,
+                  backgroundColor: `${currentPage === "/events" ? "red" : ""}`,
                 }}
                 to="/events"
-                onClick={() => setCurrentPage('/events')}
+                onClick={() => setCurrentPage("/events")}
               >
                 Events
               </Link>
             </li>
             <li>
-              <Link to="/" onClick={() => setCurrentPage('about-us')}>
+              <Link to="/" onClick={() => setCurrentPage("about-us")}>
                 About Us
               </Link>
             </li>
