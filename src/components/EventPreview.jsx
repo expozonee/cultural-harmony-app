@@ -1,12 +1,6 @@
-import { useNavigate } from 'react-router';
-
+import { Link } from "react-router";
+// todo: url builder for links
 function EventPreview({ event }) {
-  const navigate = useNavigate();
-
-  function handleEventClick(event) {
-    navigate(`/events/${event.id}`, { state: { event } });
-  }
-
   return (
     <div className="event-preview-card">
       <div className="event-image">
@@ -20,9 +14,13 @@ function EventPreview({ event }) {
       <div className="event-details">
         <h2 className="event-title">{event.event_title}</h2>
         <p className="event-description">{event.summary}</p>
-        <button className="join-button" onClick={() => handleEventClick(event)}>
+        <Link
+          to={`/events/${event.id}`}
+          state={{ event }}
+          className="join-button"
+        >
           Join event
-        </button>
+        </Link>
       </div>
     </div>
   );
