@@ -1,7 +1,12 @@
 import React, { useState } from 'react'
 import './AddEventPage.css'
+import {postEvent} from './AddEvent'
+
+
 
 export default function AddEventPage() {
+
+
     const [event_title,setevent_title]=useState("");
     const [imgUrl,setimgUrl]=useState("");
     const [maxParticipants,setmaxParticipants]=useState(0);
@@ -15,12 +20,17 @@ export default function AddEventPage() {
     event_start_time: '',
   });
   const [items, setItems] = useState([]);
-  const [newItem, setNewItem] = useState("");
+  const [newItem, setNewItem] = useState({ title: "" });
+
+
+  
+
+
 
   function handleSubmit(e){
     e.preventDefault();
     const newEvent = {
-        event_title : event_title,
+    event_title : event_title,
     imgUrl: imgUrl,
     maxParticipants :maxParticipants ,
     location:location,
@@ -28,14 +38,21 @@ export default function AddEventPage() {
     formDate :formDate,
     items :items
     };
-    setevent_title("");
-    setimgUrl("");
-    setmaxParticipants(0);
-    setlocation("");
-    setFormsummary({ summary: "", description: "" });
-    setFormDate({ date: "", event_start_time: "" });
-    //setItems([]);
-
+    postEvent(newEvent)
+    .then(() => {
+      setevent_title("");
+      setimgUrl("");
+      setmaxParticipants(0);
+      setlocation("");
+      setFormsummary({ summary: "", description: "" });
+      setFormDate({ date: "", event_start_time: "" });
+      setItems([]);
+  
+    })
+    .catch((error) => {
+        console.error("Failed to submit event:", error);
+    });
+   
 
   }
 console.log(items);
@@ -75,28 +92,40 @@ console.log(items);
     <div  className='form-group'>
     <label>summary</label>
     <input type="text" value={formsummary.summary} onChange={(e)=>{
-      setFormsummary.summary(e.target.value);
+     setFormsummary((prevFormSummary) => ({
+      ...prevFormSummary,
+      summary: e.target.value,
+    }));
     }} />
     </div>
 
     <div  className='form-group'>
     <label>Date</label>
     <input type="date" value={formDate.date} onChange={(e)=>{
-      setFormDate.date(e.target.value);
+       setFormDate((prevFormDate) => ({
+        ...prevFormDate,
+        date: e.target.value,
+      }));
     }} />
     </div>
 
     <div  className='form-group'>
     <label>Starting Time</label>
     <input type="time" value={formDate.event_start_time} onChange={(e)=>{
-      setFormDate.event_start_time(e.target.value);
+      setFormDate((prevevent_start_time) => ({
+        ...prevevent_start_time,
+        event_start_time: e.target.value,
+      }));
     }} />
     </div>
 
     <div  className='form-group'>
     <label>description</label>
     <textarea value={formsummary.description} onChange={(e)=>{
-      setFormsummary.description(e.target.value);
+        setFormsummary((prevFormdescription) => ({
+          ...prevFormdescription,
+          description: e.target.value,
+        }));
     }} />
     </div>
     <div  className='form-group'>
