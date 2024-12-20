@@ -1,9 +1,4 @@
-import {
-  SignedIn,
-  SignedOut,
-  SignInButton,
-  UserButton,
-} from "@clerk/clerk-react";
+import { SignedIn, SignedOut, UserButton } from "@clerk/clerk-react";
 import { Link, useLocation } from "react-router-dom";
 import logo from "/icons8-people-working-together-100.png";
 import { useState } from "react";
@@ -34,7 +29,7 @@ export default function NavBar() {
                 style={{
                   backgroundColor: `${currentPage === "/events" ? "red" : ""}`,
                 }}
-                to="/"
+                to="/events"
                 onClick={() => setCurrentPage("/events")}
               >
                 Events
@@ -50,9 +45,9 @@ export default function NavBar() {
       </div>
       <div className="app-header__buttons">
         <SignedOut>
-          <SignInButton>
+          <Link to={"/sign-in"}>
             <button className="sign-in__button">Sign In</button>
-          </SignInButton>
+          </Link>
         </SignedOut>
         <SignedIn>
           <UserButton />

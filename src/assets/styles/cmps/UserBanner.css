@@ -1,0 +1,13 @@
+.user-img {
+  width: 190px;
+  height: 190px;
+  border-radius: 50%;
+}
+
+.user-details {
+  padding: 20px;
+}
+
+.user-details h1 {
+  font-size: 35px;
+}
