@@ -1,4 +1,4 @@
-import { HomePage } from "../pages/HomePage";
+import { HomePage } from "../pages/homePage/HomePage";
 import { RootLayout } from "../layout/RootLayout";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import SignInPage from "./../pages/LoginPage/SignIn";
@@ -8,6 +8,8 @@ import EventDescription from "../components/EventDescription";
 import { eventsLoader } from "../../loaders/eventsLoader";
 import AdminPage from "../pages/AdminPage/AdminPage";
 import AdminLayout from "../layout/AdminLayout";
+import AddEventPage from "../components/add-update-EventPage/AddEventPage";
+
 
 const router = createBrowserRouter([
   {
@@ -16,7 +18,7 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <HomePage />,
+        element: <AddEventPage/>,
       },
       {
         path: "sign-up/*",
