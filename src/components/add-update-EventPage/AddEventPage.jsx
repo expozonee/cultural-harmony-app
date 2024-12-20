@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import './AddEventPage.css'
-import {postEvent} from './AddEvent'
+import {postEvent} from './AddEvent.js'
+
 
 
 
@@ -20,7 +21,7 @@ export default function AddEventPage() {
     event_start_time: '',
   });
   const [items, setItems] = useState([]);
-  const [newItem, setNewItem] = useState({ title: "" });
+  const [newItem, setNewItem] = useState("");
 
 
   
@@ -46,7 +47,7 @@ export default function AddEventPage() {
       setlocation("");
       setFormsummary({ summary: "", description: "" });
       setFormDate({ date: "", event_start_time: "" });
-      setItems([]);
+     //setItems([]);
   
     })
     .catch((error) => {
@@ -55,18 +56,18 @@ export default function AddEventPage() {
    
 
   }
-console.log(items);
 
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setNewItem((prev) => ({ ...prev, [name]: value }));
-  };
+
+  // const handleInputChange = (e) => {
+  //   const { name, value } = e.target;
+  //   setNewItem((prev) => ({ ...prev, [name]: value }));
+  // };
 
   const addItem = () => {
-    if (newItem.title ) {
+    if (newItem) {
       setItems((prev) => [...prev, newItem]);
-      setNewItem({ title: ""});
+      setNewItem("");
     } else {
       alert("Please fill the field.");
     }
@@ -82,7 +83,7 @@ console.log(items);
   return (
       <>
       
-<form className='form1'  onSubmit={handleSubmit}>
+<form className='form1'  >
     <div className='form-group'>
     <label>Event Title</label>
     <input type="text" value={event_title} onChange={(e)=>{
@@ -156,24 +157,18 @@ console.log(items);
           type="text"
           name="title"
           placeholder="Item Title"
-          value={newItem.title}
-          onChange={handleInputChange}
+          value={newItem}
+          onChange={(e)=>{
+            setNewItem(e.target.value);
+          }}
           style={{ marginRight: "10px" }}
         />
-        {/* <input
-          type="text"
-          name="description"
-          placeholder="Item Description"
-          value={newItem.description}
-          onChange={handleInputChange}
-          style={{ marginRight: "10px" }}
-        /> */}
-        <button className="AddButton" onClick={addItem}>Add Checklist Item</button>
+        <button className="AddButton"  type="button" onClick={addItem}>Add Checklist Item</button>
       </div>
       <ul>
         {items.map((item, index) => (
           <li key={index} style={{ marginBottom: "10px" }}>
-            <strong>{item.title}</strong>
+            <strong>{item}</strong>
             <button
               onClick={() => removeItem(index)}
               style={{
@@ -192,7 +187,7 @@ console.log(items);
       </ul>
     </div>
 
-    <button className='button1' type='submit'> Add Event</button>
+    <button className='button1' type='submit' > Add Event</button>
     </form>
 
    </>
