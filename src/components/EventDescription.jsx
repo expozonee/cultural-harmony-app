@@ -47,6 +47,9 @@ function EventDescription() {
         alt={event.event_title}
       />
       <p>Date: {event.date}</p>
+      <ul className="event-contribution-list">
+        {console.log(event)}
+      </ul>
     </div>
   );
 }
