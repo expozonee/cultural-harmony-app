@@ -1,5 +1,5 @@
 
-.section1 {
+.section1-homepage {
     position: relative; 
     width: 100%;
     height: 90vh; 
@@ -7,7 +7,7 @@
     overflow: hidden; 
   }
   
-  .backgroundImg {
+  .backgroundImg-homepage {
     position: absolute; 
     top: 0;
     left: 0;
@@ -18,20 +18,20 @@
   }
   
 
-.content-card {
+.content-card-homepage {
     position: absolute;
     top: 15%;
     left: 30%;
     
   }
 
-  .content-card h1 {
+  .content-card-homepage h1 {
     font-size: 3.5vw;
     color: #ffffff;
     margin-bottom: 1rem;
   }
   
-  .content-card p {
+  .content-card-homepage p {
     color: #ffffff;
     font-size: 1.5vw;
     text-transform: uppercase;
@@ -40,7 +40,7 @@
   }
   
 
-  .section2 {
+  .section2-homepage {
     position: relative;
     width: 100%;
     height: 40vh;
@@ -50,13 +50,13 @@
     text-align: center;
   }
   
-  .section2 h2 {
+  .section2-homepage h2 {
     font-size: 2.5vw;
     margin-bottom: 1.2rem;
     color:  #1c0c78;
   }
   
-  .section2 p {
+  .section2-homepage p {
     font-size: 1.5vw;
     line-height: 1.6;
     margin-bottom: 1vw;
@@ -67,39 +67,39 @@
   }
  /* Media Query for phone screens */
 @media (max-width: 768px) {
-    .section1 {
+    .section1-homepage {
       height: 40vh; 
       max-height: none;
     }
 
-    .content-card {
-        width: 80%;
+    .content-card-homepage {
+      width: 80%;
       top: 10%; 
       left: 45%; 
       transform: translateX(-50%); 
       text-align: center; 
     }
   
-    .content-card h1 {
+    .content-card-homepage h1 {
       font-size: 3.5vw; 
     }
   
-    .content-card p {
+    .content-card-homepage p {
       font-size: 1.5vw;
     }
   
     /* Section 2 Adjustments */
-    .section2 {
+    .section2-homepage {
       height: auto; 
       padding: 30px 10px; 
     }
   
-    .section2 h2 {
+    .section2-homepage h2 {
       font-size: 3vw;
       margin-bottom: 1rem; 
     }
   
-    .section2 p {
+    .section2-homepage p {
       font-size: 2vw; 
       line-height: 1.4; 
       margin-bottom: 1rem;
@@ -107,24 +107,24 @@
   }
   
   @media (max-width: 500px) {
-    .section1 {
+    .section1-homepage {
         height: 30vh; 
         max-height: none; 
       }
   
-    .content-card h1 {
+    .content-card-homepage h1 {
       font-size: 3vw;
     }
   
-    .content-card p {
+    .content-card-homepage p {
       font-size: 1.5vw; 
     }
   
-    .section2 h2 {
+    .section2-homepage h2 {
       font-size: 3vw; 
     }
   
-    .section2 p {
+    .section2-homepage p {
       font-size: 1.5vw;
     }
   }
