@@ -36,9 +36,7 @@ export function RootLayout() {
   return (
     <>
       <NavBar />
-      <section className="flex justify-center">
-        <Outlet />
-      </section>
+      <Outlet />
     </>
   );
 }
