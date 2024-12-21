@@ -9,6 +9,7 @@ import { eventsLoader } from "../../loaders/eventsLoader";
 import AdminPage from "../pages/AdminPage/AdminPage";
 import AdminLayout from "../layout/AdminLayout";
 import AddEventPage from "../components/add-update-EventPage/AddEventPage";
+import UpdateEvent from "../components/add-update-EventPage/UpdateEvent";
 
 
 const router = createBrowserRouter([
@@ -18,7 +19,7 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <AddEventPage/>,
+        element: <UpdateEvent/>,
       },
       {
         path: "sign-up/*",
