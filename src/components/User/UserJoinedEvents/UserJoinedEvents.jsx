@@ -17,7 +17,7 @@ export default function UserJoinedEvents() {
 
   return (
     <div>
-      {joinedEvents.length > 0 ? (
+      {joinedEvents && joinedEvents.length > 0 ? (
         joinedEvents.map((e) => <p key={e.id}>Event: {e.event_title}</p>)
       ) : (
         <p>You did not join any events yet!</p>

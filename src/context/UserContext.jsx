@@ -50,9 +50,9 @@ export function UserContextProvider({ children }) {
     const findUserInDb = users.find((u) => u.email === userEmailAddress);
     if (!findUserInDb) {
       setUserData(addNewUsersToDb());
+    } else {
+      setUserData(findUserInDb);
     }
-
-    setUserData(findUserInDb);
   }
 
   if (!userData) {
