@@ -45,7 +45,7 @@ const router = createBrowserRouter([
           },
           {
             path: ":dashboard",
-            element: <AdminPage dashboard={"events"} />,
+            element: <AdminPage />,
             loader: eventsLoader,
           },
         ],
