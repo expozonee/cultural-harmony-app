@@ -1,6 +1,9 @@
 import { Link } from "react-router";
+import { useUserData } from "../context/UserContext";
 // todo: url builder for links
 function EventPreview({ event }) {
+  const { joinEvent } = useUserData();
+
   return (
     <div className="event-preview-card">
       <div className="event-image">
@@ -18,6 +21,7 @@ function EventPreview({ event }) {
           to={`/events/${event.id}`}
           state={{ event }}
           className="join-button"
+          onClick={() => joinEvent(event.id)}
         >
           Join event
         </Link>
