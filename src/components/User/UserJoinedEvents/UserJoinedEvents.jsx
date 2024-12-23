@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useUserData } from "../../../context/UserContext";
 
 export default function UserJoinedEvents() {
-  const { getUserJoinedEvents } = useUserData();
+  const { getUserJoinedEvents, unJoinEvent } = useUserData();
   const [joinedEvents, setJoinedEvents] = useState([]);
 
   useEffect(() => {
@@ -18,7 +18,14 @@ export default function UserJoinedEvents() {
   return (
     <div>
       {joinedEvents && joinedEvents.length > 0 ? (
-        joinedEvents.map((e) => <p key={e.id}>Event: {e.event_title}</p>)
+        joinedEvents.map((e, i) => {
+          return (
+            <div key={i}>
+              <p>Event: {e.event_title}</p>
+              <button onClick={() => unJoinEvent(e.id)}>Unjoin Event</button>
+            </div>
+          );
+        })
       ) : (
         <p>You did not join any events yet!</p>
       )}
