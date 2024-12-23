@@ -1,6 +1,5 @@
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useUser } from "@clerk/clerk-react";
-// todo: url builder for links
 function EventPreview({ event }) {
   const navigate = useNavigate();
   const location = useLocation();
