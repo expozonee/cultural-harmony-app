@@ -6,12 +6,9 @@ import SignUpPage from "./../pages/SignUp/SignUp";
 import EventsList from "../components/EventsList";
 import EventDescription from "../components/EventDescription";
 import { eventsLoader } from "../../loaders/eventsLoader";
+import {upcomingEventsLoader} from "../../loaders/upcomingEventsLoader";
 import AdminPage from "../pages/AdminPage/AdminPage";
 import AdminLayout from "../layout/AdminLayout";
-import AddEventPage from "../components/add-update-EventPage/AddEventPage";
-import UpdateEvent from "../components/add-update-EventPage/UpdateEvent";
-import { updateDoc } from 'firebase/firestore';
-
 
 const router = createBrowserRouter([
   {
@@ -21,6 +18,7 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <HomePage/>,
+        loader: upcomingEventsLoader,
       },
       {
         path: "sign-up/*",

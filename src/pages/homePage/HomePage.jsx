@@ -1,11 +1,10 @@
 
-import AboutUs from './AboutUs';
+import AboutUs from '../../components/Home/AboutUs';
+import FeaturedEvents from '../../components/Home/FeaturedEvents';
 export function HomePage() {
-  return <>
+  return <div className='home-page-container'>
    
-    <AboutUs/>
-    
-    
-    </>;
-  
+    <AboutUs/>   
+    <FeaturedEvents/>
+  </div>;  
 }
