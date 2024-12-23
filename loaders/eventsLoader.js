@@ -5,8 +5,8 @@ export async function eventsLoader() {
   try {
     const queryEventsDB = await getDocs(collection(db, "events"));
     const eventsData = queryEventsDB.docs.map((doc) => ({
-      id: doc.id,
       ...doc.data(),
+      id: doc.id,
     }));
     return eventsData;
   } catch (error) {
