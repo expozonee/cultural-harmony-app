@@ -14,8 +14,8 @@ export async function upcomingEventsLoader() {
 
     const querySnapshot = await getDocs(eventsQuery);
     const upcomingEvents = querySnapshot.docs.map((doc) => ({
-      id: doc.id,
       ...doc.data(),
+      id: doc.id,
     }));
     return upcomingEvents;
   } catch (error) {

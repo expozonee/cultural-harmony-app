@@ -10,6 +10,8 @@ function EventDescription() {
   const [event, setEvent] = useState(location.state?.event || null); 
   const [loading, setLoading] = useState(!location.state?.event); 
 
+  console.log("Event:", event);
+
   useEffect(() => {
     if (!event) {
       const fetchEvent = async () => {
@@ -52,6 +54,7 @@ function EventDescription() {
         <ContributionList
           eventDocId={String(event.id)}
           contributionList={event.contribution_list || []}
+          setEvent={setEvent}
         />
       </ul>
     </div>
