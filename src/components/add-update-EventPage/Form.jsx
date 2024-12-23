@@ -1,12 +1,15 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import './AddEventPage.css'
 import { useEffect } from 'react';
-
-
-
-export default function Form( { Event = {}   ,onsubmit , id} ) {
-
-    console.log( "Event",Event);
+import { useUser } from "@clerk/clerk-react";
+ 
+export default function Form( { Event = {}   ,onsubmit , id ,Buttontext}  ) {
+  // console.log("id",id);
+  
+    const { user } = useUser();
+  //  const currentUserName = user?.username;
+    const currentUserName ="nana";
+    // console.log( "Event",Event);
     const [event, setEvent] = useState({
         event_title: "",
         imgUrl: "",
@@ -14,15 +17,16 @@ export default function Form( { Event = {}   ,onsubmit , id} ) {
         location: "",
         summary: "",
         description: "",
+        event_host_name :currentUserName ,
         date: "",
         event_start_time: "",
-        items: [],
-        newItem: "",
+        contribution_list: [],
+        item_name: "",
       });
     
       // Synchronize the local state with the Event prop when it changes
       useEffect(() => {
-        if (Event) {
+        if (JSON.stringify(Event) !== JSON.stringify(prevEvent.current)) {
           setEvent({
             event_title: Event.event_title || "",
             imgUrl: Event.imgUrl || "",
@@ -32,19 +36,24 @@ export default function Form( { Event = {}   ,onsubmit , id} ) {
             description: Event.description || "",
             date: Event.date || "",
             event_start_time: Event.event_start_time || "",
-            items: Event.items || [],
-            newItem: "",
+            contribution_list: Event.contribution_list || [],
+            item_name: "",
           });
+          prevEvent.current = Event; // Update reference
         }
       }, [Event]);
-    
+      
+      const prevEvent = useRef(Event);
 
     const addItem = () => {
-        if (event.newItem.trim()) {
+        if (event.item_name.trim()) {
         setEvent((prevEvent) => ({
             ...prevEvent,
-            items: [...prevEvent.items, prevEvent.newItem], 
-            newItem: '', 
+            contribution_list: [
+              ...prevEvent.contribution_list,
+              { item_name: prevEvent.item_name, user: "undefined" }, // Add user as undefined
+            ],
+            item_name: '', 
         }));
         } else {
         alert("Please fill the field."); 
@@ -54,7 +63,7 @@ export default function Form( { Event = {}   ,onsubmit , id} ) {
     const removeItem = (index) => {
         setEvent((prevEvent) => ({
         ...prevEvent,
-        items: prevEvent.items.filter((_, i) => i !== index), 
+        contribution_list: prevEvent.contribution_list.filter((_, i) => i !== index), 
         }));
     };
 
@@ -78,24 +87,28 @@ export default function Form( { Event = {}   ,onsubmit , id} ) {
         description: event.description,
         date: event.date,
         event_start_time: event.event_start_time,
-        items: event.items ,
-        newItem : ''
+        contribution_list: event.contribution_list ,
+        event_host_name :currentUserName ,
+        item_name : ''
         };
-        console.log("new event",newEvent);
+        // console.log("new event",newEvent);
         
-        onsubmit(newEvent).then(() => {
+    const submitResult = id ? onsubmit (id,newEvent) : onsubmit(newEvent);
+    submitResult
+        .then(() => {
             setEvent({
                 event_title: "",
                 imgUrl: "",
-                maxParticipants: 0,
+                maxParticipants: "",
                 location: "",
                 summary: "",
                 description: "",
                 date: "",
                 event_start_time: "",
-                items: [],
-                newItem: "",
-              });
+                event_host_name :"",
+                contribution_list: [],
+                item_name: "",
+            });
         })
         .catch((error) => {
             console.error("Failed to submit event:", error);
@@ -147,17 +160,17 @@ export default function Form( { Event = {}   ,onsubmit , id} ) {
     <div>
         <input
         type="text"
-        name="newItem"
-        value={event.newItem}
+        name="item_name"
+        value={event.item_name}
         onChange={handleOnChange}
         />
         <button className="AddButton"  type="button" onClick={addItem}>Add Checklist Item</button>
     </div>
     <ul>
-        {event.items.map((item, index) => (
+        {event.contribution_list.map((item, index) => (
         <li key={index} style={{ marginBottom: "10px" }}>
-            <strong>{item}</strong>
-            <button
+            <strong>{item.item_name}</strong>
+            <button type="button"
             style={{
                 marginLeft: "10px",
                 color: "white",
@@ -175,7 +188,7 @@ export default function Form( { Event = {}   ,onsubmit , id} ) {
     </ul>
     </div>
 
-    <button className='button1' type='submit' > Add Event</button>
+    <button className='button1' type='submit' > {Buttontext}</button>
     </form>
     </>
 )

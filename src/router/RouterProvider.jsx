@@ -10,6 +10,7 @@ import AdminPage from "../pages/AdminPage/AdminPage";
 import AdminLayout from "../layout/AdminLayout";
 import AddEventPage from "../components/add-update-EventPage/AddEventPage";
 import UpdateEvent from "../components/add-update-EventPage/UpdateEvent";
+import { updateDoc } from 'firebase/firestore';
 
 
 const router = createBrowserRouter([
@@ -19,7 +20,7 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <UpdateEvent/>,
+        element: <HomePage/>,
       },
       {
         path: "sign-up/*",

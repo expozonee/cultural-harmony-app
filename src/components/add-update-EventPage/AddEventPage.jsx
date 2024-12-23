@@ -1,4 +1,3 @@
-import React, { useState } from 'react'
 import './AddEventPage.css'
 import {postEvent} from './AddEvent.js'
 import Form from './Form.jsx'
@@ -8,7 +7,7 @@ import Form from './Form.jsx'
 
 
 export default function AddEventPage() {
-
+  const AddText ="Add Event";
   const event ={
     event_title :'',
     imgUrl : '',
@@ -18,12 +17,12 @@ export default function AddEventPage() {
     description: '',
     date: '',
     event_start_time: '',
-    items: [] ,
+    contribution_list: [] ,
     newItem : ''
   }
   return (
       <>
-    <Form Event={event} onsubmit={postEvent} />
+    <Form Event={event} onsubmit={postEvent}  Buttontext={AddText} />
     </>
   )
 }

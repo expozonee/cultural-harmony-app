@@ -29,6 +29,8 @@ export async function DeleteEvent(eventId) {
 
 export async function updateEvent(eventId, updatedFields) {
   try {
+  //  console.log("eventId",eventId);
+   
     // Get a reference to the document in the "events" collection using eventId
     const docRef = doc(db, "events", eventId);
     
