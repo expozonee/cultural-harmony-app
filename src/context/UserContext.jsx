@@ -44,10 +44,12 @@ export function UserContextProvider({ children }) {
     });
   }
 
-  async function unJoinEvent(id) {
-    await updateDoc(userRef, {
-      eventsJoined: arrayRemove(id),
-    });
+  async function unJoinEvents(ids) {
+    for (const id of ids) {
+      await updateDoc(userRef, {
+        eventsJoined: arrayRemove(id),
+      });
+    }
   }
 
   return (
@@ -56,7 +58,7 @@ export function UserContextProvider({ children }) {
         getUserJoinedEvents,
         getUserCreatedEvents,
         joinEvent,
-        unJoinEvent,
+        unJoinEvents,
       }}
     >
       {children}
