@@ -1,47 +1,23 @@
+import { useEffect, useState } from "react";
+import { getUsers } from "../../firebase/utils/getUsers";
 import UserList from "./UserList";
 
-const Users = [
-  {
-    id: 0,
-    email: "example@example.com",
-    joined: 2,
-    Organized: 2,
-  },
-  {
-    id: 1,
-    email: "example@example.com",
-    joined: 2,
-    Organized: 2,
-  },
-  {
-    id: 2,
-    email: "example@example.com",
-    joined: 3,
-    Organized: 9,
-  },
-  {
-    id: 3,
-    email: "example@example.com",
-    joined: 4,
-    Organized: 3,
-  },
-  {
-    id: 4,
-    email: "example@example.com",
-    joined: 8,
-    Organized: 6,
-  },
-  {
-    id: 5,
-    email: "example@example.com",
-    joined: 7,
-    Organized: 3,
-  },
-];
-
 export default function UsersList() {
+  const [users, setUsers] = useState([]);
+
+  useEffect(() => {
+    async function fetchUsers() {
+      const fetchedUsers = await getUsers();
+      console.log(fetchedUsers);
+
+      setUsers(fetchedUsers);
+    }
+
+    fetchUsers();
+  }, []);
+
   return (
-    <table className="table-event" border="1">
+    <table className="table-event">
       <thead>
         <tr>
           <th>Email</th>
@@ -49,9 +25,11 @@ export default function UsersList() {
           <th>Events Organized</th>
         </tr>
       </thead>
-      {Users.map((e, index) => {
-        return <UserList key={index} data={e} />;
-      })}
+      <tbody>
+        {users.map((user, index) => (
+          <UserList key={index} data={user} />
+        ))}
+      </tbody>
     </table>
   );
 }
