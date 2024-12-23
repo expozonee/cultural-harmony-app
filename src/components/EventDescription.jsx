@@ -2,29 +2,30 @@ import { doc, getDoc } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { useParams, useLocation } from "react-router";
 import { db } from "../firebase/firebaseConfig";
+import ContributionList from "./ContributionList";
 
 function EventDescription() {
-  const { eventId } = useParams();
+  const { eventId } = useParams(); 
   const location = useLocation();
-  const [event, setEvent] = useState(location.state?.event || null);
-  const [loading, setLoading] = useState(!location.state?.event);
+  const [event, setEvent] = useState(location.state?.event || null); 
+  const [loading, setLoading] = useState(!location.state?.event); 
 
   useEffect(() => {
     if (!event) {
       const fetchEvent = async () => {
         try {
-          const docRef = doc(db, "events", eventId);
-          const docSnap = await getDoc(docRef);
+          const docRef = doc(db, "events", eventId); 
+          const docSnap = await getDoc(docRef); 
 
           if (docSnap.exists()) {
-            setEvent({ id: docSnap.id, ...docSnap.data() });
+            setEvent({ id: docSnap.id, ...docSnap.data() }); 
           } else {
             console.error("Event not found");
           }
         } catch (error) {
           console.error("Error fetching data from Firestore: ", error);
         } finally {
-          setLoading(false);
+          setLoading(false); 
         }
       };
 
@@ -32,7 +33,7 @@ function EventDescription() {
     }
   }, [event, eventId]);
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) return <p>Loading...</p>; 
 
   if (!event) return <p>Event not found!</p>;
 
@@ -48,7 +49,10 @@ function EventDescription() {
       />
       <p>Date: {event.date}</p>
       <ul className="event-contribution-list">
-        {console.log(event)}
+        <ContributionList
+          eventDocId={String(event.id)}
+          contributionList={event.contribution_list || []}
+        />
       </ul>
     </div>
   );
