@@ -123,6 +123,16 @@ function EventDescription() {
           />
         </div>
       )}
+      {hasJoined && (
+        <div className="event-participants-list">
+          <h2>Participants</h2>
+          <ul>
+            {event.participants?.map((participant) => (
+              <li key={participant}>{participant}</li>
+            ))}
+          </ul>
+        </div>
+      )}
     </div>
   );
 }
