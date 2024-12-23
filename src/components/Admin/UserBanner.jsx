@@ -1,4 +1,8 @@
+import { useUser } from "@clerk/clerk-react";
+
 export default function UserBanner() {
+  const user = useUser();
+
   return (
     <div className="flex align-center justify-center">
       <img
@@ -7,8 +11,8 @@ export default function UserBanner() {
         alt=""
       />
       <section className="user-details">
-        <h1>Hello, Ward!</h1>
-        <p>email</p>
+        <h1>Hello, {user.user?.fullName}!</h1>
+        <p>{user.user?.emailAddresses[0].emailAddress}</p>
       </section>
     </div>
   );
