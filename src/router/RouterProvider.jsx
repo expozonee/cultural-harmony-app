@@ -1,4 +1,4 @@
-import { HomePage } from "../pages/HomePage";
+import { HomePage } from "../pages/homePage/HomePage";
 import { RootLayout } from "../layout/RootLayout";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import SignInPage from "./../pages/LoginPage/SignIn";
@@ -6,6 +6,7 @@ import SignUpPage from "./../pages/SignUp/SignUp";
 import EventsList from "../components/EventsList";
 import EventDescription from "../components/EventDescription";
 import { eventsLoader } from "../../loaders/eventsLoader";
+import {upcomingEventsLoader} from "../../loaders/upcomingEventsLoader";
 import AdminPage from "../pages/AdminPage/AdminPage";
 import AdminLayout from "../layout/AdminLayout";
 
@@ -17,6 +18,7 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <HomePage />,
+        loader: upcomingEventsLoader,
       },
       {
         path: "sign-up/*",
