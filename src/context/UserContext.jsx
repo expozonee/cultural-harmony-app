@@ -1,66 +1,19 @@
 /* eslint-disable react-refresh/only-export-components */
 import { useUser } from "@clerk/clerk-react";
-import { createContext, useContext, useEffect, useState } from "react";
-import { getUsers } from "../firebase/utils/getUsers";
+import { createContext, useContext } from "react";
 import { getEvents } from "../firebase/utils/getEvents";
 import { db } from "../firebase/firebaseConfig";
-import { doc, updateDoc } from "firebase/firestore";
-import { addUserToDb } from "../firebase/utils/addUserToDb";
+import { arrayRemove, arrayUnion, doc, updateDoc } from "firebase/firestore";
+import { useUserSubscribe } from "../hooks/useUserSubscribe";
 
 const UserContext = createContext(null);
 
 export function UserContextProvider({ children }) {
-  const [userData, setUserData] = useState(undefined);
-  const { user, isSignedIn } = useUser();
-  const userEmailAddress = user?.primaryEmailAddress.emailAddress;
-
-  useEffect(() => {
-    if (!isSignedIn) {
-      setUserData(undefined);
-    }
-  }, [isSignedIn]);
-
-  async function addNewUsersToDb() {
-    if (!isSignedIn) return;
-
-    const users = await getUsers();
-    const userEmailAddress = user.primaryEmailAddress.emailAddress;
-    const isUserInDb = users.find((u) => u.email === userEmailAddress);
-
-    if (!isUserInDb) {
-      const userToAdd = {
-        email: userEmailAddress,
-        profileImage: user.imageUrl,
-        eventsJoined: [],
-        eventsOrganized: [],
-        isAdmin: false,
-        name: user.fullName,
-      };
-
-      const newUser = await addUserToDb(userToAdd);
-      if (!newUser) return;
-      return newUser;
-    }
-  }
-
-  async function initialUserData() {
-    if (!isSignedIn) return;
-
-    const users = await getUsers();
-    const findUserInDb = users.find((u) => u.email === userEmailAddress);
-    if (!findUserInDb) {
-      setUserData(addNewUsersToDb());
-    } else {
-      setUserData(findUserInDb);
-    }
-  }
-
-  if (!userData) {
-    initialUserData();
-  }
+  const { isSignedIn } = useUser();
+  const [userId, userData, userRef] = useUserSubscribe();
 
   async function getUserJoinedEvents() {
-    if (!isSignedIn) return;
+    if (!userData) return;
 
     const userJoinedEvents = (await getEvents()).filter((e) =>
       userData.eventsJoined.includes(e.id)
@@ -84,20 +37,27 @@ export function UserContextProvider({ children }) {
 
     if (userData.eventsJoined.includes(id)) return;
 
-    const userRef = doc(db, "users", userData.id);
+    const userRef = doc(db, "users", userId);
 
     await updateDoc(userRef, {
-      eventsJoined: [...userData.eventsJoined, `${id}`],
+      eventsJoined: arrayUnion(id),
     });
+  }
 
-    const user = (await getUsers()).find((u) => u.email === userEmailAddress);
-
-    setUserData(user);
+  async function unJoinEvent(id) {
+    await updateDoc(userRef, {
+      eventsJoined: arrayRemove(id),
+    });
   }
 
   return (
     <UserContext.Provider
-      value={{ getUserJoinedEvents, getUserCreatedEvents, joinEvent }}
+      value={{
+        getUserJoinedEvents,
+        getUserCreatedEvents,
+        joinEvent,
+        unJoinEvent,
+      }}
     >
       {children}
     </UserContext.Provider>
