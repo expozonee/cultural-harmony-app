@@ -13,15 +13,8 @@ function EventDescription() {
   const [loading, setLoading] = useState(!location.state?.event);
   const navigate = useNavigate();
   const { user } = useUser();
-  const [hasJoined, setHasJoined] = useState(false);
 
-  useEffect(() => {
-    if (event && user) {
-      const userHasJoined = event.participants?.includes(user.username) || false;
-      setHasJoined(userHasJoined);
-      console.log("Updated hasJoined:", userHasJoined);
-    }
-  }, [event, user]);
+  const hasJoined = event?.participants?.includes(user?.username);
 
   useEffect(() => {
     const fetchEvent = async () => {
@@ -34,11 +27,6 @@ function EventDescription() {
             const eventData = { id: docSnap.id, ...docSnap.data() };
             setEvent(eventData);
             console.log("Fetched event:", eventData);
-
-            // Update `hasJoined` based on the fetched data
-            if (user && eventData.participants?.includes(user.username)) {
-              setHasJoined(true);
-            }
           } else {
             console.error("Event not found");
           }
@@ -51,27 +39,28 @@ function EventDescription() {
     };
 
     fetchEvent();
-  }, [event, eventId, user]);
+  }, [event, eventId]);
 
   const handleJoinClick = async (e) => {
     if (!user) {
       e.preventDefault();
       navigate("/sign-in", { state: { from: location.pathname } });
-    } else {
-      try {
-        const eventRef = doc(db, "events", eventId);
-        await updateDoc(eventRef, {
-          participants: arrayUnion(user.username),
-        });
-        setEvent((prevEvent) => ({
-          ...prevEvent,
-          participants: [...(prevEvent.participants || []), user.username],
-        }));
-        setHasJoined(true);
-        console.log("User joined the event:", user.username);
-      } catch (error) {
-        console.error("Error joining event:", error);
-      }
+      return;
+    }
+
+    try {
+      const eventRef = doc(db, "events", eventId);
+      await updateDoc(eventRef, {
+        participants: arrayUnion(user.username),
+      });
+
+      setEvent((prevEvent) => ({
+        ...prevEvent,
+        participants: [...(prevEvent?.participants || []), user.username],
+      }));
+      console.log("User joined the event:", user.username);
+    } catch (error) {
+      console.error("Error joining event:", error);
     }
   };
 
@@ -84,11 +73,10 @@ function EventDescription() {
 
       setEvent((prevEvent) => ({
         ...prevEvent,
-        participants: (prevEvent.participants || []).filter(
+        participants: (prevEvent?.participants || []).filter(
           (participant) => participant !== user.username
         ),
       }));
-      setHasJoined(false);
       console.log("User unjoined the event:", user.username);
     } catch (error) {
       console.error("Error unjoining event:", error);
