@@ -79,20 +79,20 @@ function EventDescription() {
   return (
     <div className="description-page-container">
       <h1>{event.event_title}</h1>
-      <p>{event.event_host_name}</p>
+      <p className="host-name">Organized By: <span>{event.event_host_name}</span></p>
       <p className="event-description-info">{event.description}</p>
       <img
         className="event-image-description"
         src={event.imgUrl}
         alt={event.event_title}
       />
-      <p>Date: {event.date}</p>
+      <p className="event--date"> Date: {event.date}</p>
       {hasJoined ? (
-        <button onClick={() => handleParticipantAction("unjoin")}>
+        <button className="unjoin-button"onClick={() => handleParticipantAction("unjoin")}>
           Unjoin Event
         </button>
       ) : (
-        <button onClick={() => handleParticipantAction("join")}>
+        <button className="join-button" onClick={() => handleParticipantAction("join")}>
           Join Event
         </button>
       )}
