@@ -28,14 +28,15 @@ function ContributionList({ contributionList, eventDocId, setEvent }) {
         }
     };
 
+    const hasSelectedItem = list.some((item) => item.user === currentUserName);
+
     return (
         <div className="contribution-list">
             <h3>Contribution List</h3>
             <ul>
                 {list.map((item, index) => {
                     const isPickedByCurrentUser = item.user === currentUserName;
-                    const isPickedByOtherUser =
-                        item.user !== "undifined" && !isPickedByCurrentUser;
+                    const isPickedByOtherUser = item.user !== "undefined" && !isPickedByCurrentUser;
 
                     return (
                         <li key={item.item_name}>
@@ -47,7 +48,7 @@ function ContributionList({ contributionList, eventDocId, setEvent }) {
                                 <input
                                     type="checkbox"
                                     checked={isPickedByCurrentUser}
-                                    disabled={isPickedByOtherUser}
+                                    disabled={isPickedByOtherUser || (hasSelectedItem && !isPickedByCurrentUser)}
                                     onChange={() => handleCheckboxChange(index)}
                                 />
                                 {item.item_name}

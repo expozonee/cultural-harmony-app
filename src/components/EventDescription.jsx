@@ -1,10 +1,11 @@
-import { doc, getDoc, updateDoc, arrayUnion, arrayRemove } from "firebase/firestore";
+import { doc, getDoc} from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { useParams, useLocation } from "react-router";
 import { db } from "../firebase/firebaseConfig";
 import ContributionList from "./ContributionList";
 import { useNavigate } from "react-router-dom";
 import { useUser } from "@clerk/clerk-react";
+import { updateEventParticipants } from "../utils/updateEvent";
 
 function EventDescription() {
   const { eventId } = useParams();
@@ -14,6 +15,7 @@ function EventDescription() {
   const navigate = useNavigate();
   const { user } = useUser();
 
+  console.log("Event:", event);
   const hasJoined = event?.participants?.includes(user?.username);
 
   useEffect(() => {
@@ -41,47 +43,35 @@ function EventDescription() {
     fetchEvent();
   }, [event, eventId]);
 
-  const handleJoinClick = async (e) => {
+  const handleParticipantAction = async (action) => {
     if (!user) {
-      e.preventDefault();
-      navigate("/sign-in", { state: { from: location.pathname } });
-      return;
+        navigate("/sign-in", { state: { from: location.pathname } });
+        return;
     }
 
     try {
-      const eventRef = doc(db, "events", eventId);
-      await updateDoc(eventRef, {
-        participants: arrayUnion(user.username),
-      });
+        const update = await updateEventParticipants(db, eventId, user.username, action);
+        const updatedParticipants = update[0];
+        const updatedContributionList = update[1];
+  
+        setEvent((prevEvent) => ({
+            ...prevEvent,
+            participants: updatedParticipants,
+            contribution_list: updatedContributionList,
+        }));
 
-      setEvent((prevEvent) => ({
-        ...prevEvent,
-        participants: [...(prevEvent?.participants || []), user.username],
-      }));
-      console.log("User joined the event:", user.username);
+        console.log(
+            `User ${action === "join" ? "joined" : "unjoined"} the event:`,
+            user.username
+        );
     } catch (error) {
-      console.error("Error joining event:", error);
+        console.error(
+            `Error ${action === "join" ? "joining" : "unjoining"} event:`,
+            error
+        );
     }
-  };
+};
 
-  const handleUnjoinClick = async () => {
-    try {
-      const eventRef = doc(db, "events", eventId);
-      await updateDoc(eventRef, {
-        participants: arrayRemove(user.username),
-      });
-
-      setEvent((prevEvent) => ({
-        ...prevEvent,
-        participants: (prevEvent?.participants || []).filter(
-          (participant) => participant !== user.username
-        ),
-      }));
-      console.log("User unjoined the event:", user.username);
-    } catch (error) {
-      console.error("Error unjoining event:", error);
-    }
-  };
 
   if (loading) return <p>Loading...</p>;
   if (!event) return <p>Event not found!</p>;
@@ -98,9 +88,13 @@ function EventDescription() {
       />
       <p>Date: {event.date}</p>
       {hasJoined ? (
-        <button onClick={handleUnjoinClick}>Unjoin Event</button>
+        <button onClick={() => handleParticipantAction("unjoin")}>
+          Unjoin Event
+        </button>
       ) : (
-        <button onClick={handleJoinClick}>Join Event</button>
+        <button onClick={() => handleParticipantAction("join")}>
+          Join Event
+        </button>
       )}
       {hasJoined && (
         <div className="event-contribution-list">
