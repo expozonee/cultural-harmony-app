@@ -129,10 +129,15 @@ function EventDescription() {
         </div>
       )}
 
-      <Link to="create-poll">
-        <button>Add A Poll to This Event!</button>
-      </Link>
-
+      {event.event_host_name === user?.username ? (
+        <Link to={`create-poll`}>
+          <button>Create A Poll for This Event</button>
+        </Link>
+      ) : event.poll ? (
+        <Poll poll={event.poll} />
+      ) : (
+        <p>No poll available for this event.</p>
+      )}
       <Outlet />
     </div>
   );

@@ -1,5 +1,8 @@
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router";
+import firebase from "firebase/compat/app";
+import { doc } from "firebase/firestore";
+import { db } from "../firebase/firebaseConfig";
 
 function CreatePoll() {
   const [pollQuestion, setPollQuestion] = useState("");
@@ -19,16 +22,42 @@ function CreatePoll() {
     setCurrentOption("");
   }
 
-  function createPoll(e) {
+  // function createPoll(e) {
+  //   e.preventDefault();
+
+  //   if (!pollQuestion || pollOptions.length < 2) {
+  //     alert("Can't create a poll without a question or less than 2 options");
+  //     return;
+  //   }
+  //   setIsPollCreated(true);
+  //   alert("Poll created successfully!");
+  //   navigate(`/events/${eventId}`);
+  // }
+
+  async function createPoll(e) {
     e.preventDefault();
 
     if (!pollQuestion || pollOptions.length < 2) {
-      alert("Can't create a poll without a question or less than 2 options");
+      alert("You need a poll question and at least 2 options to create a poll");
       return;
     }
-    setIsPollCreated(true);
-    alert("Poll created successfully!");
-    navigate(`/events/${eventId}`);
+
+    try {
+      const eventRef = doc(db, "events", eventId);
+      await update(eventRef, {
+        poll: {
+          question: pollQuestion,
+          options: pollOptions,
+          votes: {},
+        },
+      });
+
+      setIsPollCreated(true);
+      alert("Your poll was created successfully!");
+      navigate(`/events/${eventId}`);
+    } catch (error) {
+      console.error("Error while creating poll: ", error);
+    }
   }
 
   return (
