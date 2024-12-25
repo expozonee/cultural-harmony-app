@@ -13,6 +13,7 @@
 /* Pages */
 @import './styles/pages/event-description.css';
 @import './styles/pages/AdminPage.css';
+@import './styles/pages/HomePage.css';
 
 /* Components */
 @import './styles/cmps/app-header.css';
