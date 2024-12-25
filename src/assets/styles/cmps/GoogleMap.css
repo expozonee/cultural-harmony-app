@@ -1,0 +1,84 @@
+.marker {
+  cursor: pointer;
+  z-index: 1;
+}
+
+.marker-icon {
+  width: 50px;
+  height: 50px;
+}
+
+.event-modal-on-the-map {
+  background-color: #ff5a5f;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+  text-align: center;
+  width: fit-content;
+  height: fit-content;
+}
+
+.show-map-btn {
+  width: fit-content;
+  font-size: 14px;
+  height: 48px;
+  transition-duration: 0.15s;
+  text-size-adjust: 100%;
+  line-height: 20px;
+  position: fixed;
+  bottom: 90px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+  background-color: var(--mainBlue);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 24px;
+  cursor: pointer;
+}
+
+.show-map-btn:hover {
+  background-color: var(--mainRed);
+  font-weight: bold;
+}
+
+.modal-open-event {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  max-width: 300px;
+}
+
+.event-modal-img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.close-modal-btn {
+  margin-top: 1rem;
+  margin-left: 1rem;
+  padding: 0.5rem 1rem;
+  background-color: #ccc;
+  color: black;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.go-to-event {
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  background-color: #ff5a5f;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
