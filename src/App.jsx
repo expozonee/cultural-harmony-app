@@ -1,4 +1,5 @@
 import "./assets/main.css";
+import { EventsProvider } from "./context/EventsContext";
 import { UserContextProvider } from "./context/UserContext";
 import { RouterProviderComponent as RouterProvider } from "./router/RouterProvider";
 import { ClerkProvider } from "@clerk/clerk-react";
@@ -13,7 +14,9 @@ function App() {
   return (
     <ClerkProvider publishableKey={PUBLISHABLE_KEY}>
       <UserContextProvider>
-        <RouterProvider />;
+        <EventsProvider>
+          <RouterProvider />;
+        </EventsProvider>
       </UserContextProvider>
     </ClerkProvider>
   );
