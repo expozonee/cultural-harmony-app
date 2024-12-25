@@ -1,5 +1,6 @@
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useUser } from "@clerk/clerk-react";
+
 function EventPreview({ event }) {
   const navigate = useNavigate();
   const location = useLocation();
@@ -29,7 +30,7 @@ function EventPreview({ event }) {
           to={`/events/${event.id}`}
           state={{ event }}
           className="join-button"
-          onClick={handleJoinClick}
+          onClick={(e) => handleJoinClick(e, event.id)}
         >
           Join event
         </Link>
