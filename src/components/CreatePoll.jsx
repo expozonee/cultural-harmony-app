@@ -26,12 +26,15 @@ function CreatePoll() {
     setCurrentOption("");
   }
 
-  function createPoll() {
+  function createPoll(e) {
+    e.preventDefault();
+
     if (!pollQuestion || pollOptions.length < 2) {
       alert("Can't create a poll without a question or less than 2 options");
       return;
     }
     setIsPollCreated(true);
+    alert("Poll created successfully!");
   }
 
   return (
@@ -44,7 +47,7 @@ function CreatePoll() {
             type="text"
             value={pollQuestion}
             placeholder="Enter poll question"
-            onInput={(e) => setPollQuestion(e.target.value)}
+            onChange={(e) => setPollQuestion(e.target.value)}
           />
         </label>
 
@@ -54,7 +57,7 @@ function CreatePoll() {
               type="text"
               value={currentOption}
               placeholder="Enter option for answer"
-              onInput={(e) => setCurrentOption(e.target.value)}
+              onChange={(e) => setCurrentOption(e.target.value)}
             />
             <button onClick={addOption}>Add Option</button>
           </label>

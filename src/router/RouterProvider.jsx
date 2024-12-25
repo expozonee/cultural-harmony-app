@@ -5,8 +5,9 @@ import SignInPage from "./../pages/LoginPage/SignIn";
 import SignUpPage from "./../pages/SignUp/SignUp";
 import EventsList from "../components/EventsList";
 import EventDescription from "../components/EventDescription";
+import CreatePoll from "../components/CreatePoll";
 import { eventsLoader } from "../../loaders/eventsLoader";
-import {upcomingEventsLoader} from "../../loaders/upcomingEventsLoader";
+import { upcomingEventsLoader } from "../../loaders/upcomingEventsLoader";
 import AdminPage from "../pages/AdminPage/AdminPage";
 import AdminLayout from "../layout/AdminLayout";
 
@@ -36,6 +37,12 @@ const router = createBrowserRouter([
       {
         path: "/events/:eventId",
         element: <EventDescription />,
+        children: [
+          {
+            path: "create-poll",
+            element: <CreatePoll />,
+          },
+        ],
       },
       {
         path: "/admin",

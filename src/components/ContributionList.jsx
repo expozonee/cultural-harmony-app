@@ -109,9 +109,6 @@ function ContributionList({ contributionList, eventDocId }) {
           );
         })}
       </ul>
-      <div>
-        <CreatePoll />
-      </div>
     </div>
   );
 }
