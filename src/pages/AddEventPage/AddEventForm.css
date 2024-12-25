@@ -1,0 +1,14 @@
+.text-red {
+  color: red;
+}
+
+.border-red {
+  border-color: red;
+}
+
+.error {
+  color: red;
+  font-size: 0.8rem;
+  margin-top: 0.2rem;
+  display: block;
+}

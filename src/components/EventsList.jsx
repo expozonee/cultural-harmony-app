@@ -1,7 +1,7 @@
-import EventPreview from './EventPreview';
-import { useLoaderData } from 'react-router';
-import { GoogleMapList } from './Google_maps/GoogleMapList';
-import { useState } from 'react';
+import EventPreview from "./EventPreview";
+import { useLoaderData } from "react-router";
+import { GoogleMapList } from "./Google_maps/GoogleMapList";
+import { useState } from "react";
 
 function EventsList() {
   const events = useLoaderData();
@@ -14,8 +14,8 @@ function EventsList() {
         className="show-map-btn"
         onClick={() => setPreviewMap(!previewMap)}
       >
-        {previewMap ? 'Show List' : 'Show Map'}{' '}
-        <i className={`fa-solid ${previewMap ? 'fa-list' : 'fa-map'}`}></i>
+        {previewMap ? "Show List" : "Show Map"}{" "}
+        <i className={`fa-solid ${previewMap ? "fa-list" : "fa-map"}`}></i>
       </button>
       {previewMap ? (
         <GoogleMapList events={events} />
