@@ -1,0 +1,34 @@
+.create-poll-cmp {
+  width: 100%;
+  max-width: 40rem;
+  background-color: #f7f7f7;
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.create-poll-cmp h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.create-poll-cmp span {
+  font-size: 0.9rem;
+  color: #555;
+  margin-left: 0.5rem;
+  font-style: italic;
+}
+
+.create-poll-cmp ul {
+  list-style-type: none;
+  line-height: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  font-size: 1rem;
+}
+
+.create-poll-cmp button:hover {
+  background-color: rgb(127, 187, 255);
+}

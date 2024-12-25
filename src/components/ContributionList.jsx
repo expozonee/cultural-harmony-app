@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useUser } from "@clerk/clerk-react";
 import { updateContributionList } from "../utils/updateEvent";
-import CreatePoll from "./CreatePoll";
 
 function ContributionList({ contributionList, eventDocId, setEvent }) {
   const [list, setList] = useState(contributionList || []);
