@@ -1,4 +1,3 @@
-import './AddEventPage.css'
 import {postEvent} from './AddEvent.js'
 import Form from './Form.jsx'
 

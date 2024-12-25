@@ -7,8 +7,8 @@ import Form from './Form.jsx';
 export default function UpdateEvent() { 
   
     const UpdateText ="Update Event";
-    // const { id: eventId } = useParams();
-    const eventId ="Qtk19P3bP34DzHYRkRR4";
+    const { id: eventId } = useParams();
+    
     const [event ,setEvent]=useState("");
     useEffect(() => {
       const fetchEvent = async () => {

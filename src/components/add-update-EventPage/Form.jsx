@@ -4,17 +4,17 @@ import { useEffect } from 'react';
 import { useUser } from "@clerk/clerk-react";
  
 export default function Form( { Event = {}   ,onsubmit , id ,Buttontext}  ) {
-  // console.log("id",id);
-  
-    const { user } = useUser();
-  //  const currentUserName = user?.username;
-    const currentUserName ="nana";
-    // console.log( "Event",Event);
+  const inputRef = useRef(null);
+   const { user } = useUser();
+    const currentUserName = user?.username;
+    
     const [event, setEvent] = useState({
         event_title: "",
         imgUrl: "",
         maxParticipants: "",
         location: "",
+        lat :0,
+        lng :0 ,
         summary: "",
         description: "",
         event_host_name :currentUserName ,
@@ -23,6 +23,69 @@ export default function Form( { Event = {}   ,onsubmit , id ,Buttontext}  ) {
         contribution_list: [],
         item_name: "",
       });
+
+        useEffect(() => {
+          const loadGoogleMapsScript = () => {
+            if (document.querySelector(`script[src="https://maps.googleapis.com/maps/api/js?key=${import.meta.env.VITE_APP_GOOGLE_MAPS_API_KEY}&libraries=places"]`)) {
+              if (window.google) {
+                initAutocomplete(); 
+              }
+              return;
+            }
+            const script = document.createElement("script");
+            script.src = `https://maps.googleapis.com/maps/api/js?key=${import.meta.env.VITE_APP_GOOGLE_MAPS_API_KEY}&libraries=places`;
+            script.async = true;
+            script.defer = true;
+            script.onload = initAutocomplete;
+            script.onerror = () => {
+              console.error("Google Maps API script could not be loaded.");
+            };
+            document.head.appendChild(script);
+          };
+        
+          loadGoogleMapsScript();
+        }, []);
+        
+      const initAutocomplete = () => {
+        if (window.google) {
+          const autocomplete = new window.google.maps.places.Autocomplete(
+            inputRef.current,
+            {
+              fields: ["geometry", "formatted_address"], 
+            }
+          );
+    
+          autocomplete.addListener("place_changed", () => {
+            const place = autocomplete.getPlace();
+    
+            if (!place.geometry) {
+              console.log("No details available for input: " + place.name);
+              return;
+            }
+    
+            const lat = place.geometry.location.lat();
+            const lng = place.geometry.location.lng();
+            const address = place.formatted_address;
+
+            setEvent((prevEvent) => ({
+              ...prevEvent,
+              location: address,
+              lat: lat,
+              lng: lng,
+            }));
+
+            console.log("lat",lat);
+            console.log("lng",lng);
+            console.log(event.location);
+          
+          
+          });
+        }
+      };
+
+
+
+
     
       // Synchronize the local state with the Event prop when it changes
       useEffect(() => {
@@ -32,18 +95,33 @@ export default function Form( { Event = {}   ,onsubmit , id ,Buttontext}  ) {
             imgUrl: Event.imgUrl || "",
             maxParticipants: Event.maxParticipants || "",
             location: Event.location || "",
+            lat : Event.lat || "" ,
+            lng : Event.lng || "" ,
             summary: Event.summary || "",
             description: Event.description || "",
             date: Event.date || "",
             event_start_time: Event.event_start_time || "",
             contribution_list: Event.contribution_list || [],
-            item_name: "",
           });
           prevEvent.current = Event; // Update reference
         }
       }, [Event]);
       
       const prevEvent = useRef(Event);
+        const checkAllValidationInput = (event) => {
+          for (const [key, value] of Object.entries(event)) {
+            if (!isValid(value)) {
+              alert(`Please fill in the ${key}`); 
+              return false; 
+            }
+          }
+          return true; 
+        }
+        const isValid = (value) => {
+          if(value)
+            return true;
+        return false;  
+        }
 
     const addItem = () => {
         if (event.item_name.trim()) {
@@ -83,16 +161,16 @@ export default function Form( { Event = {}   ,onsubmit , id ,Buttontext}  ) {
         imgUrl: event.imgUrl,
         maxParticipants :event.maxParticipants ,
         location:event.location,
+        lat:event.lat,
+        lng: event.lng,
         summary: event.summary,
         description: event.description,
         date: event.date,
         event_start_time: event.event_start_time,
         contribution_list: event.contribution_list ,
-        event_host_name :currentUserName ,
-        item_name : ''
+        event_host_name :currentUserName 
         };
-        // console.log("new event",newEvent);
-        
+       if (checkAllValidationInput(newEvent)){
     const submitResult = id ? onsubmit (id,newEvent) : onsubmit(newEvent);
     submitResult
         .then(() => {
@@ -101,6 +179,8 @@ export default function Form( { Event = {}   ,onsubmit , id ,Buttontext}  ) {
                 imgUrl: "",
                 maxParticipants: "",
                 location: "",
+                lat :"",
+                lng :"",
                 summary: "",
                 description: "",
                 date: "",
@@ -112,7 +192,7 @@ export default function Form( { Event = {}   ,onsubmit , id ,Buttontext}  ) {
         })
         .catch((error) => {
             console.error("Failed to submit event:", error);
-        }); }
+        });} }
        
   return (
     <>
@@ -147,7 +227,10 @@ export default function Form( { Event = {}   ,onsubmit , id ,Buttontext}  ) {
 
     <div  className='form-group'>
     <label>location </label>
-    <input  name="location"  type="text"  value ={event.location} onChange={handleOnChange} />
+    <input  id="location-input"
+         ref={inputRef}
+        type="text"
+        placeholder={event.location}/>
     </div>
 
     <div  className='form-group'>
