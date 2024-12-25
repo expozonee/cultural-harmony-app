@@ -41,47 +41,51 @@ export function GoogleMapList({ events }) {
 
   return (
     <>
-      <GoogleMapReact
-        style={{ height: '75vh', width: '100%' }}
-        bootstrapURLKeys={{
-          key: import.meta.env.VITE_APP_GOOGLE_MAPS_API_KEY,
-        }}
-        defaultCenter={defaultCoords}
-        defaultZoom={zoom}
-        options={mapOptions}
-      >
-        {events.map((event) => (
-          <EventMarker
-            className="marker"
-            key={event.id}
-            lat={event.location.lat}
-            lng={event.location.lng}
-            event={event}
-            onOpenModal={() => setSelectedEvent(event)}
-          />
-        ))}
-      </GoogleMapReact>
+      <div style={{ height: '75vh', width: '100%' }}>
+        <GoogleMapReact
+          bootstrapURLKeys={{
+            key: import.meta.env.VITE_APP_GOOGLE_MAPS_API_KEY,
+          }}
+          defaultCenter={defaultCoords}
+          defaultZoom={zoom}
+          options={mapOptions}
+        >
+          {events.map((event) => (
+            <EventMarker
+              className="marker"
+              key={event.id}
+              lat={event.location.lat}
+              lng={event.location.lng}
+              event={event}
+              onOpenModal={() => setSelectedEvent(event)}
+            />
+          ))}
+        </GoogleMapReact>
 
-      {selectedEvent && (
-        <div className="modal-open-event" onClick={(e) => e.stopPropagation()}>
-          <img
-            src={selectedEvent.imgUrl}
-            alt={selectedEvent.event_title}
-            className="event-modal-img"
-          />
-          <h3>{selectedEvent.event_title}</h3>
-          <p>{selectedEvent.summary}</p>
-          <button onClick={navToDescriptionFromModal} className="go-to-event">
-            Go to Event
-          </button>
-          <button
-            onClick={() => setSelectedEvent(null)}
-            className="close-modal-btn"
+        {selectedEvent && (
+          <div
+            className="modal-open-event"
+            onClick={(e) => e.stopPropagation()}
           >
-            Close
-          </button>
-        </div>
-      )}
+            <img
+              src={selectedEvent.imgUrl}
+              alt={selectedEvent.event_title}
+              className="event-modal-img"
+            />
+            <h3>{selectedEvent.event_title}</h3>
+            <p>{selectedEvent.summary}</p>
+            <button onClick={navToDescriptionFromModal} className="go-to-event">
+              Go to Event
+            </button>
+            <button
+              onClick={() => setSelectedEvent(null)}
+              className="close-modal-btn"
+            >
+              Close
+            </button>
+          </div>
+        )}
+      </div>
     </>
   );
 }
