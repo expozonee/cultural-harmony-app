@@ -1,6 +1,6 @@
 .sign-in__button {
-  background-color: var(--mainRed);
-  color: white;
+  background-color: #8AD4EB;
+  color: rgb(0, 0, 0);
   border: none;
   padding: 1rem 2rem;
   border-radius: 0.25rem;
@@ -9,6 +9,7 @@
 }
 
 .sign-in__button:hover {
-  background-color: black;
+  background-color: #A3F3F5;
   cursor: pointer;
+  color: white;
 }
