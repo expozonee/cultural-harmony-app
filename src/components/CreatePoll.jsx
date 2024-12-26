@@ -22,18 +22,6 @@ function CreatePoll() {
     setCurrentOption("");
   }
 
-  // function createPoll(e) {
-  //   e.preventDefault();
-
-  //   if (!pollQuestion || pollOptions.length < 2) {
-  //     alert("Can't create a poll without a question or less than 2 options");
-  //     return;
-  //   }
-  //   setIsPollCreated(true);
-  //   alert("Poll created successfully!");
-  //   navigate(`/events/${eventId}`);
-  // }
-
   async function createPoll(e) {
     e.preventDefault();
 
