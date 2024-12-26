@@ -2,8 +2,7 @@
 .section1-homepage {
     position: relative; 
     width: 100%;
-    height: 90vh; 
-    max-height: 700px;
+    height: 110vh; 
     overflow: hidden; 
   }
   
@@ -13,8 +12,7 @@
     left: 0;
     width: 100%; 
     height: 100%; 
-    object-fit: cover; 
-    border-radius: 8px; 
+    object-fit: contain; 
   }
   
 

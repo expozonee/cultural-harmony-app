@@ -4,7 +4,7 @@ export default function AboutUs() {
    <div className='section1-homepage'>
     
     <img className='backgroundImg-homepage'
-    src='/images/backgroundImg.jpeg'/>
+    src='/images/backgroundImg.svg'/>
     {/* <div className="content-card-homepage">
         <h1>
         We Make Event Planning <br />
