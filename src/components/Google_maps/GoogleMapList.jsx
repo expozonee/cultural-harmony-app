@@ -1,8 +1,8 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
-import { useState } from 'react';
-import GoogleMapReact from 'google-map-react';
-import { useNavigate } from 'react-router-dom';
+import { useState } from "react";
+import GoogleMapReact from "google-map-react";
+import { useNavigate } from "react-router-dom";
 
 export function GoogleMapList({ events }) {
   const defaultProps = {
@@ -45,7 +45,7 @@ export function GoogleMapList({ events }) {
 
   return (
     <>
-      <div style={{ height: '77vh', width: '100%' }}>
+      <div style={{ height: "77vh", width: "100%" }}>
         <GoogleMapReact
           bootstrapURLKeys={{
             key: import.meta.env.VITE_APP_GOOGLE_MAPS_API_KEY,
