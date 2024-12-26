@@ -10,6 +10,7 @@ import {upcomingEventsLoader} from "../../loaders/upcomingEventsLoader";
 import AdminPage from "../pages/AdminPage/AdminPage";
 import AdminLayout from "../layout/AdminLayout";
 
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -17,7 +18,7 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <HomePage />,
+        element: <HomePage/>,
         loader: upcomingEventsLoader,
       },
       {
