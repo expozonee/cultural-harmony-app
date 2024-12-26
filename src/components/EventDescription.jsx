@@ -1,4 +1,4 @@
-import { doc, getDoc} from "firebase/firestore";
+import { doc, getDoc } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { useParams, useLocation } from "react-router";
 import { db } from "../firebase/firebaseConfig";
@@ -6,6 +6,7 @@ import ContributionList from "./ContributionList";
 import { useNavigate } from "react-router-dom";
 import { useUser } from "@clerk/clerk-react";
 import { updateEventParticipants } from "../utils/updateEvent";
+import { Link, Outlet } from "react-router";
 
 function EventDescription() {
   const { eventId } = useParams();
@@ -45,33 +46,37 @@ function EventDescription() {
 
   const handleParticipantAction = async (action) => {
     if (!user) {
-        navigate("/sign-in", { state: { from: location.pathname } });
-        return;
+      navigate("/sign-in", { state: { from: location.pathname } });
+      return;
     }
 
     try {
-        const update = await updateEventParticipants(db, eventId, user.username, action);
-        const updatedParticipants = update[0];
-        const updatedContributionList = update[1];
-  
-        setEvent((prevEvent) => ({
-            ...prevEvent,
-            participants: updatedParticipants,
-            contribution_list: updatedContributionList,
-        }));
+      const update = await updateEventParticipants(
+        db,
+        eventId,
+        user.username,
+        action
+      );
+      const updatedParticipants = update[0];
+      const updatedContributionList = update[1];
 
-        console.log(
-            `User ${action === "join" ? "joined" : "unjoined"} the event:`,
-            user.username
-        );
+      setEvent((prevEvent) => ({
+        ...prevEvent,
+        participants: updatedParticipants,
+        contribution_list: updatedContributionList,
+      }));
+
+      console.log(
+        `User ${action === "join" ? "joined" : "unjoined"} the event:`,
+        user.username
+      );
     } catch (error) {
-        console.error(
-            `Error ${action === "join" ? "joining" : "unjoining"} event:`,
-            error
-        );
+      console.error(
+        `Error ${action === "join" ? "joining" : "unjoining"} event:`,
+        error
+      );
     }
-};
-
+  };
 
   if (loading) return <p>Loading...</p>;
   if (!event) return <p>Event not found!</p>;
@@ -79,7 +84,9 @@ function EventDescription() {
   return (
     <div className="description-page-container">
       <h1>{event.event_title}</h1>
-      <p className="host-name">Organized By: <span>{event.event_host_name}</span></p>
+      <p className="host-name">
+        Organized By: <span>{event.event_host_name}</span>
+      </p>
       <p className="event-description-info">{event.description}</p>
       <img
         className="event-image-description"
@@ -88,11 +95,17 @@ function EventDescription() {
       />
       <p className="event--date"> Date: {event.date}</p>
       {hasJoined ? (
-        <button className="unjoin-button"onClick={() => handleParticipantAction("unjoin")}>
+        <button
+          className="unjoin-button"
+          onClick={() => handleParticipantAction("unjoin")}
+        >
           Unjoin Event
         </button>
       ) : (
-        <button className="join-button" onClick={() => handleParticipantAction("join")}>
+        <button
+          className="join-button"
+          onClick={() => handleParticipantAction("join")}
+        >
           Join Event
         </button>
       )}
@@ -115,6 +128,17 @@ function EventDescription() {
           </ul>
         </div>
       )}
+
+      {event.event_host_name === user?.username ? (
+        <Link to={`create-poll`}>
+          <button>Create A Poll for This Event</button>
+        </Link>
+      ) : event.poll ? (
+        <Poll poll={event.poll} />
+      ) : (
+        <p>No poll available for this event.</p>
+      )}
+      <Outlet />
     </div>
   );
 }
