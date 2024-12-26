@@ -1,11 +1,14 @@
 import EventPreview from "./EventPreview";
 import { useLoaderData } from "react-router";
 import { GoogleMapList } from "./Google_maps/GoogleMapList";
+import { Link } from "react-router-dom";
 import { useState } from "react";
+import { useUser } from "@clerk/clerk-react";
 
 function EventsList() {
   const events = useLoaderData();
   const [previewMap, setPreviewMap] = useState(false);
+  const { isSignedIn } = useUser();
 
   return (
     <>
@@ -17,6 +20,11 @@ function EventsList() {
         {previewMap ? "Show List" : "Show Map"}{" "}
         <i className={`fa-solid ${previewMap ? "fa-list" : "fa-map"}`}></i>
       </button>
+      {isSignedIn && (
+        <Link to="/events/add-event">
+          <button className="">Add Event</button>
+        </Link>
+      )}
       {previewMap ? (
         <GoogleMapList events={events} />
       ) : (
