@@ -1,18 +1,5 @@
-import { Link, useNavigate, useLocation } from "react-router-dom";
-import { useUser } from "@clerk/clerk-react";
-// todo: url builder for links
+import { Link} from "react-router-dom";
 function EventPreview({ event }) {
-
-  const navigate = useNavigate();
-  const location = useLocation();
-  const { user } = useUser(); 
-  
-  const handleJoinClick = (e) => {
-    if (!user) {
-      e.preventDefault();
-      navigate("/sign-in", { state: { from: location } });
-    }} 
-
   return (
     <div className="event-preview-card">
       <div className="event-image">
@@ -29,10 +16,8 @@ function EventPreview({ event }) {
         <Link
           to={`/events/${event.id}`}
           state={{ event }}
-          className="join-button"
-          onClick={handleJoinClick}
-        >
-          Join event
+          className="details-button">
+          For more Details
         </Link>
       </div>
     </div>
