@@ -1,8 +1,12 @@
-export default function UserCreatedEventData({ data }) {
+export default function UserCreatedEventData({
+  data,
+  index,
+  onCheckboxChange,
+}) {
   return (
     <tr>
       <td>
-        <input type="checkbox" />
+        <input type="checkbox" onClick={() => onCheckboxChange(index)} />
       </td>
       <td>{data.event_title}</td>
       <td>{data.location.city_name}</td>

@@ -26,7 +26,7 @@ export function UserContextProvider({ children }) {
     if (!isSignedIn) return;
 
     const userCreatedEvents = (await getEvents()).filter((e) =>
-      userData.eventsOrganized.includes(e.id)
+      userData?.eventsOrganized.includes(e.id)
     );
 
     return userCreatedEvents;

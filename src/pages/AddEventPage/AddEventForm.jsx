@@ -8,15 +8,15 @@ import { intialEvent } from "../../utils/Event/intialEvent";
 import ErrorMessage from "../../components/add-update-EventPage/ErrorMessage/ErrorMessage";
 import { initAutocomplete } from "../../utils/Event/initAutocomplete";
 import { useUser } from "@clerk/clerk-react";
-import { postEvent } from "../../firebase/utils/addevent";
+import { useEvents } from "../../context/EventsContext";
 
 const schema = yup.object().shape({
   event_title: yup.string().required("Title is Required"),
   summary: yup.string().required("Summary is required"),
   date: yup
-    .string()
-    .required("Date is required")
-    .matches(/^\d{4}-\d{2}-\d{2}$/, "Date must be in the format YYYY-MM-DD"),
+    .date()
+    .min(new Date(), "Date must not be in the past")
+    .required("Date is required"),
   event_start_time: yup.string().required("Starting time is requried"),
   description: yup.string().required("Description is required"),
   imgUrl: yup.string().required("ImageUrl is required"),
@@ -29,7 +29,8 @@ const schema = yup.object().shape({
     .typeError("Max participants must be a number"),
 });
 
-export default function AddEventForm({ eventData }) {
+export default function AddEventForm({ eventData, eventId }) {
+  const { createEvent } = useEvents();
   const locationInputRef = useRef(null);
   const [newItem, setNewItem] = useState("");
   const [items, setItems] = useState([]);
@@ -103,11 +104,13 @@ export default function AddEventForm({ eventData }) {
       event_host_name: user.user.fullName,
       location: event.location,
       contribution_list: items,
-      date: data.date,
+      date: new Intl.DateTimeFormat("en-GB").format(data.date),
     };
 
+    console.log(newEvent);
+
     try {
-      await postEvent(newEvent);
+      await createEvent(newEvent);
       console.log("Event successfully added to Firestore!");
     } catch (error) {
       console.error("Error adding event to Firestore:", error);
