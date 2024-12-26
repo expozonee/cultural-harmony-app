@@ -65,17 +65,17 @@
   color: #555;
 }
 
-.join-button {
+.details-button {
   background-color: #f37878;
   color: #fafafa;
   border: none;
   padding: 0.625rem 1.25rem;
-  font-size: 1rem;
+  font-size: 0.9rem;
   cursor: pointer;
   border-radius: 0.25rem;
 }
 
-.join-button:hover {
+.details-button:hover {
   background-color: #1c36c7;
   color: rgb(255, 255, 255);
   font-weight: 600;
