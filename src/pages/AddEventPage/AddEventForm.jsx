@@ -7,14 +7,16 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { intialEvent } from "../../utils/Event/intialEvent";
 import ErrorMessage from "../../components/add-update-EventPage/ErrorMessage/ErrorMessage";
 import { initAutocomplete } from "../../utils/Event/initAutocomplete";
+import { useUser } from "@clerk/clerk-react";
+import { postEvent } from "../../firebase/utils/addevent";
 
 const schema = yup.object().shape({
   event_title: yup.string().required("Title is Required"),
   summary: yup.string().required("Summary is required"),
   date: yup
-    .date()
-    .typeError("Date is required")
-    .min(new Date(), "Date cannot be in the past"),
+    .string()
+    .required("Date is required")
+    .matches(/^\d{4}-\d{2}-\d{2}$/, "Date must be in the format YYYY-MM-DD"),
   event_start_time: yup.string().required("Starting time is requried"),
   description: yup.string().required("Description is required"),
   imgUrl: yup.string().required("ImageUrl is required"),
@@ -32,6 +34,7 @@ export default function AddEventForm({ eventData }) {
   const [newItem, setNewItem] = useState("");
   const [items, setItems] = useState([]);
   const [event, setEvent] = useState(eventData ?? intialEvent);
+  const user = useUser();
   const {
     register,
     handleSubmit,
@@ -76,32 +79,39 @@ export default function AddEventForm({ eventData }) {
     }));
   };
 
-  const addItem = () => {
-    setItems((prev) => {
-      return [...prev, newItem];
-    });
+  const handleNewItemChange = (e) => {
+    setNewItem(e.target.value);
   };
 
-  function handleNewItemChange(e) {
-    setNewItem(e.target.value);
-  }
+  const addItem = () => {
+    if (newItem.trim() !== "") {
+      setItems((prev) => {
+        const updatedItems = [...prev, { item_name: newItem, user: "" }];
+        return updatedItems;
+      });
+      setNewItem("");
+    }
+  };
 
   const removeItem = (index) => {
-    setEvent((prevEvent) => ({
-      ...prevEvent,
-      contribution_list: prevEvent.contribution_list.filter(
-        (_, i) => i !== index
-      ),
-    }));
+    setItems((prev) => prev.filter((_, i) => i !== index));
   };
 
-  function onSubmit(data) {
+  async function onSubmit(data) {
     const newEvent = {
       ...data,
+      event_host_name: user.user.fullName,
       location: event.location,
+      contribution_list: items,
+      date: data.date,
     };
 
-    console.log(newEvent);
+    try {
+      await postEvent(newEvent);
+      console.log("Event successfully added to Firestore!");
+    } catch (error) {
+      console.error("Error adding event to Firestore:", error);
+    }
   }
 
   return (
@@ -219,9 +229,8 @@ export default function AddEventForm({ eventData }) {
           <input
             type="text"
             name="item_name"
-            value={event.item_name}
-            onChange={handleNewItemChange}
-            {...register("item_name")}
+            value={newItem} // Bind to newItem state
+            onChange={handleNewItemChange} // Update newItem state on change
           />
 
           <button className="AddButton" type="button" onClick={addItem}>
@@ -231,7 +240,7 @@ export default function AddEventForm({ eventData }) {
         <ul>
           {items.map((item, index) => (
             <li key={index} style={{ marginBottom: "10px" }}>
-              <strong>{item}</strong>
+              <strong>{item.item_name}</strong>
               <button
                 type="button"
                 style={{
