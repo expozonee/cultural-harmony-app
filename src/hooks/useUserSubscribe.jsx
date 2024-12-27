@@ -77,7 +77,6 @@ export function useUserSubscribe() {
       }
     });
 
-    // const userRef = doc(db, "users", userId);
     const unSubscribe = onSnapshot(userRef, (snapshot) => {
       if (snapshot.exists()) {
         setUserData(snapshot.data());
