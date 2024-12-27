@@ -1,4 +1,3 @@
-import * as yup from "yup";
 import "./AddEventForm.css";
 import "./AddEventPage.css";
 import { useForm } from "react-hook-form";
@@ -9,33 +8,21 @@ import ErrorMessage from "../../components/add-update-EventPage/ErrorMessage/Err
 import { initAutocomplete } from "../../utils/Event/initAutocomplete";
 import { useUser } from "@clerk/clerk-react";
 import { useEvents } from "../../context/EventsContext";
-
-const schema = yup.object().shape({
-  event_title: yup.string().required("Title is Required"),
-  summary: yup.string().required("Summary is required"),
-  date: yup
-    .date()
-    .min(new Date(), "Date must not be in the past")
-    .required("Date is required"),
-  event_start_time: yup.string().required("Starting time is requried"),
-  description: yup.string().required("Description is required"),
-  imgUrl: yup.string().required("ImageUrl is required"),
-  location: yup.string().required("Location is required"),
-  max_participants: yup
-    .number()
-    .min(1, "Max participants is required")
-    .max(25, "Max praticipants is 25")
-    .required("Max participants is required")
-    .typeError("Max participants must be a number"),
-});
+import { useNavigate } from "react-router";
+import { schema } from "../../schema/YupSchema";
 
 export default function AddEventForm({ eventData, eventId }) {
-  const { createEvent } = useEvents();
+  const navigate = useNavigate();
+  const { createEvent, updateEvent } = useEvents();
   const locationInputRef = useRef(null);
   const [newItem, setNewItem] = useState("");
-  const [items, setItems] = useState([]);
+  const [location, setLocation] = useState(
+    eventData ? eventData.location.city_name : ""
+  );
+  const [items, setItems] = useState(eventData?.contribution_list ?? []);
   const [event, setEvent] = useState(eventData ?? intialEvent);
-  const user = useUser();
+  const { user } = useUser();
+
   const {
     register,
     handleSubmit,
@@ -52,7 +39,7 @@ export default function AddEventForm({ eventData, eventId }) {
         )
       ) {
         if (window.google) {
-          initAutocomplete(locationInputRef, setEvent);
+          initAutocomplete(locationInputRef, setEvent, setLocation);
         }
         return;
       }
@@ -62,7 +49,8 @@ export default function AddEventForm({ eventData, eventId }) {
       }&libraries=places`;
       script.async = true;
       script.defer = true;
-      script.onload = () => initAutocomplete(locationInputRef, setEvent);
+      script.onload = () =>
+        initAutocomplete(locationInputRef, setEvent, setLocation);
       script.onerror = () => {
         console.error("Google Maps API script could not be loaded.");
       };
@@ -101,20 +89,39 @@ export default function AddEventForm({ eventData, eventId }) {
   async function onSubmit(data) {
     const newEvent = {
       ...data,
-      event_host_name: user.user.fullName,
+      event_host_name: user.fullName,
+      host_email_address: user.primaryEmailAddress.emailAddress,
       location: event.location,
       contribution_list: items,
-      date: new Intl.DateTimeFormat("en-GB").format(data.date),
+      participants: [],
+      date: new Intl.DateTimeFormat("en-GB", {
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit",
+      })
+        .format(data.date)
+        .split("/")
+        .reverse()
+        .join("-"),
     };
 
     console.log(newEvent);
 
     try {
-      await createEvent(newEvent);
-      console.log("Event successfully added to Firestore!");
+      if (eventId) {
+        await updateEvent(eventId, newEvent);
+        navigate(`/events/${eventId}`);
+      } else {
+        await createEvent(newEvent);
+        navigate("/events");
+      }
     } catch (error) {
       console.error("Error adding event to Firestore:", error);
     }
+  }
+
+  function handleLoacationChange() {
+    setLocation(locationInputRef.current.value);
   }
 
   return (
@@ -208,6 +215,8 @@ export default function AddEventForm({ eventData, eventId }) {
             register("location").ref(e);
             locationInputRef.current = e;
           }}
+          onChange={handleLoacationChange}
+          value={location}
         />
         {errors.location && <ErrorMessage message={errors.location.message} />}
       </div>
@@ -232,8 +241,8 @@ export default function AddEventForm({ eventData, eventId }) {
           <input
             type="text"
             name="item_name"
-            value={newItem} // Bind to newItem state
-            onChange={handleNewItemChange} // Update newItem state on change
+            value={newItem}
+            onChange={handleNewItemChange}
           />
 
           <button className="AddButton" type="button" onClick={addItem}>
@@ -264,7 +273,7 @@ export default function AddEventForm({ eventData, eventId }) {
       </div>
 
       <button className="button1" type="submit">
-        Buttontext
+        {eventId ? "Update Event" : "Add Event"}
       </button>
     </form>
   );
