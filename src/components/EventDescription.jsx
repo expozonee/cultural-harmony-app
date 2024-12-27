@@ -3,9 +3,13 @@ import { useEffect, useState } from "react";
 import { useParams, useLocation } from "react-router";
 import { db } from "../firebase/firebaseConfig";
 import { Link } from "react-router-dom";
+import { useUserData } from "../context/UserContext";
 
 function EventDescription() {
   const { eventId } = useParams();
+  const { userData } = useUserData();
+  const currentEmail = userData?.email;
+
   const location = useLocation();
   const [event, setEvent] = useState(location.state?.event || null);
   const [loading, setLoading] = useState(!location.state?.event);
@@ -49,9 +53,11 @@ function EventDescription() {
       />
       <p>Date: {event.date}</p>
       <p>Location: {event.location.city_name}</p>
-      <Link to={`/events/${event.id}/update-event`}>
-        <button>Edit Event</button>
-      </Link>
+      {currentEmail === event.host_email_address && (
+        <Link to={`/events/${event.id}/update-event?from=event`}>
+          <button>Edit Event</button>
+        </Link>
+      )}
     </div>
   );
 }
