@@ -16,7 +16,6 @@ import { useUserSubscribe } from "../hooks/useUserSubscribe";
 import { useUserData } from "./UserContext";
 import { getUsers } from "../firebase/utils/getUsers";
 import { db } from "/src/firebase/firebaseConfig";
-import { getEvents } from "../firebase/utils/getEvents";
 
 const EventsContext = createContext(null);
 
