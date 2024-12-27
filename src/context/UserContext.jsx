@@ -10,7 +10,7 @@ const UserContext = createContext(null);
 
 export function UserContextProvider({ children }) {
   const { isSignedIn } = useUser();
-  const [userId, userData, userRef] = useUserSubscribe();
+  const [userId, userData, userRef, users] = useUserSubscribe();
 
   async function getUserJoinedEvents() {
     if (!userData) return;
@@ -55,6 +55,7 @@ export function UserContextProvider({ children }) {
   return (
     <UserContext.Provider
       value={{
+        users,
         getUserJoinedEvents,
         getUserCreatedEvents,
         joinEvent,
