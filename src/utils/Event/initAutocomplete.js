@@ -1,4 +1,4 @@
-export const initAutocomplete = (locationInputRef, setEvent) => {
+export const initAutocomplete = (locationInputRef, setEvent, setLocation) => {
   if (window.google) {
     const autocomplete = new window.google.maps.places.Autocomplete(
       locationInputRef.current,
@@ -18,6 +18,10 @@ export const initAutocomplete = (locationInputRef, setEvent) => {
       const lat = place.geometry.location.lat();
       const lng = place.geometry.location.lng();
       const address = place.formatted_address;
+
+      // locationInputRef.current.value = address;
+
+      setLocation(address);
 
       setEvent((prevEvent) => ({
         ...prevEvent,
