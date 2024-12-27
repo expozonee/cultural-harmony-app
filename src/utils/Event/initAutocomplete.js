@@ -19,8 +19,6 @@ export const initAutocomplete = (locationInputRef, setEvent, setLocation) => {
       const lng = place.geometry.location.lng();
       const address = place.formatted_address;
 
-      // locationInputRef.current.value = address;
-
       setLocation(address);
 
       setEvent((prevEvent) => ({
