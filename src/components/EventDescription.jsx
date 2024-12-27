@@ -2,6 +2,7 @@ import { doc, getDoc } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { useParams, useLocation } from "react-router";
 import { db } from "../firebase/firebaseConfig";
+import { Link } from "react-router-dom";
 
 function EventDescription() {
   const { eventId } = useParams();
@@ -47,6 +48,10 @@ function EventDescription() {
         alt={event.event_title}
       />
       <p>Date: {event.date}</p>
+      <p>Location: {event.location.city_name}</p>
+      <Link to={`/events/${event.id}/update-event`}>
+        <button>Edit Event</button>
+      </Link>
     </div>
   );
 }
