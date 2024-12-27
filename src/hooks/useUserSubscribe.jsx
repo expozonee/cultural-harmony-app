@@ -1,7 +1,7 @@
 import { useUser } from "@clerk/clerk-react";
 import { useEffect, useState } from "react";
 import { getUsers } from "../firebase/utils/getUsers";
-import { doc, onSnapshot } from "firebase/firestore";
+import { collection, doc, onSnapshot } from "firebase/firestore";
 import { db } from "../firebase/firebaseConfig";
 import { addUserToDb } from "../firebase/utils/addUserToDb";
 
@@ -9,6 +9,7 @@ export function useUserSubscribe() {
   const [userId, setUserId] = useState(undefined);
   const [userData, setUserData] = useState(undefined);
   const [userRef, setUserRef] = useState(undefined);
+  const [users, setUsers] = useState([]);
   const { user, isSignedIn } = useUser();
 
   useEffect(() => {
@@ -45,6 +46,7 @@ export function useUserSubscribe() {
 
     async function getUserId() {
       const users = await getUsers();
+      setUsers(users);
       const userId = users.find((u) => u.email === userEmailAddress)?.id;
 
       setUserId(userId);
@@ -60,6 +62,21 @@ export function useUserSubscribe() {
       return;
     }
 
+    const usersRef = collection(db, "users");
+
+    const unSubscribeUsers = onSnapshot(usersRef, (snapshot) => {
+      if (snapshot.docs) {
+        setUsers(
+          snapshot.docs.map((e) => {
+            return {
+              ...e.data(),
+              id: e.id,
+            };
+          })
+        );
+      }
+    });
+
     // const userRef = doc(db, "users", userId);
     const unSubscribe = onSnapshot(userRef, (snapshot) => {
       if (snapshot.exists()) {
@@ -69,8 +86,11 @@ export function useUserSubscribe() {
       }
     });
 
-    return () => unSubscribe();
+    return () => {
+      unSubscribe();
+      unSubscribeUsers();
+    };
   }, [userId, userRef]);
 
-  return [userId, userData, userRef];
+  return [userId, userData, userRef, users];
 }
