@@ -56,6 +56,7 @@ export function UserContextProvider({ children }) {
     <UserContext.Provider
       value={{
         users,
+        userData,
         getUserJoinedEvents,
         getUserCreatedEvents,
         joinEvent,
