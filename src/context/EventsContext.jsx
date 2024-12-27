@@ -16,6 +16,7 @@ import { useUserSubscribe } from "../hooks/useUserSubscribe";
 import { useUserData } from "./UserContext";
 import { getUsers } from "../firebase/utils/getUsers";
 import { db } from "/src/firebase/firebaseConfig";
+import { getEvents } from "../firebase/utils/getEvents";
 
 const EventsContext = createContext(null);
 
@@ -58,14 +59,18 @@ export function EventsProvider({ children }) {
       await joinEvent(createEvent.id);
       return createEvent.id;
     } catch (error) {
+      console.error(error);
       return error;
     }
   }
 
-  async function updateEvent(event) {
+  async function updateEvent(id, event) {
+    const eventRef = doc(db, "events", id);
+
     try {
-      await updateDoc(eventsRef, event);
+      await updateDoc(eventRef, event);
     } catch (error) {
+      console.error(error);
       return { error };
     }
   }
@@ -93,9 +98,14 @@ export function EventsProvider({ children }) {
     }
   }
 
+  async function getEvenyById(id) {
+    const event = events.find((e) => e.id === id);
+    return event;
+  }
+
   return (
     <EventsContext.Provider
-      value={{ events, createEvent, updateEvent, deleteEvent }}
+      value={{ events, createEvent, updateEvent, deleteEvent, getEvenyById }}
     >
       {children}
     </EventsContext.Provider>
