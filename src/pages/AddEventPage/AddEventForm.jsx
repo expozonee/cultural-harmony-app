@@ -11,7 +11,7 @@ import { useEvents } from "../../context/EventsContext";
 import { useNavigate } from "react-router";
 import { schema } from "../../schema/YupSchema";
 
-export default function AddEventForm({ eventData, eventId }) {
+export default function AddEventForm({ eventData, eventId, from }) {
   const navigate = useNavigate();
   const { createEvent, updateEvent } = useEvents();
   const locationInputRef = useRef(null);
@@ -105,12 +105,14 @@ export default function AddEventForm({ eventData, eventId }) {
         .join("-"),
     };
 
-    console.log(newEvent);
-
     try {
       if (eventId) {
         await updateEvent(eventId, newEvent);
-        navigate(`/events/${eventId}`);
+        if (from === "dashboard") {
+          navigate("/admin/events-created");
+        } else {
+          navigate(`/events/${eventId}`);
+        }
       } else {
         await createEvent(newEvent);
         navigate("/events");
