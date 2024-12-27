@@ -1,20 +1,8 @@
-import { useEffect, useState } from "react";
-import { getUsers } from "../../firebase/utils/getUsers";
 import UserList from "./UserList";
+import { useUserData } from "../../context/UserContext";
 
 export default function UsersList() {
-  const [users, setUsers] = useState([]);
-
-  useEffect(() => {
-    async function fetchUsers() {
-      const fetchedUsers = await getUsers();
-      console.log(fetchedUsers);
-
-      setUsers(fetchedUsers);
-    }
-
-    fetchUsers();
-  }, []);
+  const { users } = useUserData();
 
   return (
     <table className="table-event">
