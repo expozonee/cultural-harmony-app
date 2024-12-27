@@ -36,6 +36,7 @@ export default function UserEventsCreated() {
                 <th>Location</th>
                 <th>Date</th>
                 <th>Host</th>
+                <th>Actions</th>
               </tr>
             </thead>
             <tbody>
@@ -50,13 +51,14 @@ export default function UserEventsCreated() {
             </tbody>
           </table>
           <button
-            onClick={() =>
+            onClick={() => {
               deleteEvent(
                 checkedIndices.map((index) => {
                   return createdEvents[index].id;
                 })
-              )
-            }
+              );
+              setCheckedIndices([]);
+            }}
           >
             Delete Selected
           </button>
