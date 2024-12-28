@@ -4,15 +4,15 @@
 }
 
 .marker-icon {
-  width: 50px;
-  height: 50px;
+  width: 3.125rem;
+  height: 3.125rem;
 }
 
 .event-modal-on-the-map {
-  background-color: #ff5a5f;
+  background-color: var(--blue);
   color: white;
-  padding: 5px 10px;
-  border-radius: 5px;
+  padding: 0.3125rem 0.625rem;
+  border-radius: 0.3125rem;
   text-align: center;
   width: fit-content;
   height: fit-content;
@@ -20,26 +20,26 @@
 
 .show-map-btn {
   width: fit-content;
-  font-size: 14px;
-  height: 48px;
+  font-size: 0.875rem;
+  height: 3rem;
   transition-duration: 0.15s;
   text-size-adjust: 100%;
-  line-height: 20px;
+  line-height: 1.25rem;
   position: fixed;
-  bottom: 90px;
+  bottom: 5.625rem;
   left: 50%;
   transform: translateX(-50%);
   z-index: 1;
-  background-color: var(--mainBlue);
+  background-color: var(--blue);
   color: white;
   border: none;
-  padding: 10px 20px;
-  border-radius: 24px;
+  padding: 0.625rem 1.25rem;
+  border-radius: 1.5rem;
   cursor: pointer;
 }
 
 .show-map-btn:hover {
-  background-color: var(--mainRed);
+  background-color: var(--periwinkle);
   font-weight: bold;
 }
 
@@ -50,16 +50,16 @@
   transform: translate(-50%, -50%);
   background-color: white;
   padding: 1.5rem;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 0.5rem;
+  box-shadow: 0 0.125rem 0.5rem rgba(0, 0, 0, 0.2);
   z-index: 1000;
-  max-width: 300px;
+  max-width: 18.75rem;
 }
 
 .event-modal-img {
   width: 100%;
   height: auto;
-  border-radius: 8px;
+  border-radius: 0.5rem;
 }
 
 .close-modal-btn {
@@ -69,16 +69,16 @@
   background-color: #ccc;
   color: black;
   border: none;
-  border-radius: 4px;
+  border-radius: 0.25rem;
   cursor: pointer;
 }
 
 .go-to-event {
   margin-top: 1rem;
   padding: 0.5rem 1rem;
-  background-color: #ff5a5f;
+  background-color: var(--blue);
   color: white;
   border: none;
-  border-radius: 4px;
+  border-radius: 0.25rem;
   cursor: pointer;
 }

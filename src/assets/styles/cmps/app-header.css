@@ -45,18 +45,16 @@
 }
 
 .logo-and-nav > nav a:hover {
-  background-color: var(--periwinkle); /* Periwinkle hover background */
-  color: #000; /* Black text for contrast */
-  box-shadow: 0 0.2rem 0.4rem rgba(0, 0, 0, 0.15); /* Subtle hover shadow */
+  background-color: var(--periwinkle); 
+  color: #000; 
+  box-shadow: 0 0.2rem 0.4rem rgba(0, 0, 0, 0.15); 
 }
 
-/* Active Link */
 .logo-and-nav > nav a[style*="background-color"] {
   background-color: var(--periwinkle);
   font-weight: bold;
 }
 
-/* Header Buttons */
 .app-header__buttons {
   display: flex;
   align-items: center;
@@ -65,29 +63,28 @@
 
 .sign-in__button {
   background-color: var(--blue);
-  color: #ffffff; /* White text for contrast */
+  color: #ffffff; 
   padding: 0.5rem 1rem;
   border-radius: 0.5rem;
   font-size: 1.2rem;
   font-weight: 600;
-  font-family: 'Georgia', serif; /* Cohesive font */
-  border: none; /* Removed border */
+  font-family: 'Georgia', serif; 
+  border: none; 
   cursor: pointer;
   transition: all 0.3s ease;
 }
 
 .sign-in__button:hover {
-  background-color: var(--sky-blue); /* Sky-blue for hover effect */
-  box-shadow: 0 0.2rem 0.4rem rgba(0, 0, 0, 0.15);  /* Slight lift effect */
+  background-color: var(--sky-blue); 
+  box-shadow: 0 0.2rem 0.4rem rgba(0, 0, 0, 0.15);  
 }
 
-/* Mobile Responsive Styles */
 @media screen and (max-width: 44rem) {
   .app-header {
     flex-direction: column;
     text-align: center;
     padding: 1rem;
-    height: auto; /* Allow height to adjust */
+    height: auto; 
   }
 
   .logo-and-nav > nav ul {
