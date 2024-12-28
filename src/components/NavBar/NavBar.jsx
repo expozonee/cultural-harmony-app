@@ -1,6 +1,6 @@
 import { SignedIn, SignedOut, UserButton } from "@clerk/clerk-react";
 import { Link, useLocation } from "react-router-dom";
-import logo from "/culturalLogo.svg";
+import logo from "/Mediamodifier-Design.svg";
 import { useState } from "react";
 
 export default function NavBar() {
