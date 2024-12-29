@@ -29,10 +29,10 @@ function EventPreview({ event }) {
         <Link
           to={`/events/${event.id}`}
           state={{ event }}
-          className="join-button"
+          className="join-button details-button"
           onClick={(e) => handleJoinClick(e, event.id)}
         >
-          Join event
+          For more Details
         </Link>
       </div>
     </div>

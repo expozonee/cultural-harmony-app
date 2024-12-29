@@ -1,24 +1,26 @@
 /* Setup */
-@import './styles/setup/vars.css';
-@import './styles//setup/typography.css';
+@import "./styles/setup/vars.css";
+@import "./styles//setup/typography.css";
 
 /* Base */
-@import './styles//base/base.css';
-@import './styles/base/helpers.css';
-@import './styles/base/layout.css';
+@import "./styles//base/base.css";
+@import "./styles/base/helpers.css";
+@import "./styles/base/layout.css";
 
 /* Layouts */
-@import './styles/layouts/AdminLayout.css';
+@import "./styles/layouts/AdminLayout.css";
 
 /* Pages */
-@import './styles/pages/event-description.css';
-@import './styles/pages/AdminPage.css';
-@import './styles/pages/HomePage.css';
+@import "./styles/pages/event-description.css";
+@import "./styles/pages/AdminPage.css";
+@import "./styles/pages/HomePage.css";
 
 /* Components */
-@import './styles/cmps/app-header.css';
-@import './styles/cmps/events-list.css';
-@import './styles/cmps/event-preview.css';
-@import './styles/cmps/footer.css';
-@import './styles/cmps/UserBanner.css';
-@import './styles/cmps/GoogleMap.css';
+@import "./styles/cmps/app-header.css";
+@import "./styles/cmps/events-list.css";
+@import "./styles/cmps/event-preview.css";
+@import "./styles/cmps/footer.css";
+@import "./styles/cmps/UserBanner.css";
+@import "./styles/cmps/GoogleMap.css";
+@import "./styles/cmps/contribution-list.css";
+@import "./styles/cmps/create-poll.css";
