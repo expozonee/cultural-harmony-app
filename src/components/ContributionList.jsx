@@ -1,43 +1,41 @@
-import { useState } from "react";
-import { useUser } from "@clerk/clerk-react";
-import { updateContributionList } from "../utils/updateEvent";
+import { useUserData } from "../context/UserContext";
+import { useEvents } from "../context/EventsContext";
 
-function ContributionList({ contributionList, eventDocId, setEvent }) {
-  const [list, setList] = useState(contributionList || []);
-  const { user } = useUser();
-  const currentUserName = user?.username;
+function ContributionList({ eventId, eventData }) {
+  const { updateEvent } = useEvents();
+  const { userData } = useUserData();
+  // eslint-disable-next-line no-unused-vars
+  const { id, ...data } = eventData;
+
+  const currentUserEmail = userData?.email;
 
   const handleCheckboxChange = async (index) => {
-    const isUnselect = list[index].user === currentUserName;
+    const newData = {
+      ...data,
+      contribution_list: data.contribution_list.map((c, i) => {
+        if (index !== i) return c;
+        return {
+          item_name: c.item_name,
+          user: c.user ? "" : currentUserEmail,
+        };
+      }),
+    };
 
-    try {
-      const updatedList = await updateContributionList({
-        index,
-        list,
-        currentUserName,
-        eventDocId,
-        isUnselect,
-      });
-      setList(updatedList);
-      setEvent((event) => ({
-        ...event,
-        contribution_list: updatedList,
-      }));
-    } catch (error) {
-      console.error("Error handling checkbox change: ", error);
-    }
+    await updateEvent(eventId, newData);
   };
 
-  const hasSelectedItem = list.some((item) => item.user === currentUserName);
+  const hasSelectedItem = eventData.contribution_list.some(
+    (item) => item.user === currentUserEmail
+  );
 
   return (
     <div className="contribution-list">
       <h3>Contribution List</h3>
       <ul>
-        {list.map((item, index) => {
-          const isPickedByCurrentUser = item.user === currentUserName;
+        {eventData.contribution_list.map((item, index) => {
+          const isPickedByCurrentUser = item.user === currentUserEmail;
           const isPickedByOtherUser =
-            item.user !== "undefined" && !isPickedByCurrentUser;
+            item.user !== "" && !isPickedByCurrentUser;
 
           return (
             <li key={item.item_name}>
