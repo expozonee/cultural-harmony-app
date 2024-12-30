@@ -55,11 +55,32 @@ function ContributionList({ eventId, eventData }) {
                 />
                 {item.item_name}
               </label>
+              {/* {isPickedByCurrentUser && (
+                <button
+                  className="delete-item-btn"
+                  onClick={() => handleItemAction("delete", index)}
+                >
+                  Delete
+                </button>
+              )} */}
               {isPickedByOtherUser && <span> (Picked by {item.user})</span>}
             </li>
           );
         })}
       </ul>
+      {/* {!hasSelectedItem && (
+        <div className="add-item">
+          <input
+            type="text"
+            value={newItem}
+            onChange={(e) => setNewItem(e.target.value)}
+            placeholder="Enter an item"
+          />
+          <button className="add-item-btn"  onClick={() => handleItemAction("add", null, newItem)} disabled={!newItem.trim()}>
+            Add
+          </button>
+        </div>
+      )} */}
     </div>
   );
 }

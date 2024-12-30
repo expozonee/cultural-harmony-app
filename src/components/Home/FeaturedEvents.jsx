@@ -7,12 +7,10 @@ export default function FeaturedEvents() {
   return (
     <section className="featured-events">
       <h2 className="featured-events-title">Featured Events</h2>
-      <ul className="events-list">
+      <ul className="events-list-home">
         {events.map((event) => (
           <li className="event-preview" key={event.id}>
-            <div>
-              <EventPreview event={event} />
-            </div>
+            <EventPreview event={event} />
           </li>
         ))}
       </ul>
