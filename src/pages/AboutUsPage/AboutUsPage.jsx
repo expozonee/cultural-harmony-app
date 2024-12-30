@@ -52,7 +52,7 @@ function AboutUsPage() {
         <div className="hero-content">
           <h1 className="hero-title">Bringing Communities Together</h1>
           <p className="hero-description">
-            Creating harmony through shared meals and cultural exchange between
+            Creating harmony through shared events and cultural exchange between
             Jewish, Arab, and Christian communities.
           </p>
         </div>
@@ -61,9 +61,10 @@ function AboutUsPage() {
       <div className="mission">
         <h2 className="mission-title">Our Mission</h2>
         <p className="mission-text">
-          We believe that sharing food is the universal language of friendship.
-          Our platform connects people from different cultural backgrounds,
-          creating meaningful relationships through cooking and dining together.
+          We believe that sharing events is the universal language of
+          friendship. Our platform connects people from different cultural
+          backgrounds, creating meaningful relationships through cooking, dining
+          and partying together.
         </p>
       </div>
 
