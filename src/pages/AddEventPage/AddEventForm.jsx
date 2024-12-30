@@ -77,7 +77,10 @@ export default function AddEventForm({ eventData, eventId, from }) {
   const addItem = () => {
     if (newItem.trim() !== "") {
       setItems((prev) => {
-        const updatedItems = [...prev, { item_name: newItem, user: "" }];
+        const updatedItems = [
+          ...prev,
+          { item_name: newItem, user: "", addedBy: userData.email },
+        ];
         return updatedItems;
       });
       setNewItem("");

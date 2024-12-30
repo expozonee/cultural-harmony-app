@@ -155,7 +155,7 @@ function EventDescription() {
               Join Event
             </button>
           )}
-          {userData.email === event.host_email_address && (
+          {userData?.email === event.host_email_address && (
             <Link to={`/events/${eventId}/update-event`}>
               <button>Update Event</button>
             </Link>

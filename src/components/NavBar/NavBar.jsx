@@ -28,7 +28,9 @@ export default function NavBar() {
             <li>
               <Link
                 style={{
-                  backgroundColor: `${currentPage === "/events" ? "#A3F3F5" : ""}`,
+                  backgroundColor: `${
+                    currentPage === "/events" ? "#A3F3F5" : ""
+                  }`,
                 }}
                 to="/events"
                 onClick={() => setCurrentPage("/events")}
@@ -40,7 +42,9 @@ export default function NavBar() {
               <li>
                 <Link
                   style={{
-                    backgroundColor: `${currentPage === "/admin" ? "red" : ""}`,
+                    backgroundColor: `${
+                      currentPage === "/admin" ? "#A3F3F5" : ""
+                    }`,
                   }}
                   to="/admin"
                   onClick={() => setCurrentPage("/admin")}
