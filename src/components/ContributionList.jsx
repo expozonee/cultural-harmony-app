@@ -4,6 +4,7 @@ import { updateContributionList } from "../utils/updateEvent";
 
 function ContributionList({ contributionList, eventDocId, setEvent }) {
   const [list, setList] = useState(contributionList || []);
+  const [newItem, setNewItem] = useState(""); 
   const { user } = useUser();
   const currentUserName = user?.username;
 
@@ -28,6 +29,35 @@ function ContributionList({ contributionList, eventDocId, setEvent }) {
     }
   };
 
+  const handleItemAction = async (action, index = null, itemName = "") => {
+    try {
+      let updatedList;
+
+      if (action === "add" && itemName.trim()) {
+        updatedList = [...list, { item_name: itemName.trim(), user: currentUserName }];
+      } else if (action === "delete" && index !== null) {
+        updatedList = list.filter((_, i) => i !== index);
+      } else {
+        return;
+      }
+
+      await updateContributionList({
+        list: updatedList,
+        eventDocId,
+      });
+
+      setList(updatedList);
+      setEvent((event) => ({
+        ...event,
+        contribution_list: updatedList,
+      }));
+
+      if (action === "add") setNewItem(""); 
+    } catch (error) {
+      console.error(`Error handling item action (${action}): `, error);
+    }
+  };
+
   const hasSelectedItem = list.some((item) => item.user === currentUserName);
 
   return (
@@ -37,7 +67,7 @@ function ContributionList({ contributionList, eventDocId, setEvent }) {
         {list.map((item, index) => {
           const isPickedByCurrentUser = item.user === currentUserName;
           const isPickedByOtherUser =
-            item.user !== "undefined" && !isPickedByCurrentUser;
+            item.user !== ""  && !isPickedByCurrentUser;
 
           return (
             <li key={item.item_name}>
@@ -57,11 +87,32 @@ function ContributionList({ contributionList, eventDocId, setEvent }) {
                 />
                 {item.item_name}
               </label>
+              {isPickedByCurrentUser && (
+                <button
+                  className="delete-item-btn"
+                  onClick={() => handleItemAction("delete", index)}
+                >
+                  Delete
+                </button>
+              )}
               {isPickedByOtherUser && <span> (Picked by {item.user})</span>}
             </li>
           );
         })}
       </ul>
+      {!hasSelectedItem && (
+        <div className="add-item">
+          <input
+            type="text"
+            value={newItem}
+            onChange={(e) => setNewItem(e.target.value)}
+            placeholder="Enter an item"
+          />
+          <button className="add-item-btn"  onClick={() => handleItemAction("add", null, newItem)} disabled={!newItem.trim()}>
+            Add
+          </button>
+        </div>
+      )}
     </div>
   );
 }

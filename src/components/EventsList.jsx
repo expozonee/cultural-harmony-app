@@ -9,7 +9,6 @@ function EventsList() {
 
   return (
     <>
-      <h1 className="event-list-title">Upcoming Events</h1>
       <button
         className="show-map-btn"
         onClick={() => setPreviewMap(!previewMap)}
