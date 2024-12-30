@@ -8,8 +8,15 @@ import { useUserSubscribe } from "../hooks/useUserSubscribe";
 
 const UserContext = createContext(null);
 
+async function getEventById(id) {
+  const event = (await getEvents()).find((e) => e.id === id);
+
+  return event;
+}
+
 export function UserContextProvider({ children }) {
   const { isSignedIn } = useUser();
+
   const [userId, userData, userRef, users] = useUserSubscribe();
 
   async function getUserJoinedEvents() {
@@ -41,6 +48,13 @@ export function UserContextProvider({ children }) {
 
     await updateDoc(userRef, {
       eventsJoined: arrayUnion(id),
+      participants: arrayUnion(userData.email),
+    });
+
+    const eventRef = doc(db, "events", id);
+
+    await updateDoc(eventRef, {
+      participants: arrayUnion(userData.email),
     });
   }
 
@@ -48,6 +62,26 @@ export function UserContextProvider({ children }) {
     for (const id of ids) {
       await updateDoc(userRef, {
         eventsJoined: arrayRemove(id),
+      });
+
+      const event = await getEventById(id);
+
+      const newEventData = {
+        ...event,
+        contribution_list: event.contribution_list.map((c) => {
+          if (c.user !== userData.email) return c;
+          return {
+            ...c,
+            user: "",
+          };
+        }),
+      };
+
+      const eventRef = doc(db, "events", id);
+
+      updateDoc(eventRef, {
+        ...newEventData,
+        participants: arrayRemove(userData.email),
       });
     }
   }
