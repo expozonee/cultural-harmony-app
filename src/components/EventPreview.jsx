@@ -2,18 +2,18 @@ import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useUser } from "@clerk/clerk-react";
 
 function EventPreview({ event }) {
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const location = useLocation();
-  // const { user } = useUser();
+  const { user } = useUser();
 
-  // const handleJoinClick = (e) => {
-  //   if (!user) {
-  //     e.preventDefault();
-  //     navigate("/sign-in", { state: { from: location } });
-  //   }
-  // };
+  const handleJoinClick = (e) => {
+    if (!user) {
+      e.preventDefault();
+      navigate("/sign-in", { state: { from: location } });
+    }
+  };
 
-  const [year, month, day] = event.date.split("-");
+  const [, month, day] = event.date.split("-");
   const monthNames = [
     "Jan",
     "Feb",
@@ -50,6 +50,7 @@ function EventPreview({ event }) {
           to={`/events/${event.id}`}
           state={{ event }}
           className="details-button"
+          onClick={(e) => handleJoinClick(e)}
         >
           More Details
         </Link>
