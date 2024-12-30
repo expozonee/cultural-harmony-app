@@ -1,7 +1,7 @@
 .contribution-list {
     width: 100%;
     max-width: 40rem; 
-    background-color: #f7f7f7;
+    background-color: var(--sky-blue-light);
     padding: 1.5rem;
     border-radius: 0.5rem;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -54,6 +54,13 @@
   .contribution-list li .picked-by-other {
     text-decoration: line-through;
     color: #aaa;
+  }
+
+  .add-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1rem;
   }
   
   @media (max-width: 768px) {
