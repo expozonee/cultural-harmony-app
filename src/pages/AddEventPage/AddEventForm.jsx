@@ -10,6 +10,7 @@ import { useUser } from "@clerk/clerk-react";
 import { useEvents } from "../../context/EventsContext";
 import { useNavigate } from "react-router";
 import { schema } from "../../schema/YupSchema";
+import { useUserData } from "../../context/UserContext";
 
 export default function AddEventForm({ eventData, eventId, from }) {
   const navigate = useNavigate();
@@ -22,6 +23,7 @@ export default function AddEventForm({ eventData, eventId, from }) {
   const [items, setItems] = useState(eventData?.contribution_list ?? []);
   const [event, setEvent] = useState(eventData ?? intialEvent);
   const { user } = useUser();
+  const { userData } = useUserData();
 
   const {
     register,
@@ -93,7 +95,7 @@ export default function AddEventForm({ eventData, eventId, from }) {
       host_email_address: user.primaryEmailAddress.emailAddress,
       location: event.location,
       contribution_list: items,
-      participants: [],
+      participants: [userData.email],
       date: new Intl.DateTimeFormat("en-GB", {
         year: "numeric",
         month: "2-digit",
