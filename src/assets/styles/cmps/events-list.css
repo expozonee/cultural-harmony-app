@@ -1,9 +1,9 @@
 .events-list {
   display: flex;
   max-width: 150rem;
-  margin-bottom: 10px;
+  margin-top: 2rem;
   flex-wrap: wrap;
-  gap: 20px;
+  gap: 2rem;
   justify-content: center;
 }
 
@@ -13,9 +13,9 @@
 
 .event-list-title {
   text-align: center;
-  margin-bottom: 20px;
-  font-size: 5rem;
+  margin-bottom: 2rem;
+  font-size: 2rem;
   font-weight: bold;
-  color: var(--mainRed);
-  text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+  color: var(--blue);
+  text-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.5);
 }

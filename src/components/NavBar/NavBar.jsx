@@ -1,6 +1,6 @@
 import { SignedIn, SignedOut, UserButton } from '@clerk/clerk-react';
 import { Link, useLocation } from 'react-router-dom';
-import logo from '/icons8-people-working-together-100.png';
+import logo from '/Mediamodifier-Design.svg';
 import { useState } from 'react';
 
 export default function NavBar() {
@@ -16,7 +16,7 @@ export default function NavBar() {
             <li>
               <Link
                 style={{
-                  backgroundColor: `${currentPage === '/' ? 'red' : ''}`,
+                  backgroundColor: `${currentPage === '/' ? '#A3F3F5' : ''}`,
                 }}
                 to="/"
                 onClick={() => setCurrentPage('/')}
@@ -27,7 +27,9 @@ export default function NavBar() {
             <li>
               <Link
                 style={{
-                  backgroundColor: `${currentPage === '/events' ? 'red' : ''}`,
+                  backgroundColor: `${
+                    currentPage === '/events' ? '#A3F3F5' : ''
+                  }`,
                 }}
                 to="/events"
                 onClick={() => setCurrentPage('/events')}

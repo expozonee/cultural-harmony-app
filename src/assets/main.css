@@ -20,6 +20,7 @@
 @import './styles/cmps/app-header.css';
 @import './styles/cmps/events-list.css';
 @import './styles/cmps/event-preview.css';
+@import './styles/cmps/event-preview-home.css';
 @import './styles/cmps/footer.css';
 @import './styles/cmps/UserBanner.css';
 @import './styles/cmps/GoogleMap.css';
