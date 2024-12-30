@@ -1,13 +1,32 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useParams } from "react-router";
+import { db } from "../firebase/firebaseConfig";
+import { doc, updateDoc } from "firebase/firestore";
+import { useEvents } from "../context/EventsContext";
+import { useUserData } from "../context/UserContext";
+import { usePoll } from "../hooks/usePoll";
 
 function Poll({ poll }) {
+  const { eventId } = useParams();
+  const { getEventById } = useEvents();
+  const { userData } = useUserData();
   const [selectedOption, setSelectedOption] = useState(null);
+  const [isUserVoted, vote, removeVote] = usePoll(eventId, poll);
+
+  useEffect(() => {
+    const alreadyVotedOption = poll.options.find((option) =>
+      option.voted_users.includes(userData.email)
+    );
+    if (alreadyVotedOption) {
+      setSelectedOption(alreadyVotedOption.question_name);
+    }
+  }, [poll.options, userData.email]);
 
   function handleOptionSelection(e) {
     setSelectedOption(e.target.value);
   }
 
-  function handleSubmission(e) {
+  async function handleSubmission(e) {
     e.preventDefault();
     // alert if the user didn't vote in the poll - encourage their engagement
     if (!selectedOption) {
@@ -15,25 +34,67 @@ function Poll({ poll }) {
       return;
     }
     // increase the number of votes for this specific option by 1
-    poll.voted[selectedOption] = (poll.votes[selectedOption] || 0) + 1;
+    // poll.voted[selectedOption] = (poll.votes[selectedOption] || 0) + 1;
+
+    const evenRef = doc(db, "events", eventId);
+    console.log(evenRef);
+
+    const { id, ...eventData } = await getEventById(eventId);
+
+    const pollToUpdate = eventData.polls.find(
+      (p) => p.question === poll.question
+    );
+    const updatedPoll = {
+      ...pollToUpdate,
+      options: pollToUpdate.options.map((option) => {
+        if (option.question_name !== selectedOption) return option;
+        return {
+          ...option,
+          votes_count: option.votes_count + 1,
+          voted_users: [...option.voted_users, userData.email],
+        };
+      }),
+    };
+
+    const newPolls = eventData.polls.filter(
+      (p) => p.question !== poll.question
+    );
+
+    newPolls.push(updatedPoll);
+
+    console.log(newPolls);
+
+    const updatedEventData = {
+      ...eventData,
+      polls: newPolls,
+    };
+
+    await updateDoc(evenRef, updatedEventData);
   }
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+    await vote(selectedOption);
+  }
+
+  console.log(poll);
 
   return (
     <>
       <h3>{poll.question}</h3>
-      <form action="submit" onSubmit={handleSubmission}>
+      <form action="submit" onSubmit={handleSubmit}>
         {poll.options.map((option, index) => (
           <label key={index}>
             <input
               type="radio"
-              value={option}
-              checked={selectedOption === option}
+              value={option.question_name}
+              checked={selectedOption === option.question_name}
               onChange={handleOptionSelection}
             />
-            {option}
+            {option.question_name}
           </label>
         ))}
-        <button type="submit">Vote!</button>
+        <button type="submit">{isUserVoted ? "Update Vote" : "Vote!"}</button>
       </form>
     </>
   );

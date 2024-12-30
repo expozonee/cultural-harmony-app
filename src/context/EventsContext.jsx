@@ -97,14 +97,14 @@ export function EventsProvider({ children }) {
     }
   }
 
-  async function getEvenyById(id) {
+  async function getEventById(id) {
     const event = events.find((e) => e.id === id);
     return event;
   }
 
   return (
     <EventsContext.Provider
-      value={{ events, createEvent, updateEvent, deleteEvent, getEvenyById }}
+      value={{ events, createEvent, updateEvent, deleteEvent, getEventById }}
     >
       {children}
     </EventsContext.Provider>
