@@ -10,7 +10,10 @@ import { eventsLoader } from "../../loaders/eventsLoader";
 import { upcomingEventsLoader } from "../../loaders/upcomingEventsLoader";
 import AdminPage from "../pages/AdminPage/AdminPage";
 import AdminLayout from "../layout/AdminLayout";
-
+import AddEventPage from "./../pages/AddEventPage/AddEventPage";
+import UpdateEventPage, {
+  getEventByIdLoader,
+} from "../pages/UpdateEventPage/UpdateEventPage";
 
 const router = createBrowserRouter([
   {
@@ -19,7 +22,7 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <HomePage/>,
+        element: <HomePage />,
         loader: upcomingEventsLoader,
       },
       {
@@ -34,6 +37,15 @@ const router = createBrowserRouter([
         path: "/events",
         element: <EventsList />,
         loader: eventsLoader,
+      },
+      {
+        path: "/events/add-event",
+        element: <AddEventPage />,
+      },
+      {
+        path: "/events/:eventId/update-event",
+        element: <UpdateEventPage />,
+        loader: getEventByIdLoader,
       },
       {
         path: "/events/:eventId",
@@ -54,13 +66,9 @@ const router = createBrowserRouter([
             element: <AdminPage />,
           },
           {
-            path: "events",
-            element: <AdminPage dashboard={"events"} />,
+            path: ":dashboard",
+            element: <AdminPage />,
             loader: eventsLoader,
-          },
-          {
-            path: "users",
-            element: <AdminPage dashboard={"users"} />,
           },
         ],
       },
