@@ -58,7 +58,6 @@ function AITips({ eventDetails }) {
                 </li>
               ))}
             </ul>
-            {/* <p>{tips}</p> */}
             <button onClick={toggleVisibility}>Hide Tips</button>
           </div>
         )}
