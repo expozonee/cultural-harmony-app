@@ -5,6 +5,7 @@ function AITips({ eventDetails }) {
   const geminyApiKey = import.meta.env.VITE_GEMINI_API_KEY;
   const [tips, setTips] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [visible, setVisible] = useState(false);
 
   const fetchTips = async () => {
     try {
@@ -14,6 +15,7 @@ function AITips({ eventDetails }) {
 
       const result = await model.generateContent(tipsPrompt);
       setTips(result.response.text());
+      setVisible(true);
     } catch (error) {
       console.error("Error fetching AI tips:", error);
       setTips(
@@ -24,17 +26,27 @@ function AITips({ eventDetails }) {
     }
   };
 
+  const toggleVisibility = () => {
+    setVisible(!visible);
+  };
+
   return (
     <>
       <div>
-        <button onClick={fetchTips} disabled={loading}>
-          Give me 5 tips for this event!
-        </button>
-        {tips && (
+        {!visible && (
+          <button onClick={fetchTips} disabled={loading}>
+            Give me some tips for this event!
+          </button>
+        )}
+        {tips && visible && (
           <div className="ai-tips-container">
-            <h3>Here are some tips to help you prepare!</h3>
+            <h3>Here are some tips to help you prepare:</h3>
             <p>{tips}</p>
+            <button onClick={toggleVisibility}>Hide Tips</button>
           </div>
+        )}
+        {tips && !visible && (
+          <button onClick={toggleVisibility}>Show Tips</button>
         )}
       </div>
     </>
