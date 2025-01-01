@@ -8,6 +8,7 @@
     background-color: var(--periwinkle);
     border-radius: 0.3rem;
     padding: 1%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .ai-facts-container ul {
@@ -24,6 +25,13 @@
     background-color: var(--mainWhite);
     padding: 0.5rem;
     border-radius: 0.3rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 1s ease;
+}
+
+.ai-facts-container p:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .ai-facts-container h3 {

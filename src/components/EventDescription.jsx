@@ -191,12 +191,14 @@ function EventDescription() {
         </div>
       </div>
 
-      <div className="event-tips">
-        <AITips eventDetails={event} />
-      </div>
+      <div className="ai-buttons-container">
+        <div className="event-tips">
+          <AITips eventDetails={event} />
+        </div>
 
-      <div className="event-facts">
-        <AIEventKnowledge eventDetails={event} />
+        <div className="event-facts">
+          <AIEventKnowledge eventDetails={event} />
+        </div>
       </div>
 
       {event.event_host_email_address === userData?.email ? (
