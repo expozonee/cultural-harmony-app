@@ -58,6 +58,8 @@ export function usePoll(eventId, poll) {
       }),
     };
 
+    console.log(updatedPoll);
+
     const newPolls = eventData.polls.filter(
       (p) => p.question !== poll.question
     );
@@ -72,17 +74,31 @@ export function usePoll(eventId, poll) {
     await updateDoc(evenRef, updatedEventData);
   }
 
-  async function removeVote(selectedOption) {
+  async function removeVote() {
     const { id, ...eventData } = await getEventById(eventId);
 
     const pollToUpdate = eventData.polls.find(
       (p) => p.question === poll.question
     );
 
+    // const updatedPoll = {
+    //   ...pollToUpdate,
+    //   options: pollToUpdate.options.map((option, index) => {
+    //     if (option.question_name !== selectedOption) return option;
+    //     return {
+    //       ...option,
+    //       votes_count: option.votes_count - 1,
+    //       voted_users: option.voted_users.filter(
+    //         (votedUsers) => votedUsers !== userData.email
+    //       ),
+    //     };
+    //   }),
+    // };
+
     const updatedPoll = {
       ...pollToUpdate,
-      options: pollToUpdate.options.map((option, index) => {
-        if (option.question_name !== selectedOption) return option;
+      options: pollToUpdate.options.map((option) => {
+        if (!option.voted_users.includes(userData.email)) return option;
         return {
           ...option,
           votes_count: option.votes_count - 1,

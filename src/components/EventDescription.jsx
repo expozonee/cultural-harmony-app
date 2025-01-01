@@ -180,21 +180,19 @@ function EventDescription() {
           </div>
           {hasJoined && (
             <div className="event-contribution-list">
-              <ContributionList
-                eventId={eventId}
-                // contributionList={event.contribution_list || []}
-                // setEvent={setEvent}
-                eventData={event}
-              />
+              <ContributionList eventId={eventId} eventData={event} />
             </div>
           )}
         </div>
       </div>
-      {event.host_email_address === userData?.email ? (
+
+      {event.host_email_address === userData?.email && (
         <Link to={`create-poll`}>
           <button>Create A Poll for This Event</button>
         </Link>
-      ) : hasJoined && event.polls ? (
+      )}
+
+      {hasJoined && event.polls ? (
         event.polls.map((poll, index) => {
           return <Poll key={index} poll={poll} />;
         })

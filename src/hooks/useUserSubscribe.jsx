@@ -34,9 +34,7 @@ export function useUserSubscribe() {
     }
 
     addNewUsersToDb();
-  }, [isSignedIn, user]);
 
-  useEffect(() => {
     if (!isSignedIn || !user) {
       setUserData(undefined);
       return;
@@ -55,6 +53,26 @@ export function useUserSubscribe() {
 
     getUserId();
   }, [isSignedIn, user]);
+
+  // useEffect(() => {
+  //   if (!isSignedIn || !user) {
+  //     setUserData(undefined);
+  //     return;
+  //   }
+
+  //   const userEmailAddress = user.primaryEmailAddress.emailAddress;
+
+  //   async function getUserId() {
+  //     const users = await getUsers();
+  //     setUsers(users);
+  //     const userId = users.find((u) => u.email === userEmailAddress)?.id;
+
+  //     setUserId(userId);
+  //     setUserRef(doc(db, "users", userId));
+  //   }
+
+  //   getUserId();
+  // }, [isSignedIn, user]);
 
   useEffect(() => {
     if (!userId) {
