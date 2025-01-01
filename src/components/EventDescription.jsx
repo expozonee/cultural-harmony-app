@@ -6,6 +6,7 @@ import { Link, Outlet } from "react-router";
 import Poll from "./Poll";
 import { useEvents } from "../context/EventsContext";
 import AITips from "./AITips";
+import AIEventKnowledge from "./AIEventKnowledge";
 
 function EventDescription() {
   const { eventId } = useParams();
@@ -192,6 +193,10 @@ function EventDescription() {
 
       <div className="event-tips">
         <AITips eventDetails={event} />
+      </div>
+
+      <div className="event-facts">
+        <AIEventKnowledge eventDetails={event} />
       </div>
 
       {event.event_host_email_address === userData?.email ? (
