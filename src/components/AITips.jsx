@@ -3,7 +3,7 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 
 function AITips({ eventDetails }) {
   const geminyApiKey = import.meta.env.VITE_GEMINI_API_KEY;
-  const [tips, setTips] = useState(null);
+  const [tips, setTips] = useState([]);
   const [loading, setLoading] = useState(false);
   const [visible, setVisible] = useState(false);
 
@@ -11,16 +11,26 @@ function AITips({ eventDetails }) {
     try {
       const genAI = new GoogleGenerativeAI(geminyApiKey);
       const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
-      const tipsPrompt = `give me 5 tips that will help me prepare for this upcoming event: ${eventDetails.event_title}, based on the description: ${eventDetails.description}, and location: ${eventDetails.location["city_name"]}`;
+      const tipsPrompt = `provide me 5 tips that will help me prepare for this upcoming event: ${eventDetails.event_title}, based on the description: ${eventDetails.description}, and location: ${eventDetails.location["city_name"]}. please return them in as a javascript array, with each tip as a separate string. example: ["tip1", "tip2", "tip3", "tip4", "tip5"]`;
 
       const result = await model.generateContent(tipsPrompt);
-      setTips(result.response.text());
+      const resultText = result.response.text();
+
+      let responseText = resultText
+        .replace(/```javascript/, "")
+        .replace(/```/, "")
+        .trim();
+
+      console.log(responseText);
+
+      const parsedTips = JSON.parse(responseText);
+      setTips(parsedTips);
       setVisible(true);
     } catch (error) {
       console.error("Error fetching AI tips:", error);
-      setTips(
-        "Oops, didn't find tips... Please try again later, we promise to try again"
-      );
+      setTips([
+        "Oops, didn't find tips... Please try again later, we promise to try again",
+      ]);
     } finally {
       setLoading(false);
     }
@@ -41,7 +51,14 @@ function AITips({ eventDetails }) {
         {tips && visible && (
           <div className="ai-tips-container">
             <h3>Here are some tips to help you prepare:</h3>
-            <p>{tips}</p>
+            <ul>
+              {tips.map((tip, index) => (
+                <li key={index}>
+                  <p>{tip}</p>
+                </li>
+              ))}
+            </ul>
+            {/* <p>{tips}</p> */}
             <button onClick={toggleVisibility}>Hide Tips</button>
           </div>
         )}
