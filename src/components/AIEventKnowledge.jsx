@@ -32,14 +32,14 @@ function AIEventKnowledge({ eventDetails }) {
 
   return (
     <>
-      <div>
+      <div className="outer-container">
         {!visible && (
           <button onClick={fetchDetails} disabled={loading}>
             I want to learn more about the cultural context of this event!
           </button>
         )}
         {details && visible && (
-          <div className="ai-tips-container">
+          <div className="ai-facts-container">
             <h3>Some interesting facts you may want to know:</h3>
             <p>{details}</p>
             <button onClick={toggleVisibility}>Hide Facts</button>

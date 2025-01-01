@@ -32,7 +32,7 @@ function AITips({ eventDetails }) {
 
   return (
     <>
-      <div>
+      <div className="outer-container">
         {!visible && (
           <button onClick={fetchTips} disabled={loading}>
             Give me some tips for this event!
