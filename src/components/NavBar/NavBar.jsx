@@ -1,7 +1,7 @@
-import { SignedIn, SignedOut, UserButton, useUser } from "@clerk/clerk-react";
-import { Link, useLocation } from "react-router-dom";
-import logo from "/Mediamodifier-Design.svg";
-import { useState } from "react";
+import { SignedIn, SignedOut, UserButton, useUser } from '@clerk/clerk-react';
+import { Link, useLocation } from 'react-router-dom';
+import logo from '/Mediamodifier-Design.svg';
+import { useState } from 'react';
 
 export default function NavBar() {
   const { pathname } = useLocation();
@@ -17,10 +17,10 @@ export default function NavBar() {
             <li>
               <Link
                 style={{
-                  backgroundColor: `${currentPage === "/" ? "#A3F3F5" : ""}`,
+                  backgroundColor: `${currentPage === '/' ? '#A3F3F5' : ''}`,
                 }}
                 to="/"
-                onClick={() => setCurrentPage("/")}
+                onClick={() => setCurrentPage('/')}
               >
                 Home
               </Link>
@@ -29,32 +29,20 @@ export default function NavBar() {
               <Link
                 style={{
                   backgroundColor: `${
-                    currentPage === "/events" ? "#A3F3F5" : ""
+                    currentPage === '/events' ? '#A3F3F5' : ''
                   }`,
                 }}
                 to="/events"
-                onClick={() => setCurrentPage("/events")}
+                onClick={() => setCurrentPage('/events')}
               >
                 Events
               </Link>
             </li>
-            {isSignedIn && (
-              <li>
-                <Link
-                  style={{
-                    backgroundColor: `${
-                      currentPage === "/admin" ? "#A3F3F5" : ""
-                    }`,
-                  }}
-                  to="/admin"
-                  onClick={() => setCurrentPage("/admin")}
-                >
-                  Dashboard
-                </Link>
-              </li>
-            )}
             <li>
-              <Link to="/" onClick={() => setCurrentPage("about-us")}>
+              <Link
+                to="/AboutUsPage"
+                onClick={() => setCurrentPage('/AboutUsPage')}
+              >
                 About Us
               </Link>
             </li>
@@ -63,7 +51,7 @@ export default function NavBar() {
       </div>
       <div className="app-header__buttons">
         <SignedOut>
-          <Link to={"/sign-in"}>
+          <Link to={'/sign-in'}>
             <button className="sign-in__button">Sign In</button>
           </Link>
         </SignedOut>

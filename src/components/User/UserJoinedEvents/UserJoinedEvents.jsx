@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
-import { useUserData } from "../../../context/UserContext";
-import UserJoinedEventData from "./UserJoinedEventData";
+import { useEffect, useState } from 'react';
+import { useUserData } from '../../../context/UserContext';
+import UserJoinedEventData from './UserJoinedEventData';
 
 export default function UserJoinedEvents() {
   const { getUserJoinedEvents, unJoinEvents } = useUserData();
@@ -34,6 +34,7 @@ export default function UserJoinedEvents() {
                 <th>Location</th>
                 <th>Date</th>
                 <th>Host</th>
+                <th>Save to Calender</th>
               </tr>
             </thead>
             <tbody>
