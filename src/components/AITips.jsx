@@ -10,7 +10,7 @@ function AITips({ eventDetails }) {
     try {
       const genAI = new GoogleGenerativeAI(geminyApiKey);
       const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
-      const tipsPrompt = `give me 5 tips that will help me prepare for this upcoming event: ${eventDetails.event_title}`;
+      const tipsPrompt = `give me 5 tips that will help me prepare for this upcoming event: ${eventDetails.event_title}, based on the description: ${eventDetails.description}, and location: ${eventDetails.location["city_name"]}`;
 
       const result = await model.generateContent(tipsPrompt);
       setTips(result.response.text());
