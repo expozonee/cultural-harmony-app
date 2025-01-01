@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { useEvents } from "../context/EventsContext";
 import { useUserData } from "../context/UserContext";
 import { db } from "/src/firebase/firebaseConfig";
@@ -7,12 +8,9 @@ export function usePoll(eventId, poll) {
   const { getEventById } = useEvents();
   const { userData } = useUserData();
   const evenRef = doc(db, "events", eventId);
-
-  const votedOptionIndex = poll.options.indexOf((option) =>
+  const isUserVoted = poll.options.some((option) =>
     option.voted_users.includes(userData.email)
   );
-
-  const isUserVoted = votedOptionIndex !== -1;
 
   async function vote(selectedOption) {
     if (!selectedOption) {
@@ -58,8 +56,6 @@ export function usePoll(eventId, poll) {
       }),
     };
 
-    console.log(updatedPoll);
-
     const newPolls = eventData.polls.filter(
       (p) => p.question !== poll.question
     );
@@ -81,19 +77,7 @@ export function usePoll(eventId, poll) {
       (p) => p.question === poll.question
     );
 
-    // const updatedPoll = {
-    //   ...pollToUpdate,
-    //   options: pollToUpdate.options.map((option, index) => {
-    //     if (option.question_name !== selectedOption) return option;
-    //     return {
-    //       ...option,
-    //       votes_count: option.votes_count - 1,
-    //       voted_users: option.voted_users.filter(
-    //         (votedUsers) => votedUsers !== userData.email
-    //       ),
-    //     };
-    //   }),
-    // };
+    console.log(pollToUpdate);
 
     const updatedPoll = {
       ...pollToUpdate,
@@ -123,5 +107,16 @@ export function usePoll(eventId, poll) {
     await updateDoc(evenRef, updatedEventData);
   }
 
-  return [isUserVoted, vote, removeVote];
+  async function removePoll() {
+    const { id, ...eventData } = await getEventById(eventId);
+
+    const updatedEventData = {
+      ...eventData,
+      polls: eventData.polls.filter((p) => p.question !== poll.question),
+    };
+
+    await updateDoc(evenRef, updatedEventData);
+  }
+
+  return [isUserVoted, vote, removeVote, removePoll];
 }
