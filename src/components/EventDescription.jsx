@@ -10,7 +10,6 @@ function EventDescription() {
   const { eventId } = useParams();
   const { userData, unJoinEvents, joinEvent } = useUserData();
   const { getEvenyById } = useEvents();
-  // const currentEmail = userData?.email;
 
   const location = useLocation();
   const [event, setEvent] = useState(undefined);
@@ -19,27 +18,6 @@ function EventDescription() {
   const hasJoined = event?.participants?.includes(userData?.email);
 
   useEffect(() => {
-    // const fetchEvent = async () => {
-    //   if (!event) {
-    //     try {
-    //       const docRef = doc(db, "events", eventId);
-    //       const docSnap = await getDoc(docRef);
-
-    //       if (docSnap.exists()) {
-    //         const eventData = { id: docSnap.id, ...docSnap.data() };
-    //         setEvent(eventData);
-    //         console.log("Fetched event:", eventData);
-    //       } else {
-    //         console.error("Event not found");
-    //       }
-    //     } catch (error) {
-    //       console.error("Error fetching event from Firestore:", error);
-    //     } finally {
-    //       setLoading(false);
-    //     }
-    //   }
-    // };
-
     async function getEvent() {
       try {
         setLoading(true);
@@ -54,40 +32,6 @@ function EventDescription() {
 
     getEvent();
   }, [eventId, getEvenyById]);
-
-  // const handleParticipantAction = async (action) => {
-  //   if (!user) {
-  //     navigate("/sign-in", { state: { from: location.pathname } });
-  //     return;
-  //   }
-
-  //   try {
-  //     const update = await updateEventParticipants(
-  //       db,
-  //       eventId,
-  //       user.username,
-  //       action
-  //     );
-  //     const updatedParticipants = update[0];
-  //     const updatedContributionList = update[1];
-
-  //     setEvent((prevEvent) => ({
-  //       ...prevEvent,
-  //       participants: updatedParticipants,
-  //       contribution_list: updatedContributionList,
-  //     }));
-
-  //     console.log(
-  //       `User ${action === "join" ? "joined" : "unjoined"} the event:`,
-  //       user.username
-  //     );
-  //   } catch (error) {
-  //     console.error(
-  //       `Error ${action === "join" ? "joining" : "unjoining"} event:`,
-  //       error
-  //     );
-  //   }
-  // };
 
   if (loading) return <p>Loading...</p>;
   if (!event) return <p>Event not found!</p>;
@@ -157,7 +101,7 @@ function EventDescription() {
           )}
           {userData?.email === event.host_email_address && (
             <Link to={`/events/${eventId}/update-event`}>
-              <button>Update Event</button>
+              <button className="update-event-button">Update Event</button>
             </Link>
           )}
         </div>
@@ -180,8 +124,6 @@ function EventDescription() {
             <div className="event-contribution-list">
               <ContributionList
                 eventId={eventId}
-                // contributionList={event.contribution_list || []}
-                // setEvent={setEvent}
                 eventData={event}
               />
             </div>
@@ -190,7 +132,7 @@ function EventDescription() {
       </div>
       {event.event_host_email_address === userData?.email ? (
         <Link to={`create-poll`}>
-          <button>Create A Poll for This Event</button>
+          <button className="create-poll-button">Create A Poll for This Event</button>
         </Link>
       ) : event.poll ? (
         <Poll poll={event.poll} />

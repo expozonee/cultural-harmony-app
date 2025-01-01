@@ -23,7 +23,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0.8rem;
+    padding: 0.3rem;
     border-bottom: 1px solid #ddd;
     font-size: 1rem;
     line-height: 1.5;
@@ -40,6 +40,7 @@
   }
   
   .contribution-list input[type="checkbox"] {
+    max-width: 1rem;
     margin-right: 0.8rem;
     transform: scale(1.2); 
   }
@@ -58,9 +59,27 @@
 
   .add-item {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 1rem;
+    gap: 0.5rem;
+    max-height: 2rem;
+  }
+
+  .add-item input {
+    flex: 1;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 0.3rem;
+  }
+
+  .add-item-btn, .delete-item-btn{
+    padding: 0.4rem 1.1rem;
+    font-size: 1rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 0.5rem;
+    background-color: var(--blue);
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
   }
   
   @media (max-width: 768px) {

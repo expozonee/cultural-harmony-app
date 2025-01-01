@@ -170,7 +170,7 @@
   z-index: 1; 
 }
 
-.description-page-container button {
+.unjoin-button,.join-button,.create-poll-button,.update-event-button {
   padding: 0.625rem 1.25rem;
   font-size: 1rem;
   font-weight: bold;
