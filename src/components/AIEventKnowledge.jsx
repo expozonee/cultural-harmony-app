@@ -3,7 +3,7 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 
 function AIEventKnowledge({ eventDetails }) {
   const geminyApiKey = import.meta.env.VITE_GEMINI_API_KEY;
-  const [details, setDetails] = useState(null);
+  const [details, setDetails] = useState([]);
   const [loading, setLoading] = useState(false);
   const [visible, setVisible] = useState(false);
 
@@ -21,14 +21,20 @@ function AIEventKnowledge({ eventDetails }) {
         .replace(/```/, "")
         .trim();
 
+      console.log(responseText);
+      if (!Array.isArray(responseText) || responseText.length === 0) {
+        console.error(
+          "Are there correct details for this event? Couldn't find the facts for this event, please try again later."
+        );
+      }
       const parsedFacts = JSON.parse(responseText);
       setDetails(parsedFacts);
       setVisible(visible);
     } catch (error) {
       console.error("Error fetching AI details:", error);
-      setDetails(
-        "Oops, didn't find facts and background material... Please try again later, we promise to try again"
-      );
+      setDetails([
+        "Oops, didn't find facts and background material... Please try again later, we promise to try again",
+      ]);
     } finally {
       setLoading(false);
     }
