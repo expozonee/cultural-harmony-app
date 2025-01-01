@@ -9,7 +9,8 @@ import { useEvents } from "../context/EventsContext";
 function EventDescription() {
   const { eventId } = useParams();
   const { userData, unJoinEvents, joinEvent } = useUserData();
-  const { getEvenyById } = useEvents();
+  const { getEventById } = useEvents();
+  // const currentEmail = userData?.email;
 
   const location = useLocation();
   const [event, setEvent] = useState(undefined);
@@ -17,11 +18,13 @@ function EventDescription() {
 
   const hasJoined = event?.participants?.includes(userData?.email);
 
+  console.log(event);
+
   useEffect(() => {
     async function getEvent() {
       try {
         setLoading(true);
-        const eventData = await getEvenyById(eventId);
+        const eventData = await getEventById(eventId);
         setEvent(eventData);
       } catch (error) {
         console.error(error);
@@ -31,7 +34,41 @@ function EventDescription() {
     }
 
     getEvent();
-  }, [eventId, getEvenyById]);
+  }, [eventId, getEventById]);
+
+  // const handleParticipantAction = async (action) => {
+  //   if (!user) {
+  //     navigate("/sign-in", { state: { from: location.pathname } });
+  //     return;
+  //   }
+
+  //   try {
+  //     const update = await updateEventParticipants(
+  //       db,
+  //       eventId,
+  //       user.username,
+  //       action
+  //     );
+  //     const updatedParticipants = update[0];
+  //     const updatedContributionList = update[1];
+
+  //     setEvent((prevEvent) => ({
+  //       ...prevEvent,
+  //       participants: updatedParticipants,
+  //       contribution_list: updatedContributionList,
+  //     }));
+
+  //     console.log(
+  //       `User ${action === "join" ? "joined" : "unjoined"} the event:`,
+  //       user.username
+  //     );
+  //   } catch (error) {
+  //     console.error(
+  //       `Error ${action === "join" ? "joining" : "unjoining"} event:`,
+  //       error
+  //     );
+  //   }
+  // };
 
   if (loading) return <p>Loading...</p>;
   if (!event) return <p>Event not found!</p>;
@@ -122,20 +159,22 @@ function EventDescription() {
           </div>
           {hasJoined && (
             <div className="event-contribution-list">
-              <ContributionList
-                eventId={eventId}
-                eventData={event}
-              />
+              <ContributionList eventId={eventId} eventData={event} />
             </div>
           )}
         </div>
       </div>
-      {event.event_host_email_address === userData?.email ? (
+
+      {event.host_email_address === userData?.email && (
         <Link to={`create-poll`}>
           <button className="create-poll-button">Create A Poll for This Event</button>
         </Link>
-      ) : event.poll ? (
-        <Poll poll={event.poll} />
+      )}
+
+      {hasJoined && event.polls ? (
+        event.polls.map((poll, index) => {
+          return <Poll key={index} poll={poll} />;
+        })
       ) : (
         <p>No poll available for this event.</p>
       )}
