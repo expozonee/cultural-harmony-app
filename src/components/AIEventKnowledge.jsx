@@ -11,7 +11,7 @@ function AIEventKnowledge({ eventDetails }) {
     try {
       const genAI = new GoogleGenerativeAI(geminyApiKey);
       const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
-      const detailsPrompt = `please enhance my knowledge and provide me some interesting cultural and historical facts about this event: ${eventDetails.event_title}`;
+      const detailsPrompt = `please enhance my knowledge and provide me some interesting cultural and historical facts about this event: ${eventDetails.event_title}. make that short and concise with 3-5 facts.`;
 
       const result = await model.generateContent(detailsPrompt);
       setDetails(result.response.text());
