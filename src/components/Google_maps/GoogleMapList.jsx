@@ -1,5 +1,4 @@
 /* eslint-disable no-unused-vars */
-/* eslint-disable no-undef */
 import { useState } from "react";
 import GoogleMapReact from "google-map-react";
 import { useNavigate } from "react-router-dom";

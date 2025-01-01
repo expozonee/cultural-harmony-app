@@ -1,4 +1,4 @@
-import { SignedIn, SignedOut, UserButton } from '@clerk/clerk-react';
+import { SignedIn, SignedOut, UserButton, useUser } from '@clerk/clerk-react';
 import { Link, useLocation } from 'react-router-dom';
 import logo from '/Mediamodifier-Design.svg';
 import { useState } from 'react';
@@ -6,6 +6,7 @@ import { useState } from 'react';
 export default function NavBar() {
   const { pathname } = useLocation();
   const [currentPage, setCurrentPage] = useState(pathname);
+  const { isSignedIn } = useUser();
 
   return (
     <header className="app-header">
