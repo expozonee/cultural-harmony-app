@@ -11,7 +11,8 @@ function AboutUsPage() {
     },
     {
       name: 'Ibrahem Haj Ali',
-      image: '/api/placeholder/300/300',
+      image:
+        'https://res.cloudinary.com/dpixrsdwh/image/upload/v1735719618/WhatsApp_Image_2025-01-01_at_10.12.15_i3lkal.jpg',
       linkedin: 'https://linkedin.com/in/ibrahem-haj-ali-3057a5250',
       github: 'https://github.com/expozonee',
     },
@@ -31,16 +32,16 @@ function AboutUsPage() {
       github: 'https://github.com/wardkadan1',
     },
     {
-      name: 'Nana',
+      name: 'Nana Omar ',
       image:
-        'https://res.cloudinary.com/dpixrsdwh/image/upload/v1735224939/kt45756hmhhbj9zaiek0.jpg',
+        'https://res.cloudinary.com/dpixrsdwh/image/upload/v1735718619/1000101302_be9z7l.jpg',
       linkedin: 'https://www.linkedin.com/in/ward-keadan-0b633b1b0/',
-      github: 'https://github.com/nana232002',
+      github: ' https://github.com/nana232002',
     },
     {
       name: 'Jarden Aaltonen',
       image:
-        'https://res.cloudinary.com/dpixrsdwh/image/upload/v1735224939/kt45756hmhhbj9zaiek0.jpg',
+        'https://res.cloudinary.com/dpixrsdwh/image/upload/v1735718824/WhatsApp_Image_2025-01-01_at_10.06.18_aeu3yn.jpg',
       linkedin: 'https://www.linkedin.com/in/jarden-aaltonen/',
       github: 'https://github.com/jvseds',
     },
