@@ -10,11 +10,23 @@
     padding: 1%;
 }
 
+.ai-tips-container ul {
+    list-style-type: none;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .ai-tips-container p {
     line-height: 1.5;
     text-align: justify;
+    background-color: var(--mainWhite);
+    padding: 0.5rem;
+    border-radius: 0.3rem;
 }
 
 .ai-tips-container h3 {
     font-size: 1.5rem;
+    text-transform: capitalize;
 }
