@@ -23,7 +23,7 @@ function EventsList() {
       </button>
       {isSignedIn && (
         <Link to="/events/add-event">
-          <button className="">Add Event</button>
+          <button className="add-event">Add Event</button>
         </Link>
       )}
       {previewMap ? (
