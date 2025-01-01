@@ -19,3 +19,23 @@
   color: var(--blue);
   text-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.5);
 }
+
+.add-event {
+  margin-left: 50%;
+  transform: translateX(-50%);
+  margin-bottom: 15px;
+  margin-top: 15px;
+  width: fit-content;
+
+  background-color: var(--blue);
+  color: var(--mainWhite);
+  border: none;
+  padding: 0.4rem 0.8rem;
+  font-size: 0.9rem;
+  cursor: pointer;
+  border-radius: 0.25rem;
+  text-decoration: none;
+  text-align: center;
+  transition: all 0.3s ease;
+  align-self: flex-start;
+}
