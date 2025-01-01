@@ -5,6 +5,7 @@ import ContributionList from "./ContributionList";
 import { Link, Outlet } from "react-router";
 import Poll from "./Poll";
 import { useEvents } from "../context/EventsContext";
+import AITips from "./AITips";
 
 function EventDescription() {
   const { eventId } = useParams();
@@ -188,6 +189,11 @@ function EventDescription() {
           )}
         </div>
       </div>
+
+      <div className="event-tips">
+        <AITips eventDetails={event} />
+      </div>
+
       {event.event_host_email_address === userData?.email ? (
         <Link to={`create-poll`}>
           <button>Create A Poll for This Event</button>
