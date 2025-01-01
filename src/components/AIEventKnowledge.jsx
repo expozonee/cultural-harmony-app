@@ -11,10 +11,18 @@ function AIEventKnowledge({ eventDetails }) {
     try {
       const genAI = new GoogleGenerativeAI(geminyApiKey);
       const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
-      const detailsPrompt = `please enhance my knowledge and provide me some interesting cultural and historical facts about this event: ${eventDetails.event_title}. make that short and concise with 3-5 facts.`;
+      const detailsPrompt = `please enhance my knowledge and provide me some interesting cultural and historical facts about this event: ${eventDetails.event_title} and its summary: ${eventDetails.summary}. make that short and concise with 3-5 facts and return it as a javascript array, each fact as a string. example: [fact1, fact2, fact3,...]`;
 
       const result = await model.generateContent(detailsPrompt);
-      setDetails(result.response.text());
+      const resultText = result.response.text();
+
+      let responseText = resultText
+        .replace(/```javascript/, "")
+        .replace(/```/, "")
+        .trim();
+
+      const parsedFacts = JSON.parse(responseText);
+      setDetails(parsedFacts);
       setVisible(visible);
     } catch (error) {
       console.error("Error fetching AI details:", error);
@@ -41,6 +49,13 @@ function AIEventKnowledge({ eventDetails }) {
         {details && visible && (
           <div className="ai-facts-container">
             <h3>Some interesting facts you may want to know:</h3>
+            <ul>
+              {details.map((fact, index) => (
+                <li key={index}>
+                  <p>{fact}</p>
+                </li>
+              ))}
+            </ul>
             <p>{details}</p>
             <button onClick={toggleVisibility}>Hide Facts</button>
           </div>

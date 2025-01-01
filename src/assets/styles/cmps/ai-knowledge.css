@@ -10,11 +10,23 @@
     padding: 1%;
 }
 
+.ai-facts-container ul {
+    list-style-type: none;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .ai-facts-container p {
     line-height: 1.5;
     text-align: justify;
+    background-color: var(--mainWhite);
+    padding: 0.5rem;
+    border-radius: 0.3rem;
 }
 
 .ai-facts-container h3 {
     font-size: 1.5rem;
+    text-transform: capitalize;
 }
