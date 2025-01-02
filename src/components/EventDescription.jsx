@@ -79,13 +79,18 @@ function EventDescription() {
           hasConfirmButtons={confirmAction}
         />
       )}
-      {event.imgUrl && (
-        <img
-          className="event-image-description"
-          src={event.imgUrl}
-          alt={event.event_title}
-        />
-      )}
+      {event.imgUrl ? (
+          <img
+            className="event-image-description"
+            src={event.imgUrl}
+            alt={event.event_title}
+            onError={(e) => {
+              e.target.remove();
+              const card = document.querySelector('.event-description-card');
+              if (card) card.classList.add('no-image');
+            }}
+          />
+        ) : null}
       <div className="event-description-card">
         <div className="event-description-card-left">
           <h1>{event.event_title}</h1>

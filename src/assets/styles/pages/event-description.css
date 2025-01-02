@@ -10,7 +10,7 @@
   gap: 1rem;
   width: 80%;
   padding: 1.25rem;
-  margin: -40px auto 20px; 
+  margin: -2.5rem auto 1.25rem; 
   border: none;
   overflow: hidden;
   border-radius: 0.75rem;
@@ -19,7 +19,9 @@
   z-index: 2;
   position: relative;
 }
-
+.event-description-card.no-image {
+  margin: 2.5rem auto 1.25rem; 
+}
 .event-description-card-left {
   flex: 3;
   padding: 0.5rem;
@@ -28,7 +30,7 @@
 
 .event-description-card-left h1 {
   font-size: 2rem;
-  color:#2d2d2d;
+  color: #2d2d2d;
   margin-bottom: 1rem;
 }
 
@@ -42,7 +44,7 @@
 .event-icon-and-text {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 0.625rem;
 }
 
 .event-icon {
@@ -52,7 +54,7 @@
 .label {
   font-size: 1.2rem;
   color: #b0b0b0;
-  margin-bottom: 5px;
+  margin-bottom: 0.3125rem;
 }
 
 .date,
@@ -63,7 +65,7 @@
 
 .date span {
   color: #6c757d;
-  margin-left: 4rem;
+  margin-left: 2.5rem;
   font-size: 1rem;
 }
 
@@ -85,8 +87,8 @@
 .event-organizer {
   display: flex;
   align-items: center;
-  gap: 10px;
-  margin-bottom: 20px;
+  gap: 0.625rem;
+  margin-bottom: 1.25rem;
 }
 
 .organizer-icon {
@@ -133,7 +135,7 @@
   flex-direction: column;
 }
 
-.event-participants-list{
+.event-participants-list {
   background-color: var(--lavender-light);
   flex: 1;
   border-radius: 0.75rem;
@@ -170,7 +172,10 @@
   z-index: 1; 
 }
 
-.unjoin-button,.join-button,.create-poll-button,.update-event-button {
+.unjoin-button,
+.join-button,
+.create-poll-button,
+.update-event-button {
   padding: 0.625rem 1.25rem;
   font-size: 1rem;
   font-weight: bold;
