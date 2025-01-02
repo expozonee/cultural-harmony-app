@@ -49,6 +49,7 @@ function Chatbot({ eventDetails }) {
   return (
     <>
       <div className="chatbot-container">
+        <h3>ask our chatbot!</h3>
         <ChatWindow conversation={conversation} />
         <div className="builtin-prompts">
           {builtInPrompts.map((prompt, index) => (

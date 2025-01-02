@@ -8,3 +8,24 @@
     box-shadow: 2px 6px 6px 2px black;
     border-radius: 0.2rem;
 }
+
+div.chatbot-container h3 {
+    font-size: 2rem;
+    font-weight: bold;
+    text-transform: capitalize;
+    color: rgb(0, 0, 62);
+}
+
+div.chatbot-container button {
+    background-color: var(--periwinkle);
+    color: rgb(0, 0, 62);
+}
+
+div.chatbot-container button:hover {
+    background-color: var(--rose);
+    color: rgb(0, 0, 0);
+}
+
+div.user-input {
+    margin-top: 1rem;
+}
