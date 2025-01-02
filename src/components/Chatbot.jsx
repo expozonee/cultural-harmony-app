@@ -9,10 +9,10 @@ function Chatbot({ eventDetails }) {
   const [loading, setLoading] = useState(false);
 
   const builtInPrompts = [
-    `provide me some interesting cultural and historical facts about this event: ${eventDetails.event_title} and its summary: ${eventDetails.summary}.`,
-    `provide me 3 tips that will help me prepare for this upcoming event: ${eventDetails.event_title}, based on the description: ${eventDetails.description}, and location: ${eventDetails.location["city_name"]}.`,
-    `explain the cultural significance of this event: ${eventDetails.event_title}`,
-    `advise me how to properly dress for this event: ${eventDetails.event_title}`,
+    `provide me an interesting cultural or historical short fact related to this event: ${eventDetails.event_title}.`,
+    `provide me a tip that will help me prepare for this upcoming event: ${eventDetails.event_title}, based on the description: ${eventDetails.description}, and location: ${eventDetails.location["city_name"]}.`,
+    `explain the cultural significance of this event in a short sentence: ${eventDetails.event_title}`,
+    `advise me concisely how to properly dress for this event: ${eventDetails.event_title}`,
   ];
 
   const sendMessage = async (userInput) => {
