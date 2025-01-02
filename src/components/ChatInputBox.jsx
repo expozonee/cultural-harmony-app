@@ -1,5 +1,5 @@
 import { useState } from "react";
-function ChatInputBox({ loading, onSend }) {
+function ChatInputBox({ loading, onSend, eventDetails }) {
   const [input, setInput] = useState("");
 
   const handleSubmit = (e) => {
