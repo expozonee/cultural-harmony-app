@@ -1,15 +1,17 @@
 /* eslint-disable no-unused-vars */
-import { useState } from "react";
-import GoogleMapReact from "google-map-react";
-import { useNavigate } from "react-router-dom";
+import { useState } from 'react';
+import GoogleMapReact from 'google-map-react';
+import { useNavigate } from 'react-router-dom';
 
 export function GoogleMapList({ events }) {
   const defaultProps = {
     center: {
-      lat: 32.0132,
-      lng: 34.7722,
+      // lat: 32.0132,
+      // lng: 34.7722,
+      lat: 31.2508828,
+      lng: 34.7960648,
     },
-    zoom: 11,
+    zoom: 8,
   };
   const navigate = useNavigate();
   const [selectedEvent, setSelectedEvent] = useState(null);
@@ -37,14 +39,14 @@ export function GoogleMapList({ events }) {
   const mapOptions = {
     draggable: false,
     fullscreenControl: false,
-    zoomControl: true,
+    zoomControl: false,
   };
 
   if (!events) return <div>Loading map...</div>;
 
   return (
     <>
-      <div style={{ height: "77vh", width: "100%" }}>
+      <div style={{ height: '86vh', width: '100%' }}>
         <GoogleMapReact
           bootstrapURLKeys={{
             key: import.meta.env.VITE_APP_GOOGLE_MAPS_API_KEY,

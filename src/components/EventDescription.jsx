@@ -11,7 +11,7 @@ import AIEventKnowledge from "./AIEventKnowledge";
 function EventDescription() {
   const { eventId } = useParams();
   const { userData, unJoinEvents, joinEvent } = useUserData();
-  const { getEvenyById } = useEvents();
+  const { getEventById } = useEvents();
   // const currentEmail = userData?.email;
 
   const location = useLocation();
@@ -19,6 +19,8 @@ function EventDescription() {
   const [loading, setLoading] = useState(!location.state?.event);
 
   const hasJoined = event?.participants?.includes(userData?.email);
+
+  console.log(event);
 
   useEffect(() => {
     // const fetchEvent = async () => {
@@ -45,7 +47,7 @@ function EventDescription() {
     async function getEvent() {
       try {
         setLoading(true);
-        const eventData = await getEvenyById(eventId);
+        const eventData = await getEventById(eventId);
         setEvent(eventData);
       } catch (error) {
         console.error(error);
@@ -55,7 +57,7 @@ function EventDescription() {
     }
 
     getEvent();
-  }, [eventId, getEvenyById]);
+  }, [eventId, getEventById]);
 
   // const handleParticipantAction = async (action) => {
   //   if (!user) {
@@ -180,12 +182,7 @@ function EventDescription() {
           </div>
           {hasJoined && (
             <div className="event-contribution-list">
-              <ContributionList
-                eventId={eventId}
-                // contributionList={event.contribution_list || []}
-                // setEvent={setEvent}
-                eventData={event}
-              />
+              <ContributionList eventId={eventId} eventData={event} />
             </div>
           )}
         </div>
@@ -201,12 +198,16 @@ function EventDescription() {
         </div>
       </div>
 
-      {event.event_host_email_address === userData?.email ? (
+      {event.host_email_address === userData?.email && (
         <Link to={`create-poll`}>
           <button>Create A Poll for This Event</button>
         </Link>
-      ) : event.poll ? (
-        <Poll poll={event.poll} />
+      )}
+
+      {hasJoined && event.polls ? (
+        event.polls.map((poll, index) => {
+          return <Poll key={index} poll={poll} />;
+        })
       ) : (
         <p>No poll available for this event.</p>
       )}

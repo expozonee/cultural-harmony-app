@@ -54,7 +54,10 @@ export default function NavBar() {
               </li>
             )}
             <li>
-              <Link to="/" onClick={() => setCurrentPage("about-us")}>
+              <Link
+                to="/AboutUsPage"
+                onClick={() => setCurrentPage("/AboutUsPage")}
+              >
                 About Us
               </Link>
             </li>
