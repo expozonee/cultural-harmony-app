@@ -33,7 +33,7 @@ function AIEventKnowledge({ eventDetails }) {
     } catch (error) {
       console.error("Error fetching AI details:", error);
       setDetails([
-        "Oops, didn't find facts and background material... Please try again later, we promise to try again",
+        "Oops, didn't find facts and background material... Please try again later, or contact the event host.",
       ]);
     } finally {
       setLoading(false);
@@ -62,7 +62,6 @@ function AIEventKnowledge({ eventDetails }) {
                 </li>
               ))}
             </ul>
-            <p>{details}</p>
             <button onClick={toggleVisibility}>Hide Facts</button>
           </div>
         )}
