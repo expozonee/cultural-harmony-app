@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import ChatWindow from "./ChatWindow";
+import ChatInputBox from "./ChatInputBox";
 function Chatbot({ eventDetails }) {
   const geminyApiKey = import.meta.env.VITE_GEMINI_API_KEY;
   const geminiModel = "gemini-1.5-flash";
@@ -59,6 +60,9 @@ function Chatbot({ eventDetails }) {
               {prompt}
             </button>
           ))}
+        </div>
+        <div className="user-input">
+          <ChatInputBox onSend={sendMessage} loading={loading} />
         </div>
       </div>
     </>
