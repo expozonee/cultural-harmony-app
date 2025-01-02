@@ -48,7 +48,6 @@ export function UserContextProvider({ children }) {
 
     await updateDoc(userRef, {
       eventsJoined: arrayUnion(id),
-      participants: arrayUnion(userData.email),
     });
 
     const eventRef = doc(db, "events", id);

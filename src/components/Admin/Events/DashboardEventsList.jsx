@@ -1,5 +1,5 @@
-import DashboardEvents from "./DashboardEvents";
-import { useLoaderData } from "react-router";
+import DashboardEvents from './DashboardEvents';
+import { useLoaderData } from 'react-router';
 
 export default function EventsList() {
   const events = useLoaderData();

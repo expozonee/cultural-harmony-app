@@ -25,12 +25,12 @@ export function EventsProvider({ children }) {
   const [, , userRef] = useUserSubscribe();
 
   useEffect(() => {
-    async function getEvents() {
-      const events = await eventsLoader();
-      if (events) {
-        setEvents(events);
-      }
-    }
+    // async function getEvents() {
+    //   const events = await eventsLoader();
+    //   if (events) {
+    //     setEvents(events);
+    //   }
+    // }
 
     const unSubscribe = onSnapshot(eventsRef, (snapshot) => {
       if (snapshot.docs)
@@ -44,7 +44,7 @@ export function EventsProvider({ children }) {
         );
     });
 
-    getEvents();
+    // getEvents();
 
     return () => unSubscribe();
   }, []);
@@ -97,14 +97,14 @@ export function EventsProvider({ children }) {
     }
   }
 
-  async function getEvenyById(id) {
+  async function getEventById(id) {
     const event = events.find((e) => e.id === id);
     return event;
   }
 
   return (
     <EventsContext.Provider
-      value={{ events, createEvent, updateEvent, deleteEvent, getEvenyById }}
+      value={{ events, createEvent, updateEvent, deleteEvent, getEventById }}
     >
       {children}
     </EventsContext.Provider>
