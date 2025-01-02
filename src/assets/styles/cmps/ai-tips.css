@@ -11,6 +11,16 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+div .toggle-btn {
+    background-color: var(--celeste);
+    color: rgb(7, 0, 111);
+}
+
+div .toggle-btn:hover {
+    background-color: var(--periwinkle);
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
+}
+
 .ai-tips-container ul {
     list-style-type: none;
     padding: 1rem;
@@ -37,4 +47,19 @@
 .ai-tips-container h3 {
     font-size: 1.5rem;
     text-transform: capitalize;
+}
+
+@media (max-width: 768px) {
+    
+    .ai-tips-container {
+        max-width: 90%;
+    }
+
+    .ai-tips-container h3 {
+        font-size: 1rem;
+    }
+
+    .outer-container button {
+        max-width: 50%;
+    }
 }

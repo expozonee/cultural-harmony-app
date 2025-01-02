@@ -64,11 +64,15 @@ function AITips({ eventDetails }) {
                 </li>
               ))}
             </ul>
-            <button onClick={toggleVisibility}>Hide Tips</button>
+            <button className="toggle-btn" onClick={toggleVisibility}>
+              Hide Tips
+            </button>
           </div>
         )}
         {tips && tips.length > 0 && !visible && (
-          <button onClick={toggleVisibility}>Show Tips</button>
+          <button className="toggle-btn" onClick={toggleVisibility}>
+            Show Tips
+          </button>
         )}
       </div>
     </>

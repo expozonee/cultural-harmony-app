@@ -66,11 +66,15 @@ function AIEventKnowledge({ eventDetails }) {
                 </li>
               ))}
             </ul>
-            <button onClick={toggleVisibility}>Hide Facts</button>
+            <button className="toggle-btn" onClick={toggleVisibility}>
+              Hide Facts
+            </button>
           </div>
         )}
         {details && details.length > 0 && !visible && (
-          <button onClick={toggleVisibility}>Show Facts</button>
+          <button className="toggle-btn" onClick={toggleVisibility}>
+            Show Facts
+          </button>
         )}
       </div>
     </>
