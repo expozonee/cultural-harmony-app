@@ -16,14 +16,25 @@ function AITips({ eventDetails }) {
       const result = await model.generateContent(tipsPrompt);
       const resultText = result.response.text();
 
-      let responseText = resultText
-        .replace(/```javascript/, "")
-        .replace(/```/, "")
-        .trim();
+      // let responseText = resultText
+      //   .replace(/```javascript/, "")
+      //   .replace(/```/, "")
+      //   .trim();
 
-      console.log(responseText);
+      const resultArray = resultText.match(/\[.*?\]/s);
 
-      const parsedTips = JSON.parse(responseText);
+      if (!resultArray) {
+        console.error("No array was returned");
+      }
+
+      console.log(resultArray);
+      if (!Array.isArray(resultArray) || resultArray.length === 0) {
+        console.error(
+          "Are there correct details for this event? Couldn't find the facts for this event, please try again later."
+        );
+      }
+
+      const parsedTips = JSON.parse(resultArray);
       setTips(parsedTips);
       setVisible(true);
     } catch (error) {

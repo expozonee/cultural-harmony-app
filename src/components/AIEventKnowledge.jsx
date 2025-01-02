@@ -6,28 +6,38 @@ function AIEventKnowledge({ eventDetails }) {
   const [details, setDetails] = useState([]);
   const [loading, setLoading] = useState(false);
   const [visible, setVisible] = useState(false);
+  const geminiModel = "gemini-1.5-flash";
 
   const fetchDetails = async () => {
     try {
       const genAI = new GoogleGenerativeAI(geminyApiKey);
-      const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+      const model = genAI.getGenerativeModel({ model: geminiModel });
       const detailsPrompt = `please enhance my knowledge and provide me some interesting cultural and historical facts about this event: ${eventDetails.event_title} and its summary: ${eventDetails.summary}. make that short and concise with 3-5 facts and return it as a javascript array, each fact as a string. example: [fact1, fact2, fact3,...]`;
 
       const result = await model.generateContent(detailsPrompt);
+
       const resultText = result.response.text();
+      // console.log(resultText);
 
-      let responseText = resultText
-        .replace(/```javascript/, "")
-        .replace(/```/, "")
-        .trim();
+      // let responseText = resultText
+      //   .replace(/```javascript/, "")
+      //   .replace(/```/, "")
+      //   .trim();
 
-      console.log(responseText);
-      if (!Array.isArray(responseText) || responseText.length === 0) {
+      // extract the array from the result text
+      const resultArray = resultText.match(/\[.*?\]/s);
+
+      if (!resultArray) {
+        console.error("No array was returned");
+      }
+
+      console.log(resultArray);
+      if (!Array.isArray(resultArray) || resultArray.length === 0) {
         console.error(
           "Are there correct details for this event? Couldn't find the facts for this event, please try again later."
         );
       }
-      const parsedFacts = JSON.parse(responseText);
+      const parsedFacts = JSON.parse(resultArray);
       setDetails(parsedFacts);
       setVisible(visible);
     } catch (error) {
