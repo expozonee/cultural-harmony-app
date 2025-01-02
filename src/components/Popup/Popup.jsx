@@ -1,6 +1,12 @@
 import "./Popup.css";
 
-function Popup({ message, onConfirm, onCancel, hasCloseButton, hasConfirmButtons }) {
+function Popup({
+  message,
+  onConfirm,
+  onCancel,
+  hasCloseButton,
+  hasConfirmButtons,
+}) {
   return (
     <div className="popup-overlay">
       <div className="popup-container">
@@ -14,7 +20,7 @@ function Popup({ message, onConfirm, onCancel, hasCloseButton, hasConfirmButtons
           </button>
         )}
         <p className="popup-message">{message}</p>
-        {hasConfirmButtons && (
+        {!hasConfirmButtons && (
           <div className="popup-actions">
             <button className="popup-confirm-button" onClick={onConfirm}>
               Yes

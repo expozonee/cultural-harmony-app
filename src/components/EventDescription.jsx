@@ -1,18 +1,17 @@
 import { useEffect, useState } from "react";
-import { useParams, useLocation, useNavigate } from "react-router";
+import { useParams, useLocation } from "react-router";
 import { useUserData } from "../context/UserContext";
 import ContributionList from "./ContributionList";
 import { Link, Outlet } from "react-router";
 import Poll from "./Poll";
 import { useEvents } from "../context/EventsContext";
-import  usePageLeave  from "../hooks/usePageLeave";
+import usePageLeave from "../hooks/usePageLeave";
 import Popup from "./Popup/Popup";
 
 function EventDescription() {
   const { eventId } = useParams();
   const { userData, unJoinEvents, joinEvent } = useUserData();
   const { getEventById } = useEvents();
-  const navigate = useNavigate();
   const location = useLocation();
 
   const [event, setEvent] = useState(undefined);
@@ -24,6 +23,14 @@ function EventDescription() {
   const hasJoined = event?.participants?.includes(userData?.email);
   const hasPickedItem = event?.contribution_list.some(
     (contribution) => contribution.user === userData?.email
+  );
+
+  usePageLeave(
+    hasJoined,
+    hasPickedItem,
+    setShowPopup,
+    setPopupMessage,
+    confirmAction
   );
 
   const handleJoin = async () => {
@@ -40,11 +47,10 @@ function EventDescription() {
   };
 
   const confirmLeaveAction = async () => {
-    if (confirmAction) {
-      await unJoinEvents([eventId]);
-      navigate(-1);
-    }
+    await unJoinEvents([eventId]);
     setShowPopup(false);
+    setConfirmAction(true);
+    // navigate(-1);
   };
 
   useEffect(() => {
@@ -63,14 +69,12 @@ function EventDescription() {
     getEvent();
   }, [eventId, getEventById]);
 
-  usePageLeave(hasJoined, hasPickedItem, setShowPopup, setPopupMessage, setConfirmAction);
-
   if (loading) return <p>Loading...</p>;
   if (!event) return <p>Event not found!</p>;
 
   return (
     <div className="description-page-container">
-       {showPopup && (
+      {showPopup && (
         <Popup
           message={popupMessage}
           onConfirm={confirmLeaveAction}
@@ -80,17 +84,17 @@ function EventDescription() {
         />
       )}
       {event.imgUrl ? (
-          <img
-            className="event-image-description"
-            src={event.imgUrl}
-            alt={event.event_title}
-            onError={(e) => {
-              e.target.remove();
-              const card = document.querySelector('.event-description-card');
-              if (card) card.classList.add('no-image');
-            }}
-          />
-        ) : null}
+        <img
+          className="event-image-description"
+          src={event.imgUrl}
+          alt={event.event_title}
+          onError={(e) => {
+            e.target.remove();
+            const card = document.querySelector(".event-description-card");
+            if (card) card.classList.add("no-image");
+          }}
+        />
+      ) : null}
       <div className="event-description-card">
         <div className="event-description-card-left">
           <h1>{event.event_title}</h1>
@@ -136,10 +140,7 @@ function EventDescription() {
             </p>
           </div>
           {hasJoined ? (
-            <button
-              className="unjoin-button"
-              onClick={handleUnJoinButton}
-            >
+            <button className="unjoin-button" onClick={handleUnJoinButton}>
               Unjoin Event
             </button>
           ) : (
@@ -178,7 +179,9 @@ function EventDescription() {
 
       {event.host_email_address === userData?.email && (
         <Link to={`create-poll`}>
-          <button className="create-poll-button">Create A Poll for This Event</button>
+          <button className="create-poll-button">
+            Create A Poll for This Event
+          </button>
         </Link>
       )}
 
