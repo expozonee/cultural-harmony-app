@@ -7,6 +7,7 @@ export function RootLayout() {
     <>
       <LoadScript
         googleMapsApiKey={import.meta.env.VITE_APP_GOOGLE_MAPS_API_KEY}
+        libraries={["places"]}
       >
         <NavBar />
         <Outlet />
