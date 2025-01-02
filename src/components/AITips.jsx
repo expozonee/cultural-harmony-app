@@ -16,11 +16,6 @@ function AITips({ eventDetails }) {
       const result = await model.generateContent(tipsPrompt);
       const resultText = result.response.text();
 
-      // let responseText = resultText
-      //   .replace(/```javascript/, "")
-      //   .replace(/```/, "")
-      //   .trim();
-
       const resultArray = resultText.match(/\[.*?\]/s);
 
       if (!resultArray) {
@@ -59,7 +54,7 @@ function AITips({ eventDetails }) {
             Give me some tips for this event!
           </button>
         )}
-        {tips && visible && (
+        {tips && tips.length > 0 && visible && (
           <div className="ai-tips-container">
             <h3>Here are some tips to help you prepare:</h3>
             <ul>
@@ -72,7 +67,7 @@ function AITips({ eventDetails }) {
             <button onClick={toggleVisibility}>Hide Tips</button>
           </div>
         )}
-        {tips && !visible && (
+        {tips && tips.length > 0 && !visible && (
           <button onClick={toggleVisibility}>Show Tips</button>
         )}
       </div>

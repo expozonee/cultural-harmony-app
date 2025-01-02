@@ -17,12 +17,6 @@ function AIEventKnowledge({ eventDetails }) {
       const result = await model.generateContent(detailsPrompt);
 
       const resultText = result.response.text();
-      // console.log(resultText);
-
-      // let responseText = resultText
-      //   .replace(/```javascript/, "")
-      //   .replace(/```/, "")
-      //   .trim();
 
       // extract the array from the result text
       const resultArray = resultText.match(/\[.*?\]/s);
@@ -62,9 +56,9 @@ function AIEventKnowledge({ eventDetails }) {
             I want to learn more about the cultural context of this event!
           </button>
         )}
-        {details && visible && (
+        {details && details.length > 0 && visible && (
           <div className="ai-facts-container">
-            <h3>Some interesting facts you may want to know:</h3>
+            <h3>Some fun facts you may want to know:</h3>
             <ul>
               {details.map((fact, index) => (
                 <li key={index}>
@@ -75,7 +69,7 @@ function AIEventKnowledge({ eventDetails }) {
             <button onClick={toggleVisibility}>Hide Facts</button>
           </div>
         )}
-        {details && !visible && (
+        {details && details.length > 0 && !visible && (
           <button onClick={toggleVisibility}>Show Facts</button>
         )}
       </div>
