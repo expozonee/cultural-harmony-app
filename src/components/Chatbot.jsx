@@ -9,9 +9,10 @@ function Chatbot({ eventDetails }) {
   const [loading, setLoading] = useState(false);
 
   const builtInPrompts = [
-    `please enhance my knowledge and provide me some interesting cultural and historical facts about this event: ${eventDetails.event_title} and its summary: ${eventDetails.summary}. make that short and concise with 3-5 facts and return it as a javascript array, each fact as a string. example: [fact1, fact2, fact3,...]`,
-    `provide me 5 tips that will help me prepare for this upcoming event: ${eventDetails.event_title}, based on the description: ${eventDetails.description}, and location: ${eventDetails.location["city_name"]}. please return them in as a javascript array, with each tip as a separate string. example: ["tip1", "tip2", "tip3", "tip4", "tip5"]`,
-    `explain the significance of this event: ${eventDetails.event_title}`,
+    `provide me some interesting cultural and historical facts about this event: ${eventDetails.event_title} and its summary: ${eventDetails.summary}.`,
+    `provide me 3 tips that will help me prepare for this upcoming event: ${eventDetails.event_title}, based on the description: ${eventDetails.description}, and location: ${eventDetails.location["city_name"]}.`,
+    `explain the cultural significance of this event: ${eventDetails.event_title}`,
+    `advise me how to properly dress for this event: ${eventDetails.event_title}`,
   ];
 
   const sendMessage = async (userInput) => {
@@ -46,7 +47,20 @@ function Chatbot({ eventDetails }) {
 
   return (
     <>
-      <div className="chatbot-container"></div>
+      <div className="chatbot-container">
+        <ChatWindow conversation={conversation} />
+        <div className="builtin-prompts">
+          {builtInPrompts.map((prompt, index) => (
+            <button
+              key={index}
+              onClick={() => sendMessage(prompt)}
+              disabled={loading}
+            >
+              {prompt}
+            </button>
+          ))}
+        </div>
+      </div>
     </>
   );
 }

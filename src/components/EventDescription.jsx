@@ -5,8 +5,7 @@ import ContributionList from "./ContributionList";
 import { Link, Outlet } from "react-router";
 import Poll from "./Poll";
 import { useEvents } from "../context/EventsContext";
-import AITips from "./AITips";
-import AIEventKnowledge from "./AIEventKnowledge";
+import Chatbot from "./Chatbot";
 
 function EventDescription() {
   const { eventId } = useParams();
@@ -188,14 +187,8 @@ function EventDescription() {
         </div>
       </div>
 
-      <div className="ai-buttons-container">
-        <div className="event-tips">
-          <AITips eventDetails={event} />
-        </div>
-
-        <div className="event-facts">
-          <AIEventKnowledge eventDetails={event} />
-        </div>
+      <div className="ai-chatbot">
+        <Chatbot eventDetails={event} />
       </div>
 
       {event.host_email_address === userData?.email && (
