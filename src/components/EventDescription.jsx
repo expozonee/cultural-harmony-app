@@ -1,24 +1,51 @@
 import { useEffect, useState } from "react";
-import { useParams, useLocation } from "react-router";
+import { useParams, useLocation, useNavigate } from "react-router";
 import { useUserData } from "../context/UserContext";
 import ContributionList from "./ContributionList";
 import { Link, Outlet } from "react-router";
 import Poll from "./Poll";
 import { useEvents } from "../context/EventsContext";
+import  usePageLeave  from "../hooks/usePageLeave";
+import Popup from "./Popup/Popup";
 
 function EventDescription() {
   const { eventId } = useParams();
   const { userData, unJoinEvents, joinEvent } = useUserData();
   const { getEventById } = useEvents();
-  // const currentEmail = userData?.email;
-
+  const navigate = useNavigate();
   const location = useLocation();
+
   const [event, setEvent] = useState(undefined);
   const [loading, setLoading] = useState(!location.state?.event);
+  const [showPopup, setShowPopup] = useState(false);
+  const [popupMessage, setPopupMessage] = useState("");
+  const [confirmAction, setConfirmAction] = useState(false);
 
   const hasJoined = event?.participants?.includes(userData?.email);
+  const hasPickedItem = event?.contribution_list.some(
+    (contribution) => contribution.user === userData?.email
+  );
 
-  console.log(event);
+  const handleJoin = async () => {
+    await joinEvent(eventId);
+    setPopupMessage("Please pick an item to bring from the contribution list.");
+    setShowPopup(true);
+    setConfirmAction(false);
+  };
+
+  const handleUnJoinButton = () => {
+    setPopupMessage("Are you sure you want to unjoin this event?");
+    setConfirmAction(true);
+    setShowPopup(true);
+  };
+
+  const confirmLeaveAction = async () => {
+    if (confirmAction) {
+      await unJoinEvents([eventId]);
+      navigate(-1);
+    }
+    setShowPopup(false);
+  };
 
   useEffect(() => {
     async function getEvent() {
@@ -36,50 +63,29 @@ function EventDescription() {
     getEvent();
   }, [eventId, getEventById]);
 
-  // const handleParticipantAction = async (action) => {
-  //   if (!user) {
-  //     navigate("/sign-in", { state: { from: location.pathname } });
-  //     return;
-  //   }
-
-  //   try {
-  //     const update = await updateEventParticipants(
-  //       db,
-  //       eventId,
-  //       user.username,
-  //       action
-  //     );
-  //     const updatedParticipants = update[0];
-  //     const updatedContributionList = update[1];
-
-  //     setEvent((prevEvent) => ({
-  //       ...prevEvent,
-  //       participants: updatedParticipants,
-  //       contribution_list: updatedContributionList,
-  //     }));
-
-  //     console.log(
-  //       `User ${action === "join" ? "joined" : "unjoined"} the event:`,
-  //       user.username
-  //     );
-  //   } catch (error) {
-  //     console.error(
-  //       `Error ${action === "join" ? "joining" : "unjoining"} event:`,
-  //       error
-  //     );
-  //   }
-  // };
+  usePageLeave(hasJoined, hasPickedItem, setShowPopup, setPopupMessage, setConfirmAction);
 
   if (loading) return <p>Loading...</p>;
   if (!event) return <p>Event not found!</p>;
 
   return (
     <div className="description-page-container">
-      <img
-        className="event-image-description"
-        src={event.imgUrl}
-        alt={event.event_title}
-      />
+       {showPopup && (
+        <Popup
+          message={popupMessage}
+          onConfirm={confirmLeaveAction}
+          onCancel={() => setShowPopup(false)}
+          hasCloseButton={!confirmAction}
+          hasConfirmButtons={confirmAction}
+        />
+      )}
+      {event.imgUrl && (
+        <img
+          className="event-image-description"
+          src={event.imgUrl}
+          alt={event.event_title}
+        />
+      )}
       <div className="event-description-card">
         <div className="event-description-card-left">
           <h1>{event.event_title}</h1>
@@ -127,12 +133,12 @@ function EventDescription() {
           {hasJoined ? (
             <button
               className="unjoin-button"
-              onClick={() => unJoinEvents([eventId])}
+              onClick={handleUnJoinButton}
             >
               Unjoin Event
             </button>
           ) : (
-            <button className="join-button" onClick={() => joinEvent(eventId)}>
+            <button className="join-button" onClick={handleJoin}>
               Join Event
             </button>
           )}
