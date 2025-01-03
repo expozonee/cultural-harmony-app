@@ -23,13 +23,39 @@ function Chatbot({ eventDetails }) {
       const genAI = new GoogleGenerativeAI(geminyApiKey);
       const model = genAI.getGenerativeModel({ model: geminiModel });
 
-      const validationPrompt = `here is a given prompt: ${userInput}. here is a title of an upcoming social event: ${eventDetails.event_title}. here is the description of the event: ${eventDetails.description}. only if the prompt above refers directly to the event, then return javasctipt true, else return false. example: if the given prompt asks "tell me about bitcoin", return false. if the given prompt assks "what can i bring to this event?", return true.`;
+      const validationPrompt = `
+You are an assistant that determines whether a given sentence refers directly to a specific social event. Here is the user's input: "${userInput}".
+Event Details:
+- Title: "${eventDetails.event_title}"
+- Summary: "${eventDetails.summary}"
+
+Task:
+Return a JavaScript boolean value ('true' or 'false') based on the following criteria:
+- Return \`true\` if the user's input directly refers to the event's title or summary.
+- Return \`false\` otherwise.
+
+Examples:
+1. User Input: "Tell me about Bitcoin."
+   Output: false
+
+2. User Input: "What can I bring to this event?"
+   Output: true
+
+3. User Input: "Is there parking available at the event?"
+   Output: true
+
+4. User Input: "What's the weather like today?"
+   Output: false
+
+Please provide only 'true' or 'false' as the output.
+`;
 
       const validationFlag = await model.generateContent(validationPrompt);
       const validationResult = validationFlag.response
         .text()
         .toLowerCase()
         .includes("true");
+      console.log(validationResult);
       return validationResult;
     } catch (error) {
       console.error("Error while validating prompt: ", error);
