@@ -23,7 +23,7 @@ function Chatbot({ eventDetails }) {
       const genAI = new GoogleGenerativeAI(geminyApiKey);
       const model = genAI.getGenerativeModel({ model: geminiModel });
 
-      const validationPrompt = `here is a given prompt: ${userInput}. here is a title of an upcoming social event: ${eventDetails.event_title}. here is the description of the event: ${eventDetails.description}. only if the prompt above refers directly to the event, then return javasctipt true, else return false.`;
+      const validationPrompt = `here is a given prompt: ${userInput}. here is a title of an upcoming social event: ${eventDetails.event_title}. here is the description of the event: ${eventDetails.description}. only if the prompt above refers directly to the event, then return javasctipt true, else return false. example: if the given prompt asks "tell me about bitcoin", return false. if the given prompt assks "what can i bring to this event?", return true.`;
 
       const validationFlag = await model.generateContent(validationPrompt);
       const validationResult = validationFlag.response
