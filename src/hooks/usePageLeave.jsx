@@ -4,11 +4,12 @@ import { useBlocker } from "react-router-dom";
 const usePageLeave = (
   hasJoined,
   hasPickedItem,
+  IsHost,
   setPopup,
   eventId,
   unJoinEvent
 ) => {
-  const blocker = useBlocker(hasJoined && !hasPickedItem);
+  const blocker = useBlocker(hasJoined && !hasPickedItem && !IsHost);
 
   useEffect(() => {
     if (blocker.state === "blocked") {

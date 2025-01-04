@@ -23,6 +23,7 @@ function EventDescription() {
   const hasPickedItem = event?.contribution_list.some(
     (contribution) => contribution.user === userData?.email
   );
+  const IsHost = event?.host_email_address === userData?.email;
 
   const handleJoin = async () => {
     await joinEvent(eventId);
@@ -51,7 +52,7 @@ function EventDescription() {
     });
   };
 
-  usePageLeave(hasJoined, hasPickedItem, setPopup, eventId, unJoinEvents);
+  usePageLeave(hasJoined, hasPickedItem,IsHost, setPopup, eventId, unJoinEvents);
 
   console.log("popup", popup);
 
