@@ -16,42 +16,44 @@ function EventDescription() {
 
   const [event, setEvent] = useState(undefined);
   const [loading, setLoading] = useState(!location.state?.event);
-  const [showPopup, setShowPopup] = useState(false);
-  const [popupMessage, setPopupMessage] = useState("");
-  const [confirmAction, setConfirmAction] = useState(false);
+  const [popup, setPopup] = useState(null);
+
 
   const hasJoined = event?.participants?.includes(userData?.email);
   const hasPickedItem = event?.contribution_list.some(
     (contribution) => contribution.user === userData?.email
   );
 
-  usePageLeave(
-    hasJoined,
-    hasPickedItem,
-    setShowPopup,
-    setPopupMessage,
-    confirmAction
-  );
-
   const handleJoin = async () => {
     await joinEvent(eventId);
-    setPopupMessage("Please pick an item to bring from the contribution list.");
-    setShowPopup(true);
-    setConfirmAction(false);
+    setPopup({
+      message: "Please pick an item to bring to the event.",
+      buttons: [{ text: "Close", onClick: () => setPopup(null) }]
+    });
   };
 
-  const handleUnJoinButton = () => {
-    setPopupMessage("Are you sure you want to unjoin this event?");
-    setConfirmAction(true);
-    setShowPopup(true);
+  const handleUnJoinButton = async () => {
+    setPopup({
+      message: "Are you sure you want to unjoin this event?",
+      buttons: [
+        {
+          text: "Yes",
+          onClick: async () => {
+            await unJoinEvents([eventId]);
+            setPopup(null); 
+          }
+        },
+        {
+          text: "No",
+          onClick: () => setPopup(null)
+        }
+      ]
+    });
   };
 
-  const confirmLeaveAction = async () => {
-    await unJoinEvents([eventId]);
-    setShowPopup(false);
-    setConfirmAction(true);
-    // navigate(-1);
-  };
+  usePageLeave(hasJoined, hasPickedItem, setPopup, eventId, unJoinEvents);
+
+  console.log("popup", popup);
 
   useEffect(() => {
     async function getEvent() {
@@ -74,15 +76,6 @@ function EventDescription() {
 
   return (
     <div className="description-page-container">
-      {showPopup && (
-        <Popup
-          message={popupMessage}
-          onConfirm={confirmLeaveAction}
-          onCancel={() => setShowPopup(false)}
-          hasCloseButton={!confirmAction}
-          hasConfirmButtons={confirmAction}
-        />
-      )}
       {event.imgUrl ? (
         <img
           className="event-image-description"
@@ -95,6 +88,7 @@ function EventDescription() {
           }}
         />
       ) : null}
+      {popup && <Popup message={popup.message} buttons={popup.buttons} onClose={() => setPopup(null)} />}
       <div className="event-description-card">
         <div className="event-description-card-left">
           <h1>{event.event_title}</h1>

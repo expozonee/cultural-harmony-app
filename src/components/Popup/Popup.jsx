@@ -1,35 +1,25 @@
 import "./Popup.css";
 
-function Popup({
-  message,
-  onConfirm,
-  onCancel,
-  hasCloseButton,
-  hasConfirmButtons,
-}) {
+function Popup({ message, buttons = [], onClose }) {
   return (
     <div className="popup-overlay">
       <div className="popup-container">
-        {hasCloseButton && (
-          <button
-            className="popup-close-button"
-            onClick={onCancel}
-            aria-label="Close"
-          >
-            ×
-          </button>
-        )}
         <p className="popup-message">{message}</p>
-        {!hasConfirmButtons && (
-          <div className="popup-actions">
-            <button className="popup-confirm-button" onClick={onConfirm}>
-              Yes
-            </button>
-            <button className="popup-cancel-button" onClick={onCancel}>
-              No
-            </button>
-          </div>
-        )}
+        <div className="popup-buttons">
+          {buttons.length > 0 ? (
+            buttons.map((button, index) => (
+              <button
+                key={index}
+                className="popup-button"
+                onClick={button.onClick}
+              >
+                {button.text}
+              </button>
+            ))
+          ) : (
+            <button className="popup-close-button" onClick={onClose}> Close </button>
+          )}
+        </div>
       </div>
     </div>
   );

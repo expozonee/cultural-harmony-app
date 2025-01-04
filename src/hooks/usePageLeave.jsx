@@ -4,23 +4,35 @@ import { useBlocker } from "react-router-dom";
 const usePageLeave = (
   hasJoined,
   hasPickedItem,
-  setShowPopup,
-  setPopupMessage,
-  confirmAction
+  setPopup,
+  eventId,
+  unJoinEvent
 ) => {
   const blocker = useBlocker(hasJoined && !hasPickedItem);
 
   useEffect(() => {
     if (blocker.state === "blocked") {
-      setPopupMessage(
-        "You have not picked an item from the contribution list. Are you sure you want to leave?"
-      );
-      setShowPopup(true);
-      if (confirmAction) {
-        blocker.proceed();
-      }
+      setPopup({
+        message: "Are you sure you want to leave? You have not picked an item to bring to the event.",
+        buttons: [
+          {
+            text: "Yes",
+            onClick: async () => {
+              await unJoinEvent([eventId]);
+              blocker.proceed();
+              setPopup(null);
+            }
+          },
+          {
+            text: "No",
+            onClick: () => {
+              setPopup(null);
+            }
+          }
+        ]
+      });
     }
-  }, [blocker, confirmAction, hasJoined, setPopupMessage, setShowPopup]);
+  }, [blocker, hasJoined, hasPickedItem, eventId, unJoinEvent, setPopup]);
 };
 
 export default usePageLeave;

@@ -12,7 +12,7 @@
 }
 
 .popup-container {
-  background: var(--lavender-light);
+  background-color: white;
   padding: 2rem;
   border-radius: 0.5rem;
   box-shadow: 0 0.25rem 0.375rem rgba(0, 0, 0, 0.1);
@@ -20,59 +20,48 @@
   max-width: 25rem;
   text-align: center;
   position: relative;
+  font-family: Arial, sans-serif;
 }
 
 .popup-message {
   font-size: 1rem;
-  color: var(--blue);
+  color: #333;
   margin-bottom: 1.5rem;
   line-height: 1.5;
+  font-weight: normal;
 }
 
-.popup-actions {
+.popup-buttons {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.popup-buttons button {
+  background-color: var(--blue);
+  color: var(--mainWhite);
+}
+
+.popup-buttons button:hover {
+  background-color: var(--celeste);
 }
 
 .popup-close-button {
   position: absolute;
   top: 0.5rem;
   right: 0.5rem;
-  background: none;
   border: none;
   font-size: 1.2rem;
-  color: var(--blue);
   cursor: pointer;
 }
 
-.popup-close-button:hover {
-  color: var(--sky-blue);
-}
-
-.popup-confirm-button,
-.popup-cancel-button {
-  padding: 0.5rem 1rem;
+.popup-button {
+  padding: 0.6rem 1.2rem;
   border: none;
   border-radius: 0.25rem;
   cursor: pointer;
-  font-size: 0.9rem;
-}
-
-.popup-confirm-button {
-  background-color: var(--blue);
-  color: #fff;
-}
-
-.popup-confirm-button:hover {
-  background-color: var(--periwinkle);
-}
-
-.popup-cancel-button {
-  background-color: var(--sky-blue);
-  color: #fff;
-}
-
-.popup-cancel-button:hover {
-  background-color: var(--celeste);
+  font-size: 1rem;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+  display: inline-block;
 }
