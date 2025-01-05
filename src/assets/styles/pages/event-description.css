@@ -174,20 +174,38 @@
 
 .unjoin-button,
 .join-button,
-.create-poll-button,
-.update-event-button {
+.create-new-poll-button,
+.update-event-button{
   padding: 0.625rem 1.25rem;
   font-size: 1rem;
   font-weight: bold;
   border: none;
   border-radius: 0.5rem;
   background-color: var(--blue);
-  color: white;
-  margin-top: 1.25rem;
+  color: var(--mainWhite);
+  margin-top: 1rem;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
+.create-new-poll-button{
+  width: 65%;
+  align-self: center;
+}
+
 .description-page-container button:hover {
   background-color: var(--sky-blue);
+}
+
+.create-poll-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6); 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; 
 }

@@ -7,6 +7,7 @@ import Poll from "./Poll";
 import { useEvents } from "../context/EventsContext";
 import usePageLeave from "../hooks/usePageLeave";
 import Popup from "./Popup/Popup";
+import CreatePoll from "./CreatePoll";
 
 function EventDescription() {
   const { eventId } = useParams();
@@ -17,6 +18,7 @@ function EventDescription() {
   const [event, setEvent] = useState(undefined);
   const [loading, setLoading] = useState(!location.state?.event);
   const [popup, setPopup] = useState(null);
+  const [showCreatePoll, setShowCreatePoll] = useState(false);
 
 
   const hasJoined = event?.participants?.includes(userData?.email);
@@ -169,16 +171,21 @@ function EventDescription() {
               <ContributionList eventId={eventId} eventData={event} />
             </div>
           )}
+          {event.host_email_address === userData?.email && (
+          <>
+            {!showCreatePoll ? (
+              <button className="create-new-poll-button" onClick={() => setShowCreatePoll(true)}>
+                Create A Poll for This Event
+              </button>
+            ) : (
+                <div className="create-poll-container">
+                  <CreatePoll onClose={() => setShowCreatePoll(false)} />
+                </div>
+            )}
+          </>
+        )}
         </div>
       </div>
-
-      {event.host_email_address === userData?.email && (
-        <Link to={`create-poll`}>
-          <button className="create-poll-button">
-            Create A Poll for This Event
-          </button>
-        </Link>
-      )}
 
       {hasJoined && event.polls ? (
         event.polls.map((poll, index) => {
