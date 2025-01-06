@@ -11,7 +11,9 @@
   },
   "dependencies": {
     "@clerk/clerk-react": "^5.20.2",
+    "@googlemaps/markerclusterer": "^2.5.3",
     "@hookform/resolvers": "^3.9.1",
+    "@react-google-maps/api": "^2.20.5",
     "cultural-harmony": "file:",
     "dotenv": "^16.4.7",
     "firebase": "^11.1.0",

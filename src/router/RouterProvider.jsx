@@ -84,10 +84,6 @@ const router = createBrowserRouter([
             element: <AdminPage />,
             loader: eventsLoader,
           },
-          {
-            path: "users",
-            element: <AdminPage dashboard={"users"} />,
-          },
         ],
       },
     ],
