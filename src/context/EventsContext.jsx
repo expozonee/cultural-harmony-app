@@ -25,13 +25,6 @@ export function EventsProvider({ children }) {
   const [, , userRef] = useUserSubscribe();
 
   useEffect(() => {
-    // async function getEvents() {
-    //   const events = await eventsLoader();
-    //   if (events) {
-    //     setEvents(events);
-    //   }
-    // }
-
     const unSubscribe = onSnapshot(eventsRef, (snapshot) => {
       if (snapshot.docs)
         setEvents(
@@ -43,9 +36,7 @@ export function EventsProvider({ children }) {
           })
         );
     });
-
-    // getEvents();
-
+    
     return () => unSubscribe();
   }, []);
 

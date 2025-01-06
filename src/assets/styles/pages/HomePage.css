@@ -4,19 +4,22 @@
 
 .section1-homepage {
   position: relative;
-  height: 86vh;
+  height: auto;
   text-align: center;
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
 }
 
 .backgroundImg-homepage {
   width: 100%;
-  margin-left: 1rem;
+  margin: 0 auto;
   max-height: 52rem;
+  display: block;
 }
 
 .featured-events {
+  position: relative;
   padding: 2rem;
+  margin-top: 1rem;
   background-color: var(--lavender-light);
   border-radius: 0.5rem;
   box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
