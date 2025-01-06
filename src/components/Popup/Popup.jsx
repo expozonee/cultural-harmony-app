@@ -1,5 +1,3 @@
-import "./Popup.css";
-
 function Popup({ message, buttons = [], onClose }) {
   return (
     <div className="popup-overlay">

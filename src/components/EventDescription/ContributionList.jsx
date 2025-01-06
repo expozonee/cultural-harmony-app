@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { useUserData } from "../context/UserContext";
-import { useEvents } from "../context/EventsContext";
+import { useUserData } from "../../context/UserContext";
+import { useEvents } from "../../context/EventsContext";
 
 function ContributionList({ eventId, eventData }) {
   const { updateEvent } = useEvents();

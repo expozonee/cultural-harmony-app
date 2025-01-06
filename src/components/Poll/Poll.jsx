@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router";
-import { useUserData } from "../context/UserContext";
-import { usePoll } from "../hooks/usePoll";
-import { PollData } from "../utils/Poll";
+import { useUserData } from "../../context/UserContext";
+import { usePoll } from "../../hooks/usePoll";
+import { PollData } from "../../utils/Poll";
 
 function Poll({ poll }) {
   const { eventId } = useParams();

@@ -1,17 +1,17 @@
 import { useEffect, useState } from "react";
 import { useParams, useLocation } from "react-router";
-import { useUserData } from "../context/UserContext";
-import { useEvents } from "../context/EventsContext";
-import usePageLeave from "../hooks/usePageLeave";
-import Popup from "./Popup/Popup";
-import EventImage from "./EventDescription/EventImage";
-import EventDetails from "./EventDescription/EventDetails";
-import EventOrganizer from "./EventDescription/EventOrganizer";
-import JoinUnjoinButton from "./EventDescription/JoinUnjoinButton";
-import PollSection from "./EventDescription/PollSection";
-import ContributionListSection from "./EventDescription/ContributionListSection";
-import CreatePollButton from "./EventDescription/CreatePollButton";
-import Chatbot from "./Chatbot";
+import { useUserData } from "../../context/UserContext";
+import { useEvents } from "../../context/EventsContext";
+import usePageLeave from "../../hooks/usePageLeave";
+import Popup from "../../components/Popup/Popup";
+import EventImage from "../../components/EventDescription/EventImage";
+import EventDetails from "../../components/EventDescription/EventDetails";
+import EventOrganizer from "../../components/EventDescription/EventOrganizer";
+import JoinUnjoinButton from "../../components/EventDescription/JoinUnjoinButton";
+import PollSection from "../../components/EventDescription/PollSection";
+import ContributionListSection from "../../components/EventDescription/ContributionListSection";
+import CreatePollButton from "../../components/EventDescription/CreatePollButton";
+import ChatbotSection from "../../components/EventDescription/ChatbotSection";
 
 function EventDescription() {
   const location = useLocation();
@@ -135,19 +135,7 @@ function EventDescription() {
           )}
         </div>
       </div>
-
-      <div>
-        <button onClick={toggleChatbot}>
-          {isChatbotVisible ? `Close Chatbot` : `Ask Our Chatbot!`}
-        </button>
-
-        {isChatbotVisible && (
-          <div className="ai-chatbot">
-            <Chatbot eventDetails={event} />
-          </div>
-        )}
-      </div>
-      
+      <ChatbotSection event={event} isChatbotVisible={isChatbotVisible} toggleChatbot={toggleChatbot} />
     </div>
   );
 }

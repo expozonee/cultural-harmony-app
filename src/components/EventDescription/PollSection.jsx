@@ -1,4 +1,4 @@
-import Poll from "../Poll";
+import Poll from "../Poll/Poll";
 function PollSection({ hasJoined, polls }) {
     return (
       <div className="event-card-polls">

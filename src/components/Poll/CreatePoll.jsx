@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useParams } from 'react-router';
 import { arrayUnion, doc, updateDoc } from 'firebase/firestore';
-import { db } from "../firebase/firebaseConfig";
+import { db } from "../../firebase/firebaseConfig";
 import { Trash2 } from 'lucide-react';
 
 function CreatePoll({ onClose }) {

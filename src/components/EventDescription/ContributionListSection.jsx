@@ -1,4 +1,4 @@
-import ContributionList from "../ContributionList";
+import ContributionList from "./ContributionList";
 function ContributionListSection({ eventId, event, hasJoined }) {
     return hasJoined ? (
       <div className="event-contribution-list">
