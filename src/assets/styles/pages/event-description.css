@@ -186,3 +186,10 @@
 .description-page-container button:hover {
   background-color: var(--sky-blue);
 }
+
+.ai-buttons-container {
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: space-between;
+  margin-top: 1.25rem;
+}

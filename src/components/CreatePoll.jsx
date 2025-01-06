@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router";
-import firebase from "firebase/compat/app";
-import { doc } from "firebase/firestore";
+import { arrayUnion, doc, updateDoc } from "firebase/firestore";
 import { db } from "../firebase/firebaseConfig";
 
 function CreatePoll() {
@@ -10,14 +9,38 @@ function CreatePoll() {
   const [currentOption, setCurrentOption] = useState("");
   const [isPollCreated, setIsPollCreated] = useState(false);
 
+  const [poll, setPoll] = useState({});
+
+  console.log(poll);
+
   const navigate = useNavigate();
   const { eventId } = useParams();
 
   function addOption(e) {
     e.preventDefault();
     // check if the option is an empty string or a duplicate
-    if (!pollOptions.includes(currentOption)) {
-      setPollOptions((prevOptions) => [...prevOptions, currentOption]);
+    if (!poll.options?.some((option) => option.option_name === currentOption)) {
+      setPoll((prev) => {
+        return {
+          ...prev,
+          options: prev.options
+            ? [
+                ...prev.options,
+                {
+                  question_name: currentOption,
+                  votes_count: 0,
+                  voted_users: [],
+                },
+              ]
+            : [
+                {
+                  question_name: currentOption,
+                  votes_count: 0,
+                  voted_users: [],
+                }, //+
+              ],
+        };
+      });
     }
     setCurrentOption("");
   }
@@ -25,19 +48,33 @@ function CreatePoll() {
   async function createPoll(e) {
     e.preventDefault();
 
-    if (!pollQuestion || pollOptions.length < 2) {
+    if (!poll || poll.options.length < 2) {
       alert("You need a poll question and at least 2 options to create a poll");
       return;
     }
 
     try {
       const eventRef = doc(db, "events", eventId);
-      await update(eventRef, {
-        poll: {
-          question: pollQuestion,
-          options: pollOptions,
-          votes: {},
-        },
+
+      await updateDoc(eventRef, {
+        polls: arrayUnion(poll),
+        // polls: [
+        //   {
+        //     question: "question",
+        //     options: [
+        //       {
+        //         option_name: "",
+        //         votes_count: 0,
+        //         voted_users: [],
+        //       },
+        //     ],
+        //   },
+        // ],
+        // poll: {
+        //   question: pollQuestion,
+        //   options: pollOptions,
+        //   votes: {},
+        // },
       });
 
       setIsPollCreated(true);
@@ -57,9 +94,16 @@ function CreatePoll() {
             <span>Your question: </span>
             <input
               type="text"
-              value={pollQuestion}
+              value={poll.question ?? ""}
               placeholder="Enter the poll question"
-              onChange={(e) => setPollQuestion(e.target.value)}
+              onChange={(e) =>
+                setPoll((prev) => {
+                  return {
+                    ...prev,
+                    question: e.target.value,
+                  };
+                })
+              }
             />
           </label>
 
