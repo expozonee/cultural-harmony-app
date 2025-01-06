@@ -1,0 +1,42 @@
+.chatbot-container {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    max-width: 50%;
+    padding: 1rem;
+    /* gap: 1rem; */
+    margin: 1% 1% 10% 1%;
+    box-shadow: 2px 6px 6px 2px black;
+    border-radius: 0.2rem;
+    transform: translate(50%);
+    background-color: var(--white);
+    z-index: 100;
+}
+
+div.chatbot-container h3 {
+    font-size: 2rem;
+    font-weight: bold;
+    text-transform: capitalize;
+    color: rgb(0, 0, 62);
+}
+
+div.chatbot-container button {
+    background-color: var(--periwinkle);
+    color: rgb(0, 0, 62);
+}
+
+div.chatbot-container button:hover {
+    background-color: var(--rose);
+    color: rgb(0, 0, 0);
+}
+
+div.user-input {
+    margin-top: 1rem;
+}
+
+@media screen and (width <= 768px) {
+    .chatbot-container {
+        max-width: 90%;
+        transform: translate(5%);
+    }
+}

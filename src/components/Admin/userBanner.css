@@ -1,0 +1,61 @@
+/* Refined CSS for Admin Page without Blue */
+:root {
+  --lavender-web: #E1DDF5;
+  --periwinkle: #D3C0F5;
+  --sky-blue: #8AD4EB;
+  --celeste: #A3F3F5;
+  --soft-gray: #F0F0F0;
+  --dark-purple: #5A3D99;
+  --light-purple: #D6C1E8;
+  --white: #FFFFFF;
+}
+
+
+.user-image {
+  display: inline-block;
+  float: right;
+  margin-left: 15px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: var(--light-purple);
+  background-size: cover;
+  background-position: center;
+}
+
+.flex.align-center.justify-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background-color: var(--lavender-web);
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.user-img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  margin-right: 20px;
+  background-color: var(--periwinkle);
+  object-fit: cover;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.user-details {
+  text-align: left;
+  background-color: white;
+}
+
+.user-details h1 {
+  font-size: 22px;
+  color: var(--dark-purple);
+  margin: 0;
+}
+
+.user-details p {
+  font-size: 16px;
+  color: var(--dark-purple);
+  margin: 5px 0 0;
+}
