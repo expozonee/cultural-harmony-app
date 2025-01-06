@@ -115,6 +115,8 @@
 }
 
 .event-description-container-left {
+  display: flex;
+  flex-direction: column;
   flex: 2;
   padding-right: 1.25rem;
 }
@@ -123,6 +125,13 @@
   font-size: 1.5rem;
   color: var(--blue);
   margin-bottom: 0.625rem;
+}
+
+.event-card-polls{
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1.25rem;
 }
 
 .event-description-info {

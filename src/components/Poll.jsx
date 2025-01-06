@@ -9,7 +9,7 @@ function Poll({ poll }) {
   const { userData } = useUserData();
   const [selectedOption, setSelectedOption] = useState(null);
   const [isUserVoted, vote, removeVote, removePoll] = usePoll(eventId, poll);
-  const [changeVote, setChangeVote] = useState(false);
+  const [canChangeVote, setCanChangeVote] = useState(false);
   const pollData = new PollData(poll);
 
   useEffect(() => {
@@ -21,8 +21,23 @@ function Poll({ poll }) {
     }
   }, [poll.options, userData.email]);
 
-  function handleOptionSelection(e) {
-    setSelectedOption(e.target.value);
+  function handleOptionSelection(option) {
+    if (!isUserVoted) {
+      setSelectedOption(option);
+      vote(option);  
+    }
+  }
+
+  async function handleChangeVote(e) {
+    e.preventDefault();
+    await removeVote();
+    setCanChangeVote(true);
+  }
+
+  async function handleRemoveVote(e) {
+    e.preventDefault();
+    await removeVote();
+    setSelectedOption(null);
   }
 
   async function handleRemovePoll(e) {
@@ -30,53 +45,55 @@ function Poll({ poll }) {
     await removePoll();
   }
 
-  async function handleChangeVote(e) {
-    e.preventDefault();
-    await removeVote();
-    setChangeVote(!changeVote);
-  }
-
-  async function handleRemoveVote(e) {
-    e.preventDefault();
-    await removeVote();
-  }
-
-  async function handleSubmit(e) {
-    e.preventDefault();
-
-    await vote(selectedOption);
-  }
-
   return (
-    <>
-      <h3>{poll.question}</h3>
-      <form action="submit" onSubmit={handleSubmit}>
-        {poll.options.map((option, index) => (
-          <label key={index}>
-            <input
-              type="radio"
-              value={option.question_name}
-              checked={selectedOption === option.question_name}
-              onChange={handleOptionSelection}
-              disabled={isUserVoted && !changeVote}
-            />
-            {option.question_name}
+    <div className="poll-container">
+      <h3 className="poll-question">{poll.question}</h3>
+      <div className="poll-form">
+        {poll.options.map((option, index) => {
+          const votePercentage = pollData.totalVotes > 0
+            ? (pollData.getVotesCountByOptionName(option.question_name) / pollData.totalVotes) * 100
+            : 0;
 
-            <p>
-              {pollData.getVotesCountByOptionName(option.question_name)} /
-              {pollData.totalVotes}
-            </p>
-          </label>
-        ))}
-        {isUserVoted && !changeVote ? (
-          <button onClick={handleChangeVote}>Change Vote</button>
-        ) : (
-          <button type="submit">Vote</button>
+          const isSelected = selectedOption === option.question_name;
+
+          return (
+            <div
+              key={index}
+              className={`poll-option-label ${isSelected ? 'selected' : ''}`}
+              onClick={() => handleOptionSelection(option.question_name)}
+              style={{
+                cursor: isUserVoted && !canChangeVote ? 'not-allowed' : 'pointer',
+                backgroundColor: isSelected ? 'lightblue' : ''
+              }}
+            >
+              <p className="poll-answer">{option.question_name}</p>
+              <p className="poll-vote-count">
+                {votePercentage.toFixed(2)}% 
+              </p>
+            </div>
+          );
+        })}
+      </div>
+
+      <div className="poll-buttons">
+        {isUserVoted && !canChangeVote ? (
+          <button className="poll-button" onClick={handleChangeVote}>
+            Change Vote
+          </button>
+        ) : null}
+
+        {isUserVoted && (
+          <button className="poll-button" onClick={handleRemoveVote}>
+            Remove Vote
+          </button>
         )}
-        <button onClick={handleRemoveVote}>Remove vote</button>
-        <button onClick={handleRemovePoll}>Remove Poll</button>
-      </form>
-    </>
+
+        <button className="poll-button-remove" onClick={handleRemovePoll}>
+          Remove Poll
+        </button>
+      </div>
+    </div>
   );
 }
+
 export default Poll;

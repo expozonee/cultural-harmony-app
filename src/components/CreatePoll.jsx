@@ -56,11 +56,11 @@ function CreatePoll({ onClose }) {
 
     try {
       const eventRef = doc(db, 'events', eventId);
+      onClose(); 
       await updateDoc(eventRef, {
         polls: arrayUnion(poll)
-      });
+      })
       alert('Your poll was created successfully!');
-      onClose(); 
     } catch (error) {
       console.error('Error while creating poll:', error);
       alert('Failed to create poll. Please try again.');

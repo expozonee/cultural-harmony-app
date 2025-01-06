@@ -1,0 +1,92 @@
+.poll-container {
+  max-width: 16rem;
+  margin: 1rem;
+  padding: 1rem;
+  border: 0.0625rem solid #ddd;
+  border-radius: 0.5rem;
+  background: #f9f9ff;
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.poll-question {
+  font-size: 1rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  text-align: center;
+  color: #333;
+}
+
+.poll-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.poll-option-label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.2rem;
+  border: 0.0625rem solid #ccc;
+  border-radius: 0.25rem;
+  transition: background-color 0.2s, border-color 0.2s;
+  cursor: pointer;
+  background: #fff; 
+  width: 100%;
+}
+
+.poll-option-label:hover {
+  background: #e0e0f5;
+  border-color: #bbb;
+}
+
+.poll-vote-count, .poll-answer{
+  text-align: center;
+}
+
+.poll-option-input {
+  margin-right: 0.5rem;
+  accent-color: #5a67d8; /* Purple to match the page aesthetic */
+}
+
+.poll-vote-count {
+  font-size: 0.85rem;
+  color: #666;
+}
+
+.poll-buttons {
+  display: flex;
+  margin-top: 1rem;
+  gap: 0.5rem;
+  flex: 1;
+  justify-content: center;
+}
+
+.poll-button, .poll-button-remove {
+  padding: 0.3rem 0.6rem;
+  font-size: 0.85rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 0.4rem;
+  background-color: var(--blue);
+  color: var(--mainWhite);
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.poll-button:hover, .poll-button-remove:hover {
+  background: var(--sky-blue); 
+}
+
+.poll-button:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+.poll-button-remove{
+  padding: 0.4rem 0.8rem;
+}

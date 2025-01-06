@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams, useLocation } from "react-router";
 import { useUserData } from "../context/UserContext";
 import ContributionList from "./ContributionList";
-import { Link, Outlet } from "react-router";
+import { Link} from "react-router";
 import Poll from "./Poll";
 import { useEvents } from "../context/EventsContext";
 import usePageLeave from "../hooks/usePageLeave";
@@ -154,8 +154,19 @@ function EventDescription() {
       </div>
       <div className="event-description-container">
         <div className="event-description-container-left">
-          <h2>Event Description</h2>
-          <p className="event-description-info">{event.description}</p>
+          <div className="event-description-content">
+            <h2>Event Description</h2>
+            <p className="event-description-info">{event.description}</p>
+          </div>
+          <div className="event-card-polls">
+              {hasJoined && event.polls ? (
+                event.polls.map((poll, index) => {
+              return <Poll key={index} poll={poll} />;
+              })) :
+              ( 
+              <p>No poll available for this event.</p>
+              )}
+          </div>
         </div>
         <div className="event-description-container-right">
           <div className="event-participants-list">
@@ -186,15 +197,6 @@ function EventDescription() {
         )}
         </div>
       </div>
-
-      {hasJoined && event.polls ? (
-        event.polls.map((poll, index) => {
-          return <Poll key={index} poll={poll} />;
-        })
-      ) : (
-        <p>No poll available for this event.</p>
-      )}
-      <Outlet />
     </div>
   );
 }
