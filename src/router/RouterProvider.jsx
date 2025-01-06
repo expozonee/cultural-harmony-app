@@ -1,24 +1,24 @@
-import { HomePage } from '../pages/homePage/HomePage';
-import { RootLayout } from '../layout/RootLayout';
-import { RouterProvider, createBrowserRouter } from 'react-router-dom';
-import SignInPage from './../pages/LoginPage/SignIn';
-import SignUpPage from './../pages/SignUp/SignUp';
-import EventsList from '../components/EventsList';
-import EventDescription from '../components/EventDescription';
-import CreatePoll from '../components/CreatePoll';
-import { eventsLoader } from '../../loaders/eventsLoader';
-import { upcomingEventsLoader } from '../../loaders/upcomingEventsLoader';
-import AdminPage from '../pages/AdminPage/AdminPage';
-import AdminLayout from '../layout/AdminLayout';
-import AboutUsPage from './../pages/AboutUsPage/AboutUsPage';
-import AddEventPage from './../pages/AddEventPage/AddEventPage';
+import { HomePage } from "../pages/homePage/HomePage";
+import { RootLayout } from "../layout/RootLayout";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import SignInPage from "./../pages/LoginPage/SignIn";
+import SignUpPage from "./../pages/SignUp/SignUp";
+import EventsList from "../components/EventsList";
+import EventDescription from "../components/EventDescription";
+import CreatePoll from "../components/CreatePoll";
+import { eventsLoader } from "../../loaders/eventsLoader";
+import { upcomingEventsLoader } from "../../loaders/upcomingEventsLoader";
+import AdminPage from "../pages/AdminPage/AdminPage";
+import AdminLayout from "../layout/AdminLayout";
+import AboutUsPage from "./../pages/AboutUsPage/AboutUsPage";
+import AddEventPage from "./../pages/AddEventPage/AddEventPage";
 import UpdateEventPage, {
   getEventByIdLoader,
-} from '../pages/UpdateEventPage/UpdateEventPage';
+} from "../pages/UpdateEventPage/UpdateEventPage";
 
 const router = createBrowserRouter([
   {
-    path: '/',
+    path: "/",
     element: <RootLayout />,
     children: [
       {
@@ -27,52 +27,52 @@ const router = createBrowserRouter([
         loader: upcomingEventsLoader,
       },
       {
-        path: 'sign-up/*',
+        path: "sign-up/*",
         element: <SignUpPage />,
       },
       {
-        path: 'sign-in/*',
+        path: "sign-in/*",
         element: <SignInPage />,
       },
       {
-        path: '/events',
+        path: "/events",
         element: <EventsList />,
         loader: eventsLoader,
       },
       {
-        path: '/events/add-event',
+        path: "/events/add-event",
         element: <AddEventPage />,
       },
       {
-        path: '/events/:eventId/update-event',
+        path: "/events/:eventId/update-event",
         element: <UpdateEventPage />,
         loader: getEventByIdLoader,
       },
       {
-        path: '/events/add-event',
+        path: "/events/add-event",
         element: <AddEventPage />,
       },
       {
-        path: '/events/:eventId/update-event',
+        path: "/events/:eventId/update-event",
         element: <UpdateEventPage />,
         loader: getEventByIdLoader,
       },
       {
-        path: '/aboutUsPage',
+        path: "/aboutUsPage",
         element: <AboutUsPage />,
       },
       {
-        path: '/events/:eventId',
+        path: "/events/:eventId",
         element: <EventDescription />,
         children: [
           {
-            path: 'create-poll',
+            path: "create-poll",
             element: <CreatePoll />,
           },
         ],
       },
       {
-        path: '/admin',
+        path: "/admin",
         element: <AdminLayout />,
         children: [
           {
@@ -80,13 +80,9 @@ const router = createBrowserRouter([
             element: <AdminPage />,
           },
           {
-            path: ':dashboard',
+            path: ":dashboard",
             element: <AdminPage />,
             loader: eventsLoader,
-          },
-          {
-            path: 'users',
-            element: <AdminPage dashboard={'users'} />,
           },
         ],
       },

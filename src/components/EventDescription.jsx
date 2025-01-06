@@ -1,22 +1,19 @@
-import { useEffect, useState } from "react";
-import { useParams, useLocation } from "react-router";
-import { useUserData } from "../context/UserContext";
-import ContributionList from "./ContributionList";
-import { Link, Outlet } from "react-router";
 import Poll from "./Poll";
-import { useEvents } from "../context/EventsContext";
 import Chatbot from "./Chatbot";
+import { Link, Outlet } from "react-router";
+import { useEffect, useState } from "react";
+import ContributionList from "./ContributionList";
+import { useUserData } from "../context/UserContext";
+import { useEvents } from "../context/EventsContext";
+import { useParams, useLocation } from "react-router";
 
 function EventDescription() {
-  const { eventId } = useParams();
-  const { userData, unJoinEvents, joinEvent } = useUserData();
-  const { getEventById } = useEvents();
-  // const currentEmail = userData?.email;
-
   const location = useLocation();
+  const { eventId } = useParams();
+  const { getEventById } = useEvents();
   const [event, setEvent] = useState(undefined);
+  const { userData, unJoinEvents, joinEvent } = useUserData();
   const [loading, setLoading] = useState(!location.state?.event);
-
   const hasJoined = event?.participants?.includes(userData?.email);
 
   // for chatbot visibility toggle
@@ -25,75 +22,19 @@ function EventDescription() {
   console.log(event);
 
   useEffect(() => {
-    // const fetchEvent = async () => {
-    //   if (!event) {
-    //     try {
-    //       const docRef = doc(db, "events", eventId);
-    //       const docSnap = await getDoc(docRef);
+    const fetchEvent = async () => {
+      setLoading(true);
+      const eventData = getEventById(eventId);
 
-    //       if (docSnap.exists()) {
-    //         const eventData = { id: docSnap.id, ...docSnap.data() };
-    //         setEvent(eventData);
-    //         console.log("Fetched event:", eventData);
-    //       } else {
-    //         console.error("Event not found");
-    //       }
-    //     } catch (error) {
-    //       console.error("Error fetching event from Firestore:", error);
-    //     } finally {
-    //       setLoading(false);
-    //     }
-    //   }
-    // };
+      setEvent(eventData);
 
-    async function getEvent() {
-      try {
-        setLoading(true);
-        const eventData = await getEventById(eventId);
-        setEvent(eventData);
-      } catch (error) {
-        console.error(error);
-      } finally {
+      if (eventData) {
         setLoading(false);
       }
-    }
+    };
 
-    getEvent();
+    fetchEvent();
   }, [eventId, getEventById]);
-
-  // const handleParticipantAction = async (action) => {
-  //   if (!user) {
-  //     navigate("/sign-in", { state: { from: location.pathname } });
-  //     return;
-  //   }
-
-  //   try {
-  //     const update = await updateEventParticipants(
-  //       db,
-  //       eventId,
-  //       user.username,
-  //       action
-  //     );
-  //     const updatedParticipants = update[0];
-  //     const updatedContributionList = update[1];
-
-  //     setEvent((prevEvent) => ({
-  //       ...prevEvent,
-  //       participants: updatedParticipants,
-  //       contribution_list: updatedContributionList,
-  //     }));
-
-  //     console.log(
-  //       `User ${action === "join" ? "joined" : "unjoined"} the event:`,
-  //       user.username
-  //     );
-  //   } catch (error) {
-  //     console.error(
-  //       `Error ${action === "join" ? "joining" : "unjoining"} event:`,
-  //       error
-  //     );
-  //   }
-  // };
 
   if (loading) return <p>Loading...</p>;
   if (!event) return <p>Event not found!</p>;
