@@ -19,6 +19,9 @@ function EventDescription() {
 
   const hasJoined = event?.participants?.includes(userData?.email);
 
+  // for chatbot visibility toggle
+  const [isChatbotVisible, setIsChatbotVisible] = useState(false);
+
   console.log(event);
 
   useEffect(() => {
@@ -94,6 +97,11 @@ function EventDescription() {
 
   if (loading) return <p>Loading...</p>;
   if (!event) return <p>Event not found!</p>;
+
+  // toggle visibility of chatbot
+  const toggleChatbot = () => {
+    setIsChatbotVisible(!isChatbotVisible);
+  };
 
   return (
     <div className="description-page-container">
@@ -187,8 +195,16 @@ function EventDescription() {
         </div>
       </div>
 
-      <div className="ai-chatbot">
-        <Chatbot eventDetails={event} />
+      <div>
+        <button onClick={toggleChatbot}>
+          {isChatbotVisible ? `Close Chatbot` : `Ask Our Chatbot!`}
+        </button>
+
+        {isChatbotVisible && (
+          <div className="ai-chatbot">
+            <Chatbot eventDetails={event} />
+          </div>
+        )}
       </div>
 
       {event.host_email_address === userData?.email && (
