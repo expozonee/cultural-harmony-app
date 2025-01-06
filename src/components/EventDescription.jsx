@@ -1,4 +1,5 @@
 import Poll from "./Poll";
+import Chatbot from "./Chatbot";
 import { Link, Outlet } from "react-router";
 import { useEffect, useState } from "react";
 import ContributionList from "./ContributionList";
@@ -14,6 +15,11 @@ function EventDescription() {
   const { userData, unJoinEvents, joinEvent } = useUserData();
   const [loading, setLoading] = useState(!location.state?.event);
   const hasJoined = event?.participants?.includes(userData?.email);
+
+  // for chatbot visibility toggle
+  const [isChatbotVisible, setIsChatbotVisible] = useState(false);
+
+  console.log(event);
 
   useEffect(() => {
     const fetchEvent = async () => {
@@ -32,6 +38,11 @@ function EventDescription() {
 
   if (loading) return <p>Loading...</p>;
   if (!event) return <p>Event not found!</p>;
+
+  // toggle visibility of chatbot
+  const toggleChatbot = () => {
+    setIsChatbotVisible(!isChatbotVisible);
+  };
 
   return (
     <div className="description-page-container">
@@ -123,6 +134,18 @@ function EventDescription() {
             </div>
           )}
         </div>
+      </div>
+
+      <div>
+        <button onClick={toggleChatbot}>
+          {isChatbotVisible ? `Close Chatbot` : `Ask Our Chatbot!`}
+        </button>
+
+        {isChatbotVisible && (
+          <div className="ai-chatbot">
+            <Chatbot eventDetails={event} />
+          </div>
+        )}
       </div>
 
       {event.host_email_address === userData?.email && (

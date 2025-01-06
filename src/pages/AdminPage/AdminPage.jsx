@@ -5,6 +5,7 @@ import { useParams } from "react-router";
 import UserJoinedEvents from "../../components/User/UserJoinedEvents/UserJoinedEvents";
 import UserEventsCreated from "../../components/User/UserEventsCreated/UserEventsCreated";
 import { useUser } from "@clerk/clerk-react";
+import "./AdminPage.css"
 
 const BUTTONS_TYPES = [
   { key: "events", label: "Events", adminOnly: true },
