@@ -19,8 +19,6 @@ function EventDescription() {
   // for chatbot visibility toggle
   const [isChatbotVisible, setIsChatbotVisible] = useState(false);
 
-  console.log(event);
-
   useEffect(() => {
     const fetchEvent = async () => {
       setLoading(true);

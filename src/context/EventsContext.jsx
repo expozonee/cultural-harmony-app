@@ -10,7 +10,6 @@ import {
   deleteDoc,
 } from "firebase/firestore";
 import { eventsRef } from "../firebase/utils/eventsRef";
-// import { eventsLoader } from "../../loaders/eventsLoader";
 import { createContext, useEffect, useState } from "react";
 import { useUserSubscribe } from "../hooks/useUserSubscribe";
 import { useUserData } from "./UserContext";
@@ -25,12 +24,7 @@ export function EventsProvider({ children }) {
   const [, , userRef] = useUserSubscribe();
 
   useEffect(() => {
-    // async function getEvents() {
-    //   const events = await eventsLoader();
-    //   if (events) {
-    //     setEvents(events);
-    //   }
-    // }
+
 
     const unSubscribe = onSnapshot(eventsRef, (snapshot) => {
       if (snapshot.docs)
@@ -44,7 +38,7 @@ export function EventsProvider({ children }) {
         );
     });
 
-    // getEvents();
+
 
     return () => unSubscribe();
   }, []);
