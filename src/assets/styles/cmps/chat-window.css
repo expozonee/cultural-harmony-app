@@ -4,7 +4,6 @@
     max-width: 95%;
     background-color: var(--gray1);
     border-radius: 0.3rem;
-    /* padding: 0.5rem; */
     gap: 0.5rem;
 }
 
@@ -13,19 +12,45 @@
     max-width: 80%;
     text-justify: center;
     border-radius: 1rem;
-    font-size: 1.5rem;
+    font-size: 1rem;
     padding: 0.5rem;
+    opacity: 0;
+    transform: translateY(10px);
+    animation: fadeIn 0.5s ease forwards;
 }
 
 .bot-message {
     background-color: var(--lavender-web);
     align-self: flex-end;
+    animation-delay: 1s;
+}
+
+.bot-message::before {
+    content: "Event Bot: ";
+    font-weight: bold;
+}
+
+.user-message::before  {
+    content: "You: ";
+    font-weight: bold;
+    animation-delay: 0s;
 }
 
 .user-message {
     background-color: var(--sky-blue-light);
     align-self: flex-start;
-    font-weight: bold;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 @media screen and (width <= 768px) {
