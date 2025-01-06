@@ -10,6 +10,7 @@ import {
   deleteDoc,
 } from "firebase/firestore";
 import { eventsRef } from "../firebase/utils/eventsRef";
+// import { eventsLoader } from "../../loaders/eventsLoader";
 import { createContext, useEffect, useState } from "react";
 import { useUserSubscribe } from "../hooks/useUserSubscribe";
 import { useUserData } from "./UserContext";
@@ -87,7 +88,7 @@ export function EventsProvider({ children }) {
     }
   }
 
-  async function getEventById(id) {
+  function getEventById(id) {
     const event = events.find((e) => e.id === id);
     return event;
   }

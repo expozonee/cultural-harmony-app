@@ -28,9 +28,8 @@ function EventPreview({ event }) {
     "Nov",
     "Dec",
   ];
-  // console.log("location", location);
+
   const isHomePage = location.pathname === "/";
-  console.log("isHomePage", isHomePage);
 
   return (
     <div

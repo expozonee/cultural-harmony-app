@@ -11,22 +11,25 @@ import JoinUnjoinButton from "./EventDescription/JoinUnjoinButton";
 import PollSection from "./EventDescription/PollSection";
 import ContributionListSection from "./EventDescription/ContributionListSection";
 import CreatePollButton from "./EventDescription/CreatePollButton";
+import Chatbot from "./Chatbot";
 
 function EventDescription() {
-  const { eventId } = useParams();
-  const { userData, unJoinEvents, joinEvent } = useUserData();
-  const { getEventById } = useEvents();
   const location = useLocation();
-
+  const { eventId } = useParams();
+  const { getEventById } = useEvents();
   const [event, setEvent] = useState(undefined);
+  const { userData, unJoinEvents, joinEvent } = useUserData();
   const [loading, setLoading] = useState(!location.state?.event);
   const [popup, setPopup] = useState(null);
   const [showCreatePoll, setShowCreatePoll] = useState(false);
+  const [isChatbotVisible, setIsChatbotVisible] = useState(false);
 
   const hasJoined = event?.participants?.includes(userData?.email);
+
   const hasPickedItem = event?.contribution_list.some(
     (contribution) => contribution.user === userData?.email
   );
+  
   const IsHost = event?.host_email_address === userData?.email;
 
   const handleJoin = async () => {
@@ -59,23 +62,26 @@ function EventDescription() {
   usePageLeave(hasJoined, hasPickedItem, IsHost, setPopup, eventId, unJoinEvents);
 
   useEffect(() => {
-    async function getEvent() {
-      try {
-        setLoading(true);
-        const eventData = await getEventById(eventId);
-        setEvent(eventData);
-      } catch (error) {
-        console.error(error);
-      } finally {
+    const fetchEvent = async () => {
+      setLoading(true);
+      const eventData = getEventById(eventId);
+
+      setEvent(eventData);
+
+      if (eventData) {
         setLoading(false);
       }
-    }
+    };
 
-    getEvent();
+    fetchEvent();
   }, [eventId, getEventById]);
 
   if (loading) return <p>Loading...</p>;
   if (!event) return <p>Event not found!</p>;
+
+  const toggleChatbot = () => {
+    setIsChatbotVisible(!isChatbotVisible);
+  };
 
   return (
     <div className="description-page-container">
@@ -129,6 +135,19 @@ function EventDescription() {
           )}
         </div>
       </div>
+
+      <div>
+        <button onClick={toggleChatbot}>
+          {isChatbotVisible ? `Close Chatbot` : `Ask Our Chatbot!`}
+        </button>
+
+        {isChatbotVisible && (
+          <div className="ai-chatbot">
+            <Chatbot eventDetails={event} />
+          </div>
+        )}
+      </div>
+      
     </div>
   );
 }

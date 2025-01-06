@@ -225,3 +225,9 @@
   align-items: center;
   z-index: 1000; 
 }
+.ai-buttons-container {
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: space-between;
+  margin-top: 1.25rem;
+}
