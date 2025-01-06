@@ -1,4 +1,5 @@
 import { useState } from "react";
+import "@fortawesome/fontawesome-free";
 function ChatInputBox({ loading, onSend, eventDetails }) {
   const [input, setInput] = useState("");
 
@@ -19,11 +20,11 @@ function ChatInputBox({ loading, onSend, eventDetails }) {
           type="text"
           value={input}
           onChange={(e) => setInput(e.target.value)}
-          placeholder="Ask me something"
+          placeholder="Ask me something else about this event..."
           disabled={loading}
         />
         <button type="submit" disabled={loading || !input.trim()}>
-          Send
+          <i className="fas fa-paper-plane"></i>
         </button>
       </form>
     </>

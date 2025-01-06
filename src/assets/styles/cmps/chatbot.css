@@ -7,6 +7,9 @@
     margin: 1% 1% 10% 1%;
     box-shadow: 2px 6px 6px 2px black;
     border-radius: 0.2rem;
+    transform: translate(50%);
+    background-color: var(--white);
+    z-index: 100;
 }
 
 div.chatbot-container h3 {

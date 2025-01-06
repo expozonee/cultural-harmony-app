@@ -2,6 +2,7 @@ import { useState } from "react";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import ChatWindow from "./ChatWindow";
 import ChatInputBox from "./ChatInputBox";
+import "@fortawesome/fontawesome-free";
 
 function Chatbot({ eventDetails }) {
   const geminyApiKey = import.meta.env.VITE_GEMINI_API_KEY;
@@ -118,7 +119,7 @@ Please provide only 'true' or 'false' as the output.
   return (
     <>
       <div className="chatbot-container">
-        <h3>ask our chatbot!</h3>
+        <h3>How may I help you?</h3>
         <ChatWindow conversation={conversation} />
         <div className="builtin-prompts">
           {builtInPrompts.map((prompt, index) => (
