@@ -86,9 +86,16 @@
 
 .event-organizer {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 0.625rem;
+  gap: 0.5rem;
   margin-bottom: 1.25rem;
+}
+
+.event-organizer-info{
+  display: flex;
+  align-items: center;
+  gap: 0.1rem;
 }
 
 .organizer-icon {

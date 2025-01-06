@@ -1,13 +1,16 @@
 import { useEffect, useState } from "react";
 import { useParams, useLocation } from "react-router";
 import { useUserData } from "../context/UserContext";
-import ContributionList from "./ContributionList";
-import { Link} from "react-router";
-import Poll from "./Poll";
 import { useEvents } from "../context/EventsContext";
 import usePageLeave from "../hooks/usePageLeave";
 import Popup from "./Popup/Popup";
-import CreatePoll from "./CreatePoll";
+import EventImage from "./EventDescription/EventImage";
+import EventDetails from "./EventDescription/EventDetails";
+import EventOrganizer from "./EventDescription/EventOrganizer";
+import JoinUnjoinButton from "./EventDescription/JoinUnjoinButton";
+import PollSection from "./EventDescription/PollSection";
+import ContributionListSection from "./EventDescription/ContributionListSection";
+import CreatePollButton from "./EventDescription/CreatePollButton";
 
 function EventDescription() {
   const { eventId } = useParams();
@@ -19,7 +22,6 @@ function EventDescription() {
   const [loading, setLoading] = useState(!location.state?.event);
   const [popup, setPopup] = useState(null);
   const [showCreatePoll, setShowCreatePoll] = useState(false);
-
 
   const hasJoined = event?.participants?.includes(userData?.email);
   const hasPickedItem = event?.contribution_list.some(
@@ -54,9 +56,7 @@ function EventDescription() {
     });
   };
 
-  usePageLeave(hasJoined, hasPickedItem,IsHost, setPopup, eventId, unJoinEvents);
-
-  console.log("popup", popup);
+  usePageLeave(hasJoined, hasPickedItem, IsHost, setPopup, eventId, unJoinEvents);
 
   useEffect(() => {
     async function getEvent() {
@@ -79,77 +79,28 @@ function EventDescription() {
 
   return (
     <div className="description-page-container">
-      {event.imgUrl ? (
-        <img
-          className="event-image-description"
-          src={event.imgUrl}
-          alt={event.event_title}
-          onError={(e) => {
-            e.target.remove();
-            const card = document.querySelector(".event-description-card");
-            if (card) card.classList.add("no-image");
-          }}
-        />
-      ) : null}
+      <EventImage imgUrl={event.imgUrl} eventTitle={event.event_title} />
       {popup && <Popup message={popup.message} buttons={popup.buttons} onClose={() => setPopup(null)} />}
       <div className="event-description-card">
         <div className="event-description-card-left">
           <h1>{event.event_title}</h1>
-          <div className="event-date-time">
-            <div className="event-icon-and-text">
-              <i className="event-icon">📅</i>
-              <div>
-                <p className="label">Date and Time</p>
-                <p className="date">
-                  {new Date(event.date).toLocaleString("en-US", {
-                    weekday: "long",
-                    year: "numeric",
-                    month: "long",
-                    day: "numeric",
-                  })}{" "}
-                  <span>
-                    {new Date(
-                      `1970-01-01T${event.event_start_time}`
-                    ).toLocaleTimeString("en-US", {
-                      hour: "2-digit",
-                      minute: "2-digit",
-                    })}
-                  </span>
-                </p>
-              </div>
-            </div>
-          </div>
-          <div className="event-address">
-            <div className="event-icon-and-text">
-              <i className="event-icon">📍</i>
-              <div>
-                <p className="label">Address</p>
-                <p className="address">{event.location.city_name}</p>
-              </div>
-            </div>
-          </div>
+          <EventDetails 
+            date={event.date}
+            eventStartTime={event.event_start_time}
+            location={event.location}
+          />
         </div>
         <div className="event-description-card-right">
-          <div className="event-organizer">
-            <i className="organizer-icon">👤</i>
-            <p className="host-name">
-              Organized By: <span>{event.event_host_name}</span>
-            </p>
-          </div>
-          {hasJoined ? (
-            <button className="unjoin-button" onClick={handleUnJoinButton}>
-              Unjoin Event
-            </button>
-          ) : (
-            <button className="join-button" onClick={handleJoin}>
-              Join Event
-            </button>
-          )}
-          {userData?.email === event.host_email_address && (
-            <Link to={`/events/${eventId}/update-event`}>
-              <button className="update-event-button">Update Event</button>
-            </Link>
-          )}
+          <EventOrganizer 
+            hostName={event.event_host_name}
+            hostEmailAddress={event.host_email_address}
+            currentUserEmail={userData?.email}
+          />
+          <JoinUnjoinButton 
+            hasJoined={hasJoined}
+            onJoin={handleJoin}
+            onUnJoin={handleUnJoinButton}
+          />
         </div>
       </div>
       <div className="event-description-container">
@@ -158,15 +109,7 @@ function EventDescription() {
             <h2>Event Description</h2>
             <p className="event-description-info">{event.description}</p>
           </div>
-          <div className="event-card-polls">
-              {hasJoined && event.polls ? (
-                event.polls.map((poll, index) => {
-              return <Poll key={index} poll={poll} />;
-              })) :
-              ( 
-              <p>No poll available for this event.</p>
-              )}
-          </div>
+          <PollSection hasJoined={hasJoined} polls={event.polls} />
         </div>
         <div className="event-description-container-right">
           <div className="event-participants-list">
@@ -177,24 +120,13 @@ function EventDescription() {
               ))}
             </ul>
           </div>
-          {hasJoined && (
-            <div className="event-contribution-list">
-              <ContributionList eventId={eventId} eventData={event} />
-            </div>
-          )}
+          <ContributionListSection eventId={eventId} event={event} hasJoined={hasJoined} />
           {event.host_email_address === userData?.email && (
-          <>
-            {!showCreatePoll ? (
-              <button className="create-new-poll-button" onClick={() => setShowCreatePoll(true)}>
-                Create A Poll for This Event
-              </button>
-            ) : (
-                <div className="create-poll-container">
-                  <CreatePoll onClose={() => setShowCreatePoll(false)} />
-                </div>
-            )}
-          </>
-        )}
+            <CreatePollButton 
+              showCreatePoll={showCreatePoll} 
+              setShowCreatePoll={setShowCreatePoll} 
+            />
+          )}
         </div>
       </div>
     </div>
