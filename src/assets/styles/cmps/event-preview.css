@@ -137,4 +137,42 @@
     font-size: 0.75rem; 
     padding: 0.2rem 0.5rem;
   }
+  .pagination-btn {
+    width: 10%;
+  }
+}
+
+
+
+.pagination-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  gap: 10px;
+}
+
+.pagination-btn {
+  padding: 8px 16px;
+  font-size: 14px;
+  background-color: #D3C0F5;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.pagination-btn:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+.pagination-btn:hover:not(:disabled) {
+  background-color: #D3C0F5;
+}
+
+.pagination-info {
+  font-size: 14px;
+  font-weight: bold;
 }

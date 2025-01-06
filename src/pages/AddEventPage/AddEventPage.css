@@ -1,9 +1,9 @@
 
-.form1 {
+ /* .form1 {
     position: relative;
     margin: 0 auto;
     top: 10vh;
-    background-color: white; /* White background */
+    background-color: white;
     padding: 2rem;
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -59,7 +59,7 @@
   }
   
   .button1:hover {
-    background-color: #dc6fa6; /* Slightly lighter pink on hover */
+    background-color: #dc6fa6; 
   }
   h1{
     font-size: large;
@@ -75,4 +75,4 @@
     cursor: pointer;
     text-align: center;
     
-  }
+  } */
