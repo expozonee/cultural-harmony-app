@@ -1,5 +1,4 @@
 import "./AddEventForm.css";
-import "./AddEventPage.css";
 import { useForm } from "react-hook-form";
 import { useState, useRef, useEffect } from "react";
 import { yupResolver } from "@hookform/resolvers/yup";

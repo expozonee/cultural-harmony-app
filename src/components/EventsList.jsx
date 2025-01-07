@@ -26,21 +26,29 @@ function EventsList() {
 
   return (
     <>
+    <div className="buttonSection">
       <button
         className="show-map-btn"
         onClick={() => setPreviewMap(!previewMap)}
       >
-        {previewMap ? "Show List" : "Show Map"}{" "}
+        {previewMap ? " List" : " Map"}{" "}
         <i className={`fa-solid ${previewMap ? "fa-list" : "fa-map"}`}></i>
       </button>
       {isSignedIn && (
         <Link to="/events/add-event">
-          <button className="add-event">Add Event</button>
+          <button className="add-event">
+            <i className="fa-solid fa-plus"></i> 
+          </button>
+
         </Link>
       )}
+      </div>
       {previewMap ? (
         <GoogleMapList events={events} />
       ) : (
+
+        
+
         <>
           <ul className="events-list">
             {currentEvents &&
