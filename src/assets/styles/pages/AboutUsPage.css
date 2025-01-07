@@ -36,6 +36,7 @@
   margin: 0 auto;
   padding: 4rem 1.5rem;
   text-align: center;
+  background-color: white;
 }
 
 .mission-title {
@@ -105,7 +106,7 @@
 }
 
 .member-role {
-  color: #4b5563;
+  color: var(--light-medium-purple);
   text-align: center;
   margin-bottom: 1rem;
 }
@@ -117,7 +118,7 @@
 }
 
 .social-link {
-  color: #2563eb;
+  color: var(--light-medium-purple);
   transition: color 0.2s;
 }
 
