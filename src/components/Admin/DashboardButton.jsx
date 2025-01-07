@@ -9,7 +9,7 @@ export default function DashboardButton({ name, onClick, isActive }) {
           : name.toLowerCase()
       }`}
     >
-      <button style={{ color: `${isActive ? "red" : ""}` }} onClick={onClick}>
+      <button className="dashborad-button" style={{ color: `${isActive ? "red" : ""}` }} onClick={onClick}>
         {name}
       </button>
     </Link>
