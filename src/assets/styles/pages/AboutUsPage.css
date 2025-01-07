@@ -4,8 +4,7 @@
 }
 
 .hero {
-  background: linear-gradient(to right,  var(--light-medium-purple), var(--periwinkle));
-  color: white;
+  /* color: white; */
   padding: 5rem 0;
   text-align: center;
   margin-top: 1rem;
@@ -21,6 +20,7 @@
   font-size: 2.5rem;
   font-weight: bold;
   margin-bottom: 1rem;
+  color: var(--dark-purple);
 }
 
 .hero-description {
@@ -30,11 +30,13 @@
 }
 
 .mission {
+  background: linear-gradient(to right, var(--clr2bg-light), var(--periwinkle));
+  color: white;
   /* max-width: 1200px; */
   margin: 0 auto;
   padding: 4rem 1.5rem;
   text-align: center;
-  background-color:white;
+  background-color: white;
 }
 
 .mission-title {
@@ -44,7 +46,7 @@
 }
 
 .mission-text {
-  color: #4b5563;
+  color: #ffffff;
   font-size: 1.125rem;
   max-width: 48rem;
   margin: 0 auto;
@@ -66,6 +68,7 @@
   font-weight: bold;
   text-align: center;
   margin-bottom: 3rem;
+  color: var(--dark-purple);
 }
 
 .team-grid {
@@ -103,7 +106,7 @@
 }
 
 .member-role {
-  color:var(--light-medium-purple);
+  color: var(--light-medium-purple);
   text-align: center;
   margin-bottom: 1rem;
 }
