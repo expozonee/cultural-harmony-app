@@ -145,7 +145,10 @@ Please provide only \`true\` or \`false\` as the output.
   return (
     <>
       <div className="chatbot-container">
-        <h3>How may I help you?</h3>
+        <div className="chatbot-header">
+          Cultural Harmony Chatbot
+          <i className="fa-regular fa-comment"></i>
+        </div>
         <ChatWindow conversation={conversation} />
         <div className="builtin-prompts">
           {builtInPrompts.map((prompt, index) => (

@@ -2,27 +2,33 @@
     display: flex;
     flex-flow: column;
     align-items: center;
-    max-width: 50%;
+    max-width: 100%;
     padding: 1rem;
-    /* gap: 1rem; */
     margin: 1% 1% 10% 1%;
     box-shadow: 2px 6px 6px 2px black;
     border-radius: 0.2rem;
-    transform: translate(50%);
     background-color: var(--white);
     z-index: 100;
+    overflow: scroll;
 }
 
-div.chatbot-container h3 {
-    font-size: 2rem;
-    font-weight: bold;
-    text-transform: capitalize;
-    color: rgb(0, 0, 62);
+.chatbot-header {
+    background-color: #f5f5f5;
+    border-bottom: 1px solid #ddd;
+    padding: 10px 15px;
+    font-size: 0.75rem;
+    color: var(--gray2);
+    text-align: center;
+}
+
+.chatbot-header i {
+    margin-left: 0.5rem;
 }
 
 div.chatbot-container button {
     background-color: var(--periwinkle);
     color: rgb(0, 0, 62);
+    width: fit-content;
 }
 
 div.chatbot-container button:hover {
@@ -32,6 +38,12 @@ div.chatbot-container button:hover {
 
 div.user-input {
     margin-top: 1rem;
+    display: flex;
+    flex-flow: row wrap;
+}
+
+div.user-input input {
+    flex: 1;
 }
 
 @media screen and (width <= 768px) {

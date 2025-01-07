@@ -20,32 +20,11 @@ function EventDescription() {
   const hasJoined = event?.participants?.includes(userData?.email);
 
   // for chatbot visibility toggle
-  const [isChatbotVisible, setIsChatbotVisible] = useState(false);
+  const [isChatOpen, setIsChatOpen] = useState(false);
 
-  console.log(event);
+  // console.log(event);
 
   useEffect(() => {
-    // const fetchEvent = async () => {
-    //   if (!event) {
-    //     try {
-    //       const docRef = doc(db, "events", eventId);
-    //       const docSnap = await getDoc(docRef);
-
-    //       if (docSnap.exists()) {
-    //         const eventData = { id: docSnap.id, ...docSnap.data() };
-    //         setEvent(eventData);
-    //         console.log("Fetched event:", eventData);
-    //       } else {
-    //         console.error("Event not found");
-    //       }
-    //     } catch (error) {
-    //       console.error("Error fetching event from Firestore:", error);
-    //     } finally {
-    //       setLoading(false);
-    //     }
-    //   }
-    // };
-
     async function getEvent() {
       try {
         setLoading(true);
@@ -61,46 +40,12 @@ function EventDescription() {
     getEvent();
   }, [eventId, getEventById]);
 
-  // const handleParticipantAction = async (action) => {
-  //   if (!user) {
-  //     navigate("/sign-in", { state: { from: location.pathname } });
-  //     return;
-  //   }
-
-  //   try {
-  //     const update = await updateEventParticipants(
-  //       db,
-  //       eventId,
-  //       user.username,
-  //       action
-  //     );
-  //     const updatedParticipants = update[0];
-  //     const updatedContributionList = update[1];
-
-  //     setEvent((prevEvent) => ({
-  //       ...prevEvent,
-  //       participants: updatedParticipants,
-  //       contribution_list: updatedContributionList,
-  //     }));
-
-  //     console.log(
-  //       `User ${action === "join" ? "joined" : "unjoined"} the event:`,
-  //       user.username
-  //     );
-  //   } catch (error) {
-  //     console.error(
-  //       `Error ${action === "join" ? "joining" : "unjoining"} event:`,
-  //       error
-  //     );
-  //   }
-  // };
-
   if (loading) return <p>Loading...</p>;
   if (!event) return <p>Event not found!</p>;
 
   // toggle visibility of chatbot
   const toggleChatbot = () => {
-    setIsChatbotVisible(!isChatbotVisible);
+    setIsChatOpen(!isChatOpen);
   };
 
   return (
@@ -171,8 +116,25 @@ function EventDescription() {
               <button>Update Event</button>
             </Link>
           )}
+          <div className="chatbot-toggle-button">
+            <button onClick={toggleChatbot}>
+              {isChatOpen ? `Close Chatbot` : `Ask Our Chatbot!`}
+            </button>
+          </div>
         </div>
       </div>
+
+      {isChatOpen && (
+        <div className="modal-overlay" onClick={toggleChatbot}>
+          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+            <button className="modal-close" onClick={toggleChatbot}>
+              &times;
+            </button>
+            <Chatbot eventDetails={event} />
+          </div>
+        </div>
+      )}
+
       <div className="event-description-container">
         <div className="event-description-container-left">
           <h2>Event Description</h2>
@@ -193,18 +155,6 @@ function EventDescription() {
             </div>
           )}
         </div>
-      </div>
-
-      <div>
-        <button onClick={toggleChatbot}>
-          {isChatbotVisible ? `Close Chatbot` : `Ask Our Chatbot!`}
-        </button>
-
-        {isChatbotVisible && (
-          <div className="ai-chatbot">
-            <Chatbot eventDetails={event} />
-          </div>
-        )}
       </div>
 
       {event.host_email_address === userData?.email && (
