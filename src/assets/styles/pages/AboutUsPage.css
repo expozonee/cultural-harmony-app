@@ -36,7 +36,7 @@
   margin: 0 auto;
   padding: 4rem 1.5rem;
   text-align: center;
-  background-color:white;
+  background-color: white;
 }
 
 .mission-title {
@@ -106,7 +106,7 @@
 }
 
 .member-role {
-  color:var(--light-medium-purple);
+  color: var(--light-medium-purple);
   text-align: center;
   margin-bottom: 1rem;
 }
