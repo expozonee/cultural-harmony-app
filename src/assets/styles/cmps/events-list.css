@@ -55,3 +55,9 @@
     gap: 10px; 
   }
 }
+
+@media (max-width: 768px) {
+  .events-list {
+    padding: 0;
+  }
+}

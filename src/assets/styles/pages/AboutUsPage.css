@@ -32,7 +32,7 @@
 .mission {
   background: linear-gradient(to right, var(--clr2bg-light), var(--periwinkle));
   color: white;
-  /* max-width: 1200px; */
+  /* /* max-width: 1200px; */ */
   margin: 0 auto;
   padding: 4rem 1.5rem;
   text-align: center;
