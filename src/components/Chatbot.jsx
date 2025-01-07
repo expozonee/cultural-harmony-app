@@ -105,11 +105,12 @@ Please provide only \`true\` or \`false\` as the output.
         promptToSend = `
   User's Question: "${userInput}"
   
-  Event Details:
+  base your answer on these event details:
   - Title: "${eventDetails.event_title}"
   - Summary: "${eventDetails.summary}"
-  - Description: "${eventDetails.description}"
+  - Description: "${eventDetails?.description}"
   - Location: "${eventDetails.location?.city_name}"
+  - Contribution list: "${eventDetails?.contribution_list}"
         `;
       }
 
