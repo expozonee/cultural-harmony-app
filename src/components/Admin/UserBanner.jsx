@@ -1,5 +1,5 @@
 import { useUser } from "@clerk/clerk-react";
-import "./userBanner.css"
+
 
 export default function UserBanner() {
   const user = useUser();
