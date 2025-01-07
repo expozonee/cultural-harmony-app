@@ -51,7 +51,6 @@ export function EventsProvider({ children }) {
           })
         );
     });
-
     return () => unSubscribe();
   }, [user]);
 

@@ -134,8 +134,8 @@ textarea {
   font-weight: bold;
 }
 .AddButton{
-  width: 20%;
-  height: 3vh;
+  width: 35%;
+  height:4vh;
   background-color: #D3C0F5;
   color: white;
   /* font-weight: 600; */
@@ -143,3 +143,16 @@ textarea {
   margin-top: 1rem;
   border: none;
 }
+@media (max-width: 600px) {
+  .AddButton{
+    width: 50%;
+    height:4vh;
+     
+      font-size: 3vw;
+    
+}
+.checklist-item {
+  font-size: 1rem;
+}
+
+  }

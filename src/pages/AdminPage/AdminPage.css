@@ -19,7 +19,7 @@
   
   hr {
     border: none;
-    border-top: 2px solid var(--light-purple);
+    border-top: 2px solid var( --light-purple);
     margin: 15px 0;
   }
   
@@ -30,7 +30,7 @@
     margin: 25px 0;
   } 
   
-  button {
+  .dashborad-button {
     padding: 12px 25px;
     font-size: 16px;
     font-weight: bold;
@@ -42,12 +42,12 @@
     color: var(--dark-purple);
   }
   
-  button:hover {
+  .dashborad-button:hover {
     transform: scale(1.05);
     background-color: var(--periwinkle);
   }
   
-  button.active {
+  .dashborad-button.active {
     background-color: var(--dark-purple);
     color: var(--soft-gray);
   }
@@ -116,12 +116,19 @@
   }
   
   @media (max-width: 700px) {
+
+    a button {
+      display: flex;
+      justify-content: center;
+     font-size: 1.5vw;
+    
+    }
     .dashboard__buttons {
       
       font-size: medium;
     }
 
-    button {
+    .dashborad-button {
       width: 100%;
       margin-bottom: 10px;
     }
@@ -160,7 +167,7 @@
       font-size: 20px;
     }
 
-    button {
+    .dashborad-button {
      
       padding: 10px 20px;
     }
@@ -175,6 +182,19 @@
     tr{
         font-size: 6px; 
     }
+    .dashboard__buttons a button {
+     font-size: 3vw;
+    }
+    .add-to-calender svg{
+      width: 4vw;
+      height:4vh;
+    }
+
+    .add-to-calender-td button{
+     margin: 0 auto;
+      width: 2vw;
+      height:2vh;
+    }
   }
 
   @media (max-width: 400px) {
@@ -182,7 +202,7 @@
       font-size: 20px;
     }
 
-    button {
+    .dashborad-button {
       font-size: 12px;
       padding: 8px 15px;
     }
@@ -198,4 +218,5 @@
     tr{
         font-size: 5px; 
     }
+    
   }
