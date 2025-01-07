@@ -30,7 +30,7 @@
     margin: 25px 0;
   } 
   
-  button {
+  .dashborad-button {
     padding: 12px 25px;
     font-size: 16px;
     font-weight: bold;
@@ -42,12 +42,12 @@
     color: var(--dark-purple);
   }
   
-  button:hover {
+  .dashborad-button:hover {
     transform: scale(1.05);
     background-color: var(--periwinkle);
   }
   
-  button.active {
+  .dashborad-button.active {
     background-color: var(--dark-purple);
     color: var(--soft-gray);
   }
@@ -128,7 +128,7 @@
       font-size: medium;
     }
 
-    button {
+    .dashborad-button {
       width: 100%;
       margin-bottom: 10px;
     }
@@ -167,13 +167,8 @@
       font-size: 20px;
     }
 
-    a button {
-      display: flex;
-      justify-content: center;
-     font-size: 1.5vw;
-     width: 30px;
-     height: 20px;
-    
+    .dashborad-button {
+     
       padding: 10px 20px;
     }
 
@@ -207,7 +202,7 @@
       font-size: 20px;
     }
 
-    button {
+    .dashborad-button {
       font-size: 12px;
       padding: 8px 15px;
     }
