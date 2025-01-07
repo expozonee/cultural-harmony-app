@@ -116,6 +116,13 @@
   }
   
   @media (max-width: 700px) {
+
+    a button {
+      display: flex;
+      justify-content: center;
+     font-size: 1.5vw;
+    
+    }
     .dashboard__buttons {
       
       font-size: medium;
@@ -160,8 +167,13 @@
       font-size: 20px;
     }
 
-    button {
-     
+    a button {
+      display: flex;
+      justify-content: center;
+     font-size: 1.5vw;
+     width: 30px;
+     height: 20px;
+    
       padding: 10px 20px;
     }
 
@@ -174,6 +186,19 @@
     }
     tr{
         font-size: 6px; 
+    }
+    .dashboard__buttons a button {
+     font-size: 3vw;
+    }
+    .add-to-calender svg{
+      width: 4vw;
+      height:4vh;
+    }
+
+    .add-to-calender-td button{
+     margin: 0 auto;
+      width: 2vw;
+      height:2vh;
     }
   }
 
@@ -198,4 +223,5 @@
     tr{
         font-size: 5px; 
     }
+    
   }
