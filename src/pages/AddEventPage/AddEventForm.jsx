@@ -1,5 +1,4 @@
 import "./AddEventForm.css";
-import "./AddEventPage.css";
 import { useForm } from "react-hook-form";
 import { useState, useRef, useEffect } from "react";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -133,15 +132,16 @@ export default function AddEventForm({ eventData, eventId, from }) {
 
   return (
     <form
-      style={{ maxWidth: "900px", marginInline: "auto", marginTop: "5rem" }}
+      className="form-container"
       onSubmit={handleSubmit(onSubmit)}
     >
       <div className="form-group">
-        <label className={`${errors.title ? "text-red" : ""}`}>Title</label>
+        <label className={`${errors.title ? "text-error" : ""}`}>Title</label>
         <input
           name="event_title"
           type="text"
-          className={`${errors.title ? "border-red" : ""}`}
+          className={`${errors.title ? "input-error" : "input-field"}`}
+        // className={`${errors.title ? "border-red" : ""}`}
           {...register("event_title")}
           value={event.event_title}
           onChange={handleOnChange}
@@ -151,7 +151,7 @@ export default function AddEventForm({ eventData, eventId, from }) {
         )}
       </div>
       <div className="form-group">
-        <label>summary</label>
+        <label>Summary</label>
         <input
           name="summary"
           type="text"
@@ -189,7 +189,7 @@ export default function AddEventForm({ eventData, eventId, from }) {
       </div>
 
       <div className="form-group">
-        <label>description</label>
+        <label>Description</label>
         <textarea
           name="description"
           {...register("description")}
@@ -213,7 +213,7 @@ export default function AddEventForm({ eventData, eventId, from }) {
       </div>
 
       <div className="form-group">
-        <label>location</label>
+        <label>Location</label>
         <input
           type="text"
           name="location"
@@ -256,20 +256,13 @@ export default function AddEventForm({ eventData, eventId, from }) {
             Add Checklist Item
           </button>
         </div>
-        <ul>
+        <ul className="checklist-items">
           {items.map((item, index) => (
-            <li key={index} style={{ marginBottom: "10px" }}>
+            <li key={index} className="checklist-item">
               <strong>{item.item_name}</strong>
               <button
                 type="button"
-                style={{
-                  marginLeft: "10px",
-                  color: "white",
-                  backgroundColor: "red",
-                  border: "none",
-                  padding: "5px",
-                  cursor: "pointer",
-                }}
+                className="btn btn-remove"
                 onClick={() => removeItem(index)}
               >
                 Remove
@@ -279,7 +272,7 @@ export default function AddEventForm({ eventData, eventId, from }) {
         </ul>
       </div>
 
-      <button className="button1" type="submit">
+      <button className="btn btn-submit" type="submit">
         {eventId ? "Update Event" : "Add Event"}
       </button>
     </form>

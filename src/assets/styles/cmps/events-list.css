@@ -1,6 +1,7 @@
 .events-list {
   display: flex;
-  max-width: 150rem;
+ width: 90%;
+ height: auto;
   margin-top: 2rem;
   flex-wrap: wrap;
   gap: 2rem;
@@ -20,22 +21,43 @@
   text-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.5);
 }
 
-.add-event {
-  margin-left: 50%;
-  transform: translateX(-50%);
-  margin-bottom: 15px;
-  margin-top: 15px;
-  width: fit-content;
-
-  background-color: var(--blue);
+.add-event, .show-map-btn {
+  margin: 0;
+  width: auto; 
+  background-color: var( --light-medium-purple);
   color: var(--mainWhite);
   border: none;
   padding: 0.4rem 0.8rem;
-  font-size: 0.9rem;
+  font-size: 1rem;
   cursor: pointer;
   border-radius: 0.25rem;
   text-decoration: none;
   text-align: center;
   transition: all 0.3s ease;
-  align-self: flex-start;
+}
+
+.add-event:hover, .show-map-btn:hover {
+  background-color: var(--darkBlue); 
+}
+
+.buttonSection {
+  margin: 15px auto; 
+  width: 80%; 
+  height: 10%;
+  display: flex;
+  justify-content: space-between; 
+  align-items: center;
+}
+
+@media (max-width: 768px) {
+  .buttonSection {
+    flex-direction: column; 
+    gap: 10px; 
+  }
+}
+
+@media (max-width: 768px) {
+  .events-list {
+    padding: 0;
+  }
 }

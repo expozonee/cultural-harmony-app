@@ -7,20 +7,29 @@ export default function NavBar() {
   const { pathname } = useLocation();
   const [currentPage, setCurrentPage] = useState(pathname);
   const { isSignedIn } = useUser();
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const toggleMenu = () => setMenuOpen(!menuOpen);
+
+  const handleLinkClick = (path) => {
+    setCurrentPage(path);
+    setMenuOpen(false); 
+  };
 
   return (
     <header className="app-header">
+      <button className="hamburger-menu" onClick={toggleMenu}>☰</button>
       <div className="logo-and-nav">
         <img src={logo} alt="Logo" className="logo" />
-        <nav>
+        <nav className={menuOpen ? "nav-open" : ""}>
           <ul>
             <li>
               <Link
                 style={{
-                  backgroundColor: `${currentPage === "/" ? "#A3F3F5" : ""}`,
+                  backgroundColor: `${currentPage === "/" ? "#d8f5fe" : ""}`,
                 }}
                 to="/"
-                onClick={() => setCurrentPage("/")}
+                onClick={() => handleLinkClick("/")}
               >
                 Home
               </Link>
@@ -29,11 +38,11 @@ export default function NavBar() {
               <Link
                 style={{
                   backgroundColor: `${
-                    currentPage === "/events" ? "#A3F3F5" : ""
+                    currentPage === "/events" ? "#d8f5fe" : ""
                   }`,
                 }}
                 to="/events"
-                onClick={() => setCurrentPage("/events")}
+                onClick={() => handleLinkClick("/events")}
               >
                 Events
               </Link>
@@ -43,11 +52,11 @@ export default function NavBar() {
                 <Link
                   style={{
                     backgroundColor: `${
-                      currentPage === "/admin" ? "#A3F3F5" : ""
+                      currentPage === "/admin" ? "#d8f5fe" : ""
                     }`,
                   }}
                   to="/admin"
-                  onClick={() => setCurrentPage("/admin")}
+                  onClick={() => handleLinkClick("/admin")}
                 >
                   Dashboard
                 </Link>
@@ -55,8 +64,13 @@ export default function NavBar() {
             )}
             <li>
               <Link
+                style={{
+                  backgroundColor: `${
+                    currentPage === "/AboutUsPage" ? "#d8f5fe" : ""
+                  }`,
+                }}
                 to="/AboutUsPage"
-                onClick={() => setCurrentPage("/AboutUsPage")}
+                onClick={() => handleLinkClick("/AboutUsPage")}
               >
                 About Us
               </Link>
