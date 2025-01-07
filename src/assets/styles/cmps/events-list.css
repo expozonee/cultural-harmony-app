@@ -1,6 +1,7 @@
 .events-list {
   display: flex;
-  max-width: 150rem;
+ width: 90%;
+ height: auto;
   margin-top: 2rem;
   flex-wrap: wrap;
   gap: 2rem;
@@ -23,7 +24,7 @@
 .add-event, .show-map-btn {
   margin: 0;
   width: auto; 
-  background-color: var(--blue);
+  background-color: var( --light-medium-purple);
   color: var(--mainWhite);
   border: none;
   padding: 0.4rem 0.8rem;
