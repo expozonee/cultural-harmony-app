@@ -4,9 +4,10 @@ import ChatWindow from "./ChatWindow";
 import ChatInputBox from "./ChatInputBox";
 import "@fortawesome/fontawesome-free";
 
-function Chatbot({ eventDetails }) {
+function Chatbot({ eventDetails, toggleChatbot }) {
   const geminyApiKey = import.meta.env.VITE_GEMINI_API_KEY;
   const geminiModel = "gemini-1.5-flash";
+  const [useBuiltIn, setBuiltIn] = useState(false);
 
   const [conversation, setConversation] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -155,26 +156,33 @@ Please provide only \`true\` or \`false\` as the output.
 
   return (
     <>
-      <div className="chatbot-container">
+      <div className="chatbot-container ">
         <div className="chatbot-header">
           Cultural Harmony Chatbot
           <i className="fa-regular fa-comment"></i>
         </div>
         <ChatWindow conversation={conversation} />
         <div className="builtin-prompts">
-          {builtInPrompts.map((prompt, index) => (
-            <button
-              key={index}
-              onClick={() => sendMessage(prompt)}
-              disabled={loading}
-            >
-              {prompt}
-            </button>
-          ))}
+          {!useBuiltIn &&
+            builtInPrompts.map((prompt, index) => (
+              <button
+                key={index}
+                onClick={() => {
+                  sendMessage(prompt);
+                  setBuiltIn(true);
+                }}
+                disabled={loading}
+              >
+                {prompt}
+              </button>
+            ))}
         </div>
         <div className="user-input">
           <ChatInputBox onSend={sendMessage} loading={loading} />
         </div>
+        <button onClick={() => toggleChatbot()} id="close-chat">
+          X
+        </button>
       </div>
     </>
   );
