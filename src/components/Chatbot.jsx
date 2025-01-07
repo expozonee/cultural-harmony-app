@@ -110,8 +110,19 @@ Please provide only \`true\` or \`false\` as the output.
   - Summary: "${eventDetails.summary}"
   - Description: "${eventDetails?.description}"
   - Location: "${eventDetails.location?.city_name}"
-  - Contribution list: "${eventDetails?.contribution_list}"
-        `;
+  - Contribution list: ${
+    eventDetails?.contribution_list
+      ? Object.entries(eventDetails.contribution_list)
+          .map(
+            ([key, value]) =>
+              `* ${key}: ${Object.entries(value)
+                .map(([subKey, subValue]) => `${subKey} - ${subValue}`)
+                .join(", ")}`
+          )
+          .join("\n      ")
+      : "No contributions available."
+  }
+`;
       }
 
       const genAI = new GoogleGenerativeAI(geminyApiKey);
