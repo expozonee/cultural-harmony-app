@@ -34,7 +34,7 @@
   top: 0.5rem;
   left: 0.5rem;
   background-color: var(--mainWhite);
-  color: var(--periwinkle);
+  color: var(--dark-purple);
   padding: 0.5rem 0.75rem;
   text-align: center;
   border-radius: 0.25rem;
@@ -81,7 +81,7 @@
 }
 
 .details-button {
-  background-color: var(--periwinkle);
+  background-color: var( --light-medium-purple);
   color: var(--mainWhite);
   border: none;
   padding: 0.4rem 0.8rem;
@@ -95,7 +95,7 @@
 }
 
 .details-button:hover {
-  background-color: var(--blue);
+  background-color: var(--dark-purple);
   color: white;
   font-weight: bold;
   transform: scale(1.05);
@@ -149,7 +149,7 @@
   justify-content: center;
   align-items: center;
   margin-top: 20px;
-  gap: 10px;
+  gap: 10px; 
 }
 
 .pagination-btn {
@@ -176,3 +176,6 @@
   font-size: 14px;
   font-weight: bold;
 }
+
+
+  
