@@ -29,6 +29,7 @@
 @import './styles/cmps/google-calendar.css';
 @import './styles/cmps/poll.css';
 @import "./styles/cmps/chat-window.css";
+@import "./styles/cmps/chat-input-box.css";
 @import "./styles/cmps/chatbot.css";
 @import "./styles/cmps/Popup.css";
 

@@ -15,7 +15,7 @@ function Chatbot({ eventDetails }) {
     `provide me an interesting cultural or historical short fact related to this event: ${eventDetails.event_title}.`,
     `provide me a tip that will help me prepare for this upcoming event: ${eventDetails.event_title}, based on the description: ${eventDetails.description}, and location: ${eventDetails.location["city_name"]}.`,
     `explain the cultural significance of this event in a short sentence: ${eventDetails.event_title}`,
-    `advise me concisely how to properly dress for this event: ${eventDetails.event_title}`,
+    `advise me concisely how to properly dress for this event: ${eventDetails.event_title} in ${eventDetails.location?.city_name}`,
   ];
 
   // free user prompt validation
@@ -29,9 +29,11 @@ You are an assistant that determines whether a given sentence refers directly to
 Event Details:
 - Title: "${eventDetails.event_title}"
 - Summary: "${eventDetails.summary}"
+- Description: "${eventDetails.description}"
+- Location: "${eventDetails.location?.city_name}"
 
 Task:
-Return a JavaScript boolean value ('true' or 'false') based on the following criteria:
+Return a JavaScript boolean value (\`true\` or \`false\`) based on the following criteria:
 - Return \`true\` if the user's input directly refers to the event's title or summary.
 - Return \`false\` otherwise.
 
@@ -48,7 +50,16 @@ Examples:
 4. User Input: "What's the weather like today?"
    Output: false
 
-Please provide only 'true' or 'false' as the output.
+5. User Input: "Tell me about the event's traditional decorations."
+   Output: true
+
+6. User Input: "What kind of food shall I bring?"
+   Output: true
+
+7. User Input: "What do they want?"
+   Output: false
+
+Please provide only \`true\` or \`false\` as the output.
 `;
 
       const validationFlag = await model.generateContent(validationPrompt);
@@ -70,7 +81,10 @@ Please provide only 'true' or 'false' as the output.
       // check if the prompt is a built-in one or user's free prompt
       const isBuilInPrompt = builtInPrompts.includes(userInput);
 
-      // if it's a user's free prompt, check if it's a valid one
+      // define which prompt to send to the AI
+      let promptToSend = userInput;
+
+      // if it's a user's free prompt, validate it and include event details
       if (!isBuilInPrompt) {
         const isValid = await validatePrompt(userInput);
         if (!isValid) {
@@ -86,12 +100,35 @@ Please provide only 'true' or 'false' as the output.
           ]);
           return;
         }
+
+        // pass the event details in the free prompt
+        promptToSend = `
+  User's Question: "${userInput}"
+  
+  base your answer on these event details:
+  - Title: "${eventDetails.event_title}"
+  - Summary: "${eventDetails.summary}"
+  - Description: "${eventDetails?.description}"
+  - Location: "${eventDetails.location?.city_name}"
+  - Contribution list: ${
+    eventDetails?.contribution_list
+      ? Object.entries(eventDetails.contribution_list)
+          .map(
+            ([key, value]) =>
+              `* ${key}: ${Object.entries(value)
+                .map(([subKey, subValue]) => `${subKey} - ${subValue}`)
+                .join(", ")}`
+          )
+          .join("\n      ")
+      : "No contributions available."
+  }
+`;
       }
 
       const genAI = new GoogleGenerativeAI(geminyApiKey);
       const model = genAI.getGenerativeModel({ model: geminiModel });
 
-      const result = await model.generateContent(userInput);
+      const result = await model.generateContent(promptToSend);
       const resultText = result.response.text();
 
       // add new messages to the chat message history
@@ -103,7 +140,7 @@ Please provide only 'true' or 'false' as the output.
     } catch (error) {
       console.log("Error fetching AI response:", error);
       setConversation((prevConversation) => [
-        // in case of an error, update history with an error message
+        // in case of an error, update the history with an error message
         ...prevConversation,
         { sender: "user", message: userInput },
         {
@@ -119,7 +156,10 @@ Please provide only 'true' or 'false' as the output.
   return (
     <>
       <div className="chatbot-container">
-        <h3>How may I help you?</h3>
+        <div className="chatbot-header">
+          Cultural Harmony Chatbot
+          <i className="fa-regular fa-comment"></i>
+        </div>
         <ChatWindow conversation={conversation} />
         <div className="builtin-prompts">
           {builtInPrompts.map((prompt, index) => (

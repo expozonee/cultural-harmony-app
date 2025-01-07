@@ -19,7 +19,10 @@ function ChatInputBox({ loading, onSend, eventDetails }) {
         <input
           type="text"
           value={input}
-          onChange={(e) => setInput(e.target.value)}
+          onChange={(e) => {
+            e.preventDefault();
+            setInput(e.target.value);
+          }}
           placeholder="Ask me something else about this event..."
           disabled={loading}
         />
