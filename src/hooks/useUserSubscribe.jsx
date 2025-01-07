@@ -1,9 +1,9 @@
-import { useUser } from "@clerk/clerk-react";
 import { useEffect, useState } from "react";
-import { getUsers } from "../firebase/utils/getUsers";
-import { collection, doc, onSnapshot } from "firebase/firestore";
+import { useUser } from "@clerk/clerk-react";
 import { db } from "../firebase/firebaseConfig";
+import { getUsers } from "../firebase/utils/getUsers";
 import { addUserToDb } from "../firebase/utils/addUserToDb";
+import { collection, doc, onSnapshot } from "firebase/firestore";
 
 export function useUserSubscribe() {
   const [userId, setUserId] = useState(undefined);
@@ -13,66 +13,45 @@ export function useUserSubscribe() {
   const { user, isSignedIn } = useUser();
 
   useEffect(() => {
-    async function addNewUsersToDb() {
-      if (!isSignedIn) return;
+    async function handleUserSubscription() {
+      if (!isSignedIn || !user) {
+        setUserId(undefined);
+        setUserRef(undefined);
+        return;
+      }
 
-      const users = await getUsers();
       const userEmailAddress = user.primaryEmailAddress.emailAddress;
-      const isUserInDb = users.find((u) => u.email === userEmailAddress);
+      const userId = (await getUsers()).find(
+        (u) => u.email === userEmailAddress
+      )?.id;
 
-      if (!isUserInDb) {
-        const userToAdd = {
-          email: userEmailAddress,
-          profileImage: user.imageUrl,
-          eventsJoined: [],
-          eventsOrganized: [],
-          isAdmin: false,
-          name: user.fullName,
-        };
-        await addUserToDb(userToAdd);
+      try {
+        if (!userId) {
+          const userToAdd = {
+            email: userEmailAddress,
+            profileImage: user.imageUrl,
+            eventsJoined: [],
+            eventsOrganized: [],
+            isAdmin: false,
+            name: user.fullName,
+          };
+
+          // Add user to Firestore with setDoc
+          const [userRef, userId] = await addUserToDb(userToAdd);
+          setUserId(userId);
+          setUserRef(userRef);
+        } else {
+          const userDocRef = doc(db, "users", userId);
+          setUserId(userId);
+          setUserRef(userDocRef);
+        }
+      } catch (error) {
+        console.error("Error handling user subscription:", error);
       }
     }
 
-    addNewUsersToDb();
-
-    if (!isSignedIn || !user) {
-      setUserData(undefined);
-      return;
-    }
-
-    const userEmailAddress = user.primaryEmailAddress.emailAddress;
-
-    async function getUserId() {
-      const users = await getUsers();
-      setUsers(users);
-      const userId = users.find((u) => u.email === userEmailAddress)?.id;
-
-      setUserId(userId);
-      setUserRef(doc(db, "users", userId));
-    }
-
-    getUserId();
+    handleUserSubscription();
   }, [isSignedIn, user]);
-
-  // useEffect(() => {
-  //   if (!isSignedIn || !user) {
-  //     setUserData(undefined);
-  //     return;
-  //   }
-
-  //   const userEmailAddress = user.primaryEmailAddress.emailAddress;
-
-  //   async function getUserId() {
-  //     const users = await getUsers();
-  //     setUsers(users);
-  //     const userId = users.find((u) => u.email === userEmailAddress)?.id;
-
-  //     setUserId(userId);
-  //     setUserRef(doc(db, "users", userId));
-  //   }
-
-  //   getUserId();
-  // }, [isSignedIn, user]);
 
   useEffect(() => {
     if (!userId) {

@@ -11,20 +11,34 @@ import {
 } from "firebase/firestore";
 import { eventsRef } from "../firebase/utils/eventsRef";
 import { createContext, useEffect, useState } from "react";
-import { useUserSubscribe } from "../hooks/useUserSubscribe";
 import { useUserData } from "./UserContext";
 import { getUsers } from "../firebase/utils/getUsers";
 import { db } from "/src/firebase/firebaseConfig";
+import { useUser } from "@clerk/clerk-react";
 
 const EventsContext = createContext(null);
 
 export function EventsProvider({ children }) {
   const { joinEvent } = useUserData();
   const [events, setEvents] = useState([]);
-  const [, , userRef] = useUserSubscribe();
+  const [userRef, setUserRef] = useState(undefined);
+  const { user } = useUser();
 
   useEffect(() => {
+    async function getUserRef() {
+      const userEmailAddress = user?.primaryEmailAddress.emailAddress;
+      const userId = (await getUsers()).find(
+        (u) => u.email === userEmailAddress
+      )?.id;
 
+      if (!userId) return;
+
+      const userRef = doc(db, "users", userId);
+
+      setUserRef(userRef);
+    }
+
+    getUserRef();
 
     const unSubscribe = onSnapshot(eventsRef, (snapshot) => {
       if (snapshot.docs)
@@ -38,10 +52,8 @@ export function EventsProvider({ children }) {
         );
     });
 
-
-
     return () => unSubscribe();
-  }, []);
+  }, [user]);
 
   async function createEvent(event) {
     try {
