@@ -27,8 +27,8 @@
   line-height: 1.25rem;
   position: fixed;
   bottom: 5.625rem;
-  left: 50%;
-  transform: translateX(-50%);
+  left: 47%;
+  /* transform: translateX(-50%); */
   z-index: 1;
   background-color: var(--blue);
   color: white;
@@ -40,7 +40,6 @@
 
 .show-map-btn:hover {
   background-color: var(--periwinkle);
-  font-weight: bold;
 }
 
 .modal-open-event {

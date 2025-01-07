@@ -39,3 +39,9 @@
   transition: all 0.3s ease;
   align-self: flex-start;
 }
+
+@media (max-width: 768px) {
+  .events-list {
+    padding: 0;
+  }
+}
