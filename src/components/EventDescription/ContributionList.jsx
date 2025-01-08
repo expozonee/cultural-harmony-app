@@ -34,14 +34,13 @@ function ContributionList({ eventId, eventData }) {
     }
   };
 
-
   const handleItemAction = async (action, index, itemName) => {
     if (action === "add") {
       const newData = {
         ...data,
         contribution_list: [
           ...data.contribution_list,
-          { item_name: itemName, user: currentUserEmail,addedBy: currentUserEmail },
+          { item_name: itemName, user: currentUserEmail, addedBy: currentUserEmail },
         ],
       };
       await updateEvent(eventId, newData);
@@ -62,35 +61,36 @@ function ContributionList({ eventId, eventData }) {
   const isListFull = eventData.contribution_list.length >= eventData.max_participants;
 
   return (
-    <div className="contribution-list">
-      <h3>Contribution List</h3>
-      <ul>
+    <div className="contribution-list-container">
+      <h3 className="contribution-list-header">Contribution List</h3>
+      <ul className="contribution-list-items">
         {eventData.contribution_list.map((item, index) => {
           const isPickedByCurrentUser = item.user === currentUserEmail;
           const isPickedByOtherUser = item.user !== "" && !isPickedByCurrentUser;
           const addedByCurrentUser = item.addedBy === currentUserEmail;
 
           return (
-            <li key={item.item_name}>
-              <label className="checkbox-label" style={{textDecoration: isPickedByOtherUser ? "line-through" : "none",}}>
+            <li key={item.item_name} className="contribution-list-item">
+              <label className={`checkbox-label ${isPickedByOtherUser ? "strikethrough" : ""}`}>
                 <input type="checkbox" checked={isPickedByCurrentUser}
-                  disabled={isPickedByOtherUser ||(hasSelectedItem && !isPickedByCurrentUser)}
+                  disabled={isPickedByOtherUser || (hasSelectedItem && !isPickedByCurrentUser)}
                   onChange={() => handleCheckboxChange(index)}
+                  className="checkbox-input"
                 />
                 {item.item_name}
               </label>
-              {isPickedByOtherUser && <span> (Picked by {item.user})</span>}
-              {addedByCurrentUser && <button className="delete-item-btn" onClick={() => handleItemAction("delete",index)}>Delete</button>}
+              {isPickedByOtherUser && <span className="picked-by-other"> (Picked by {item.user})</span>}
+              {addedByCurrentUser && <button className="delete-item-btn" onClick={() => handleItemAction("delete", index)}>Delete</button>}
             </li>
           );
         })}
       </ul>
-      {!hasSelectedItem && !isListFull &&(
-          <div className="add-item">
-            <input type="text" value={newItem} onChange={(e) => setNewItem(e.target.value)} placeholder="Enter an item"/>
-            <button className="add-item-btn"  onClick={() => handleItemAction("add", null, newItem)} disabled={!newItem.trim()}>Add</button>
-          </div>
-        )}
+      {!hasSelectedItem && !isListFull && (
+        <div className="add-item-container">
+          <input type="text" value={newItem} onChange={(e) => setNewItem(e.target.value)} placeholder="Enter an item" className="add-item-input"/>
+          <button className="add-item-btn" onClick={() => handleItemAction("add", null, newItem)} disabled={!newItem.trim()}>Add</button>
+        </div>
+      )}
     </div>
   );
 }

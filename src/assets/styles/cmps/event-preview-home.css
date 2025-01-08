@@ -37,13 +37,14 @@
   .event-preview-card-home {
     display: flex;
     flex-direction: column;
-    width: 14rem;
-    height: 12rem;
+    width: 12rem;
     background: white;
     border-radius: 0.5rem;
     box-shadow: 0 0.125rem 0.5rem rgba(0, 0, 0, 0.1);
     overflow: hidden;
+    margin-bottom: 1rem;
   }
+
   .event-image-home {
     position: relative;
     width: 100%;

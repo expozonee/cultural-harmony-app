@@ -136,12 +136,11 @@ export default function AddEventForm({ eventData, eventId, from }) {
       onSubmit={handleSubmit(onSubmit)}
     >
       <div className="form-group">
-        <label className={`${errors.title ? "text-error" : ""}`}>Title</label>
+        <label className={`form-group-label ${errors.title ? "text-error" : ""}`}>Title</label>
         <input
           name="event_title"
           type="text"
-          className={`${errors.title ? "input-error" : "input-field"}`}
-        // className={`${errors.title ? "border-red" : ""}`}
+          className={`form-group-input ${errors.title ? "input-error" : "input-field"}`}
           {...register("event_title")}
           value={event.event_title}
           onChange={handleOnChange}
@@ -151,10 +150,11 @@ export default function AddEventForm({ eventData, eventId, from }) {
         )}
       </div>
       <div className="form-group">
-        <label>Summary</label>
+        <label className="form-group-label">Summary</label>
         <input
           name="summary"
           type="text"
+          className="form-group-input"
           {...register("summary")}
           value={event.summary}
           onChange={handleOnChange}
@@ -163,10 +163,11 @@ export default function AddEventForm({ eventData, eventId, from }) {
       </div>
 
       <div className="form-group">
-        <label>Date</label>
+        <label className="form-group-label">Date</label>
         <input
           name="date"
           type="date"
+          className="form-group-input"
           {...register("date")}
           value={event.date}
           onChange={handleOnChange}
@@ -175,10 +176,11 @@ export default function AddEventForm({ eventData, eventId, from }) {
       </div>
 
       <div className="form-group">
-        <label>Starting Time</label>
+        <label className="form-group-label">Starting Time</label>
         <input
           name="event_start_time"
           type="time"
+          className="form-group-input"
           {...register("event_start_time")}
           value={event.event_start_time}
           onChange={handleOnChange}
@@ -189,9 +191,10 @@ export default function AddEventForm({ eventData, eventId, from }) {
       </div>
 
       <div className="form-group">
-        <label>Description</label>
+        <label className="form-group-label">Description</label>
         <textarea
           name="description"
+          className="form-group-input"
           {...register("description")}
           value={event.description}
           onChange={handleOnChange}
@@ -201,10 +204,11 @@ export default function AddEventForm({ eventData, eventId, from }) {
         )}
       </div>
       <div className="form-group">
-        <label>Image URL </label>
+        <label className="form-group-label">Image URL </label>
         <input
           name="imgUrl"
           type="text"
+          className="form-group-input"
           {...register("imgUrl")}
           value={event.imgUrl}
           onChange={handleOnChange}
@@ -213,10 +217,11 @@ export default function AddEventForm({ eventData, eventId, from }) {
       </div>
 
       <div className="form-group">
-        <label>Location</label>
+        <label className="form-group-label">Location</label>
         <input
           type="text"
           name="location"
+          className="form-group-input"
           {...register("location")}
           ref={(e) => {
             register("location").ref(e);
@@ -229,10 +234,11 @@ export default function AddEventForm({ eventData, eventId, from }) {
       </div>
 
       <div className="form-group">
-        <label>Max Participants </label>
+        <label className="form-group-label">Max Participants </label>
         <input
           name="max_participants"
           type="text"
+          className="form-group-input"
           {...register("max_participants")}
           value={event.max_participants}
           onChange={handleOnChange}
@@ -248,6 +254,7 @@ export default function AddEventForm({ eventData, eventId, from }) {
           <input
             type="text"
             name="item_name"
+            className="form-group-input"
             value={newItem}
             onChange={handleNewItemChange}
           />

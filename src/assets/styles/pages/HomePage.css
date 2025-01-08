@@ -1,5 +1,5 @@
 .home-page-container {
-  padding: 2rem;
+  padding: 0.5rem;
 }
 
 .section1-homepage {
@@ -59,7 +59,8 @@
 
   .section1-homepage {
     background-color: var(--mainWhite);
-    height: 30vh;
+    height: auto;
+    max-height: 35vh;
     padding: 1rem;
   }
 

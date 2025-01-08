@@ -1,40 +1,54 @@
 .description-page-container {
-  background-color: var(--mainwhite);
+  background-color: var(--mainWhite);
   text-align: center;
+}
+
+.event-image-description {
+  width: 100%;
+  height: auto;
+  max-height: 50vh;
+  object-fit: cover;
+  position: relative; 
+  z-index: 1; 
 }
 
 .event-description-card {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
-  align-items: center;
   gap: 1rem;
-  width: 80%;
-  padding: 1.25rem;
+  width: 70%;
+  padding: 1.5rem;
   margin: -2.5rem auto 1.25rem; 
   border: none;
   overflow: hidden;
   border-radius: 0.75rem;
   background-color: var(--mainWhite);
   box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
-  z-index: 2;
   position: relative;
+  z-index: 2;
 }
+
 .event-description-card.no-image {
-  margin: 2.5rem auto 1.25rem; 
+  margin: 1rem auto;
 }
+
 .event-description-card-left {
   flex: 3;
   padding: 0.5rem;
   text-align: left;
+  min-width: 60%;
 }
 
-.event-description-card-left h1 {
-  font-size: 2rem;
+.event-description-card-left .event-title-description-card {
+  font-size: 1.8rem;
   color: #2d2d2d;
   margin-bottom: 1rem;
+  text-align: left;
 }
 
-.event-date-time .event-adress {
+.event-date-time,
+.event-address {
   display: flex;
   align-items: flex-start;
   gap: 0.625rem;
@@ -43,36 +57,31 @@
 
 .event-icon-and-text {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 0.625rem;
 }
 
 .event-icon {
   font-size: 1.2rem;
+  color: #555;
 }
 
-.label {
-  font-size: 1.2rem;
+.adress-label {
+  font-size: 1rem;
   color: #b0b0b0;
-  margin-bottom: 0.3125rem;
+  margin-bottom: 0.25rem;
 }
 
-.date,
+.event-date-date,
 .address {
-  font-size: 1.1rem;
+  font-size: 1rem;
   color: #2d2d2d;
 }
 
-.date span {
+.event-date-date .date-span {
   color: #6c757d;
-  margin-left: 2.5rem;
-  font-size: 1rem;
-}
-
-.address {
-  color: var(--blue);
-  text-decoration: underline;
-  cursor: pointer;
+  margin-left: 1.5rem;
+  font-size: 0.9rem;
 }
 
 .event-description-card-right {
@@ -81,6 +90,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  min-width: 35%;
   padding: 0.5rem;
 }
 
@@ -89,31 +99,32 @@
   flex-direction: column;
   align-items: center;
   gap: 0.5rem;
-  margin-bottom: 1.25rem;
+  margin-bottom: 1rem;
 }
 
-.event-organizer-info{
+.event-organizer-info {
   display: flex;
   align-items: center;
-  gap: 0.1rem;
+  gap: 0.25rem;
 }
 
 .organizer-icon {
   font-size: 1.2rem;
-  margin-bottom: 1.2rem;
+  margin-bottom: 0.5rem;
 }
 
 .host-name {
-  font-size: 1.2rem;
+  font-size: 1rem;
   color: #2d2d2d;
   font-weight: bold;
 }
 
-.host-name span {
+.host-name .host-name-span {
   color: #6c757d;
   font-weight: normal;
 }
 
+/*************************/
 .event-description-container {
   display: flex;
   justify-content: space-between;
@@ -134,7 +145,7 @@
   margin-bottom: 0.625rem;
 }
 
-.event-card-polls{
+.event-card-polls {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
@@ -179,19 +190,10 @@
   margin-top: 1.25rem;
 }
 
-.event-image-description {
-  width: 100%;
-  height: auto;
-  max-height: 25rem;
-  object-fit: cover;
-  position: relative; 
-  z-index: 1; 
-}
-
 .unjoin-button,
 .join-button,
 .create-new-poll-button,
-.update-event-button{
+.update-event-button {
   padding: 0.625rem 1.25rem;
   font-size: 1rem;
   font-weight: bold;
@@ -204,7 +206,7 @@
   transition: background-color 0.3s ease;
 }
 
-.create-new-poll-button{
+.create-new-poll-button {
   width: 65%;
   align-self: center;
 }
@@ -225,6 +227,7 @@
   align-items: center;
   z-index: 1000; 
 }
+
 .ai-buttons-container {
   display: flex;
   flex-flow: column wrap;
@@ -232,7 +235,6 @@
   margin-top: 1.25rem;
 }
 
-/* chatbot modal overlay */
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -246,7 +248,6 @@
   z-index: 1000;
 }
 
-/* chatbot modal content */
 .modal-content {
   background: white;
   border-radius: 10px;
@@ -259,7 +260,6 @@
   overflow-y: auto; 
 }
 
-/* Close Button */
 .modal-close {
   position: absolute;
   top: 10px;
@@ -269,4 +269,47 @@
   font-size: 1.5rem;
   cursor: pointer;
   color: #333;
+}
+
+@media (max-width: 768px) {
+  .event-image-description {
+    max-height: 20vh;
+  }
+  .event-description-card {
+    flex-direction: column; 
+    gap: 0.5rem;
+  }
+
+  .event-description-card-left,
+  .event-description-card-right {
+    width: 100%;
+    min-width: unset;
+  }
+
+  .event-description-card-left .event-title-description-card {
+    font-size: 1.5rem;
+  }
+
+  .event-organizer {
+    align-items: flex-start; 
+    margin: 0;
+  }
+
+  .event-icon {
+    font-size: 1rem;
+  }
+
+  .event-address {
+    margin: 0;
+  }
+
+  .adress-label,
+  .event-date-date,
+  .address {
+    font-size: 0.9rem;
+  }
+
+  .event-date-date .date-span {
+    margin-left: 0.5rem;
+  }
 }
