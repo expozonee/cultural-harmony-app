@@ -31,17 +31,14 @@
   flex-direction: column;
   gap: 0.75rem; 
 }
-.event-content-home .event-description {
-  flex-grow: 1; 
-}
 
 @media (max-width: 768px) {
   
   .event-preview-card-home {
     display: flex;
     flex-direction: column;
-    width: 16rem;
-    height: 14rem;
+    width: 14rem;
+    height: 12rem;
     background: white;
     border-radius: 0.5rem;
     box-shadow: 0 0.125rem 0.5rem rgba(0, 0, 0, 0.1);
@@ -50,7 +47,7 @@
   .event-image-home {
     position: relative;
     width: 100%;
-    height: 8rem;
+    height: 5rem;
   }
 
   .event-image-home img {
@@ -62,7 +59,7 @@
     padding: 0.5rem;
     display: flex;
     flex-direction: column;
-    gap: 0.25rem;
+    gap: 0.4rem;
     height: 6rem;
     justify-content: center;
   }

@@ -1,7 +1,7 @@
 .events-list {
   display: flex;
- width: 90%;
- height: auto;
+  width: 100%;
+  height: auto;
   margin-top: 2rem;
   flex-wrap: wrap;
   gap: 2rem;
@@ -48,16 +48,48 @@
   justify-content: space-between; 
   align-items: center;
 }
+.pagination-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  gap: 10px; 
+}
+
+.pagination-btn {
+  padding: 8px 16px;
+  font-size: 14px;
+  background-color: #D3C0F5;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.pagination-btn:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+.pagination-btn:hover:not(:disabled) {
+  background-color: #D3C0F5;
+}
+
+.pagination-info {
+  font-size: 14px;
+  font-weight: bold;
+}
 
 @media (max-width: 768px) {
   .buttonSection {
     flex-direction: column; 
     gap: 10px; 
   }
-}
-
-@media (max-width: 768px) {
   .events-list {
     padding: 0;
+  }
+  .pagination-btn {
+    width: 10%;
   }
 }
