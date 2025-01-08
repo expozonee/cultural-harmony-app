@@ -1,5 +1,4 @@
-import { Link } from "react-router-dom";
-function EventOrganizer({ hostName, hostEmailAddress, currentUserEmail }) {
+function EventOrganizer({ hostName}) {
   return (
     <div className="event-organizer">
       <div className="event-organizer-info">
@@ -8,14 +7,6 @@ function EventOrganizer({ hostName, hostEmailAddress, currentUserEmail }) {
           <span className="host-name-span">{hostName}</span>
         </p>
       </div>
-
-      {hostEmailAddress === currentUserEmail && (
-        <>
-          <Link to={`/events/${hostEmailAddress}/update-event`}>
-            <button className="update-event-button">Update Event</button>
-          </Link>
-        </>
-      )}
     </div>
   );
 }

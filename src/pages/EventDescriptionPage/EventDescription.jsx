@@ -11,7 +11,6 @@ import JoinUnjoinButton from "../../components/EventDescription/JoinUnjoinButton
 import PollSection from "../../components/EventDescription/PollSection";
 import ContributionListSection from "../../components/EventDescription/ContributionListSection";
 import CreatePollButton from "../../components/EventDescription/CreatePollButton";
-import ChatbotSection from "../../components/EventDescription/ChatbotSection";
 import ParticipantsList from "../../components/EventDescription/ParticipantsList";
 
 function EventDescription() {
@@ -113,20 +112,19 @@ function EventDescription() {
         <div className="event-description-card-right">
           <EventOrganizer
             hostName={event.event_host_name}
-            hostEmailAddress={event.host_email_address}
-            currentUserEmail={userData?.email}
-            event={event}
           />
-          <ChatbotSection
-            event={event}
-            isChatbotVisible={isChatbotVisible}
-            toggleChatbot={toggleChatbot}
-          />
-          <JoinUnjoinButton
-            hasJoined={hasJoined}
-            onJoin={handleJoin}
-            onUnJoin={handleUnJoinButton}
-          />
+          <div className="event-buttons-chatbot">
+            <JoinUnjoinButton
+              hasJoined={hasJoined}
+              onJoin={handleJoin}
+              onUnJoin={handleUnJoinButton}
+              hostEmailAddress={event.host_email_address}
+              currentUserEmail={userData?.email}
+              event={event}
+              isChatbotVisible={isChatbotVisible}
+              toggleChatbot={toggleChatbot}
+            />
+          </div>
         </div>
       </div>
       <div className="event-description-container">

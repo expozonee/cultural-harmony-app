@@ -92,19 +92,6 @@ div.user-input input {
   color: white;
 }
 
-#toggle-chat {
-  padding: 0.625rem 1.25rem;
-  font-size: 1rem;
-  font-weight: bold;
-  border: none;
-  border-radius: 0.5rem;
-  background-color: var(--blue);
-  color: var(--mainWhite);
-  margin-top: 1rem;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
 @media screen and (width <= 768px) {
   .chatbot-container {
     max-width: 90%;
@@ -112,7 +99,6 @@ div.user-input input {
   }
 }
 
-/* chatbot modal overlay */
 .modal-overlay {
   position: fixed;
   top: 0;

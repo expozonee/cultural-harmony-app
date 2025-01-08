@@ -128,7 +128,7 @@
 .event-description-container {
   display: flex;
   justify-content: space-between;
-  width: 80%;
+  width: 70%;
   margin: 1.875rem auto;
 }
 
@@ -139,7 +139,7 @@
   padding-right: 1.25rem;
 }
 
-.event-description-container-left h2 {
+.event-description-content .event-description-header {
   font-size: 1.5rem;
   color: var(--blue);
   margin-bottom: 0.625rem;
@@ -154,7 +154,9 @@
 
 .event-description-info {
   font-size: 1rem;
-  text-align: justify;
+  text-align: left;
+  width: 90%;
+  padding: 1rem;
 }
 
 .event-description-container-right {
@@ -189,9 +191,15 @@
 .event-contribution-list {
   margin-top: 1.25rem;
 }
+.event-buttons-chatbot,.event-buttons-card{
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
 
 .unjoin-button,
 .join-button,
+#toggle-chat,
 .create-new-poll-button,
 .update-event-button {
   padding: 0.625rem 1.25rem;
@@ -206,9 +214,18 @@
   transition: background-color 0.3s ease;
 }
 
+.update-event-button{
+  width: 100%;
+}
+
+#toggle-chat:hover{
+  background-color: var(--sky-blue);
+}
+
 .create-new-poll-button {
-  width: 65%;
+  width: 80%;
   align-self: center;
+  font-size: 0.9rem;
 }
 
 .description-page-container button:hover {
@@ -311,5 +328,20 @@
 
   .event-date-date .date-span {
     margin-left: 0.5rem;
+  }
+
+  .event-description-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .event-description-container-left,
+  .event-description-container-right {
+    padding: 0;
+    margin-bottom: 1.25rem;
+  }
+
+  .event-description-container-right {
+    align-items: center;
   }
 }

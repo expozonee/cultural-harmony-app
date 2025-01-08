@@ -120,14 +120,14 @@
   border: 0.12rem solid var(--sky-blue-light);
 }
 
-.option-item span {
+.option-item .option-item-span {
   flex: 1;
   font-size: 1rem;
 }
 
 .option-actions {
   display: flex;
-  gap: 0.5rem;
+  justify-content: space-between;
 }
 
 .edit-button, .delete-button, .save-button, .cancel-button {
@@ -181,6 +181,10 @@
 
   .option-input-group button {
     margin-top: 0.5rem;
+    width: 100%;
+  }
+
+  .options-list {
     width: 100%;
   }
 }

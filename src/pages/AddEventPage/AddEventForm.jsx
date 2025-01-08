@@ -248,8 +248,8 @@ export default function AddEventForm({ eventData, eventId, from }) {
         )}
       </div>
 
-      <div>
-        <h1>Event Item</h1>
+      <div className="checklist-form">
+        <h1 className="add-item-header">Event Item</h1>
         <div>
           <input
             type="text"
