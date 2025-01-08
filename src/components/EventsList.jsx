@@ -12,7 +12,7 @@ function EventsList() {
   const { isSignedIn } = useUser();
 
   const [currentPage, setCurrentPage] = useState(1);
-  const eventsPerPage = 9;
+  const eventsPerPage = 8;
   const totalPages = Math.ceil((events?.length || 0) / eventsPerPage);
 
   const indexOfLastEvent = currentPage * eventsPerPage;

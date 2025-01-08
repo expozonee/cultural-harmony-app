@@ -24,7 +24,7 @@
 .add-event, .show-map-btn {
   margin: 0;
   width: auto; 
-  background-color: var( --light-medium-purple);
+  background-color: var(--light-medium-purple);
   color: var(--mainWhite);
   border: none;
   padding: 0.4rem 0.8rem;
@@ -37,32 +37,33 @@
 }
 
 .add-event:hover, .show-map-btn:hover {
-  background-color: var(--darkBlue); 
+  background-color: var(--dark-purple); 
 }
 
 .buttonSection {
-  margin: 15px auto; 
+  margin: 0.9375rem auto;
   width: 80%; 
   height: 10%;
   display: flex;
   justify-content: space-between; 
   align-items: center;
 }
+
 .pagination-controls {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 20px;
-  gap: 10px; 
+  margin-top: 1.25rem;
+  gap: 0.625rem;
 }
 
 .pagination-btn {
-  padding: 8px 16px;
-  font-size: 14px;
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
   background-color: #D3C0F5;
   color: white;
   border: none;
-  border-radius: 4px;
+  border-radius: 0.25rem;
   cursor: pointer;
   transition: background-color 0.3s;
 }
@@ -77,14 +78,13 @@
 }
 
 .pagination-info {
-  font-size: 14px;
+  font-size: 0.875rem;
   font-weight: bold;
 }
 
 @media (max-width: 768px) {
   .buttonSection {
-    flex-direction: column; 
-    gap: 10px; 
+    gap: 0.625rem;
   }
   .events-list {
     padding: 0;
