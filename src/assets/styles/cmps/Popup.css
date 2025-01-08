@@ -65,3 +65,20 @@
   transition: background-color 0.3s ease;
   display: inline-block;
 }
+
+@media (max-width: 600px) {
+  .popup-container {
+    padding: 1rem;
+    width: 95%;
+    max-width: 20rem;
+  }
+
+  .popup-message {
+    font-size: 0.9rem;
+  }
+
+  .popup-button {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+  }
+}

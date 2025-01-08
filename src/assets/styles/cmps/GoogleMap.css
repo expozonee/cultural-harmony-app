@@ -6,6 +6,7 @@
 .marker-icon {
   width: 3.125rem;
   height: 3.125rem;
+  background-color: var(--blue);
 }
 
 .event-modal-on-the-map {
@@ -18,30 +19,7 @@
   height: fit-content;
 }
 
-.show-map-btn {
-  width: fit-content;
-  font-size: 0.875rem;
-  height: 3rem;
-  transition-duration: 0.15s;
-  text-size-adjust: 100%;
-  line-height: 1.25rem;
-  position: fixed;
-  bottom: 5.625rem;
-  left: 47%;
-  /* transform: translateX(-50%); */
-  z-index: 1;
-  background-color: var(--blue);
-  color: white;
-  border: none;
-  padding: 0.625rem 1.25rem;
-  border-radius: 1.5rem;
-  cursor: pointer;
-}
-
-.show-map-btn:hover {
-  background-color: var(--periwinkle);
-}
-*/ .modal-open-event {
+.modal-open-event {
   position: fixed;
   top: 50%;
   left: 50%;
@@ -61,23 +39,50 @@
   border-radius: 0.5rem;
 }
 
-.close-modal-btn {
+.modal-open-event-title {
+  font-size: 1.2rem;
+}
+
+.modal-open-event-description {
   margin-top: 1rem;
-  margin-left: 1rem;
+  font-size: 1rem;
+  color: var(--gray3);
+}
+
+.model-open-event-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1rem;
+}
+
+.go-to-event, .close-modal-btn {
   padding: 0.5rem 1rem;
-  background-color: #ccc;
-  color: black;
+  background-color: var(--light-medium-purple);
+  color: white;
   border: none;
   border-radius: 0.25rem;
   cursor: pointer;
 }
 
-.go-to-event {
-  margin-top: 1rem;
-  padding: 0.5rem 1rem;
-  background-color: var(--blue);
-  color: white;
-  border: none;
-  border-radius: 0.25rem;
-  cursor: pointer;
+@media (max-width: 600px) {
+  .modal-open-event {
+    width: 90%;
+    padding: 1rem;
+  }
+
+  .modal-open-event-title {
+    font-size: 1rem;
+  }
+
+  .modal-open-event-description {
+    font-size: 0.875rem;
+  }
+
+  .model-open-event-buttons {
+    align-items: stretch;
+  }
+
+  .go-to-event, .close-modal-btn {
+    margin-top: 0.5rem;
+  }
 }

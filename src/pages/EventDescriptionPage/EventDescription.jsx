@@ -11,7 +11,7 @@ import JoinUnjoinButton from "../../components/EventDescription/JoinUnjoinButton
 import PollSection from "../../components/EventDescription/PollSection";
 import ContributionListSection from "../../components/EventDescription/ContributionListSection";
 import CreatePollButton from "../../components/EventDescription/CreatePollButton";
-import ChatbotSection from "../../components/EventDescription/ChatbotSection";
+import ParticipantsList from "../../components/EventDescription/ParticipantsList";
 
 function EventDescription() {
   const location = useLocation();
@@ -102,7 +102,7 @@ function EventDescription() {
       )}
       <div className="event-description-card">
         <div className="event-description-card-left">
-          <h1>{event.event_title}</h1>
+          <h1 className="event-title-description-card">{event.event_title}</h1>
           <EventDetails
             date={event.date}
             eventStartTime={event.event_start_time}
@@ -112,39 +112,31 @@ function EventDescription() {
         <div className="event-description-card-right">
           <EventOrganizer
             hostName={event.event_host_name}
-            hostEmailAddress={event.host_email_address}
-            currentUserEmail={userData?.email}
-            event={event}
           />
-          <ChatbotSection
-            event={event}
-            isChatbotVisible={isChatbotVisible}
-            toggleChatbot={toggleChatbot}
-          />
-          <JoinUnjoinButton
-            hasJoined={hasJoined}
-            onJoin={handleJoin}
-            onUnJoin={handleUnJoinButton}
-          />
+          <div className="event-buttons-chatbot">
+            <JoinUnjoinButton
+              hasJoined={hasJoined}
+              onJoin={handleJoin}
+              onUnJoin={handleUnJoinButton}
+              hostEmailAddress={event.host_email_address}
+              currentUserEmail={userData?.email}
+              event={event}
+              isChatbotVisible={isChatbotVisible}
+              toggleChatbot={toggleChatbot}
+            />
+          </div>
         </div>
       </div>
       <div className="event-description-container">
         <div className="event-description-container-left">
           <div className="event-description-content">
-            <h2>Event Description</h2>
+            <h2 className="event-description-header">Event Description</h2>
             <p className="event-description-info">{event.description}</p>
           </div>
           <PollSection hasJoined={hasJoined} polls={event.polls} />
         </div>
         <div className="event-description-container-right">
-          <div className="event-participants-list">
-            <h2>Participants</h2>
-            <ul>
-              {event.participants?.map((participant) => (
-                <li key={participant}>{participant}</li>
-              ))}
-            </ul>
-          </div>
+          <ParticipantsList event={event} />
           <ContributionListSection
             eventId={eventId}
             event={event}

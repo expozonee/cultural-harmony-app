@@ -9,13 +9,12 @@
   --white: #FFFFFF;
 }
 
-
 .user-image {
   display: inline-block;
   float: right;
-  margin-left: 15px;
-  width: 50px;
-  height: 50px;
+  margin-left: 0.9375rem;
+  width: 3.125rem;
+  height: 3.125rem;
   border-radius: 50%;
   background-color: var(--light-purple);
   background-size: cover;
@@ -26,20 +25,20 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 20px;
+  padding: 1.25rem;
   background-color: var(--lavender-web);
-  border-radius: 12px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 0.75rem;
+  box-shadow: 0 0.25rem 0.375rem rgba(0, 0, 0, 0.1);
 }
 
 .user-img {
-  width: 80px;
-  height: 80px;
+  width: 5rem;
+  height: 5rem;
   border-radius: 50%;
-  margin-right: 20px;
+  margin-right: 1.25rem;
   background-color: var(--periwinkle);
   object-fit: cover;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.1);
 }
 
 .user-details {
@@ -47,23 +46,24 @@
   background-color: white;
 }
 
-.user-details h1 {
-  font-size: 22px;
+.user-details .user-full-name {
+  font-size: 1.375rem;
   color: var(--dark-purple);
   margin: 0;
 }
 
-.user-details p {
-  font-size: 16px;
+.user-details .user-email {
+  font-size: 1rem;
   color: var(--dark-purple);
-  margin: 5px 0 0;
+  margin: 0.3125rem 0 0;
 }
 
-@media (max-width: 400px) {
+@media (max-width: 25rem) {
   .user-img {
-    width: 50px;
-    height: 50px;}
-    .user-details p ,.user-details h1 {
-  font-size: small;
-}
+    width: 3.125rem;
+    height: 3.125rem;
+  }
+  .user-details .user-email, .user-details .user-full-name {
+    font-size: 0.875rem;
+  }
 }

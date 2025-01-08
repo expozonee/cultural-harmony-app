@@ -1,24 +1,25 @@
 .home-page-container {
-  padding: 2rem;
+  padding: 0.5rem;
 }
 
 .section1-homepage {
   position: relative;
   height: auto;
   text-align: center;
-  margin-bottom: 2rem;
+  height: 86vh;
+  background-color: var(--mainWhite);
 }
 
 .backgroundImg-homepage {
   width: 100%;
   margin: 0 auto;
-  max-height: 52rem;
+  max-height: 86vh;
   display: block;
 }
 
 .featured-events {
   position: relative;
-  padding: 2rem;
+  padding: 1rem;
   margin-top: 1rem;
   background-color: var(--lavender-light);
   border-radius: 0.5rem;
@@ -27,7 +28,7 @@
 
 .featured-events-title {
   color: var(--dark-gray);
-  font-size: 2rem;
+  font-size: 1.8rem;
   text-align: center;
   margin-bottom: 1.5rem;
   font-weight: bold;
@@ -49,4 +50,31 @@
   margin: 0;
   display: flex;
   justify-content: center;
+}
+
+@media (max-width: 768px) {
+  .home-page-container {
+    padding: 1rem;
+  }
+
+  .section1-homepage {
+    background-color: var(--mainWhite);
+    height: auto;
+    max-height: 35vh;
+    padding: 1rem;
+  }
+
+  .featured-events {
+    padding: 1rem;
+    margin-top: 0.5rem;
+  }
+
+  .featured-events-title {
+    font-size: 1.5rem;
+  }
+
+  .events-list-home {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
 }

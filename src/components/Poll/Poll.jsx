@@ -31,6 +31,7 @@ function Poll({ poll }) {
   async function handleChangeVote(e) {
     e.preventDefault();
     await removeVote();
+    setSelectedOption(null);
     setCanChangeVote(true);
   }
 

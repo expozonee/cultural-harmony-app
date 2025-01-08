@@ -108,7 +108,7 @@ function CreatePoll({ onClose }) {
             <ul className="options-list">
               {poll.options.map((option, index) => (
                 <li key={index} className="option-item">
-                  <span>{option.question_name}</span>
+                  <span className='option-item-span'>{option.question_name}</span>
                   <div className="option-actions">
                     <button
                       onClick={() => removeOption(index)}
